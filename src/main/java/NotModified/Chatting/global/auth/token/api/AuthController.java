@@ -1,6 +1,6 @@
 package NotModified.Chatting.global.auth.token.api;
 
-import NotModified.Chatting.domain.member.dto.request.CreateMemberRequest;
+import NotModified.Chatting.global.auth.token.dto.request.SignupRequest;
 import NotModified.Chatting.global.auth.token.dto.Tokens;
 import NotModified.Chatting.global.auth.token.dto.request.SigninRequest;
 import NotModified.Chatting.global.auth.token.dto.response.TokenResponse;
@@ -8,14 +8,11 @@ import NotModified.Chatting.global.auth.token.service.AuthService;
 import NotModified.Chatting.global.util.CookieUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import static org.springframework.http.HttpHeaders.SET_COOKIE;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,7 +22,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping
-    public ResponseEntity<String> signup(@RequestBody CreateMemberRequest request) {
+    public ResponseEntity<String> signup(@RequestBody SignupRequest request) {
 
         authService.signup(request);
 

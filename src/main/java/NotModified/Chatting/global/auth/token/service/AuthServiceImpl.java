@@ -1,6 +1,6 @@
 package NotModified.Chatting.global.auth.token.service;
 
-import NotModified.Chatting.domain.member.dto.request.CreateMemberRequest;
+import NotModified.Chatting.global.auth.token.dto.request.SignupRequest;
 import NotModified.Chatting.domain.member.model.Member;
 import NotModified.Chatting.domain.member.repository.MemberRepository;
 import NotModified.Chatting.global.auth.token.dto.Tokens;
@@ -21,7 +21,7 @@ public class AuthServiceImpl implements AuthService {
     private final TokenService tokenService;
 
     @Override
-    public Member signup(CreateMemberRequest request) {
+    public Member signup(SignupRequest request) {
 
         String username = request.getUsername();
         String nickname = request.getNickname();
