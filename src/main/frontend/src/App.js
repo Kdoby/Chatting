@@ -1,20 +1,44 @@
-import './App.css';
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import ArchivePage from './pages/ArchivePage';
+import AuthPage from './pages/AuthPage';
 
-function App() {
-   const [hello, setHello] = useState('')
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 
-    useEffect(() => {
-        axios.get('/api/hello')
-        .then(response => setHello(response.data))
-        .catch(error => console.log(error))
-    }, []);
+function AppContent() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const hideMenu = (location.pathname === "/login" || location.pathname === "/Login" || location.pathname === "/signup");
 
     return (
-        <div>
-            백엔드에서 가져온 데이터입니다 : {hello}
+        <div className="App"
+             style={{
+                 display: "flex",
+                 height: "100%"
+             }}
+        >
+            <div className="screen"
+                 style={{
+                     height: "100%",
+                     flex: 1,
+                     overflowY: "auto"
+                 }}
+            >
+                <Routes>
+                    <Route path="/login" element={<AuthPage type="login" />} />
+                    <Route path="/signup" element={<AuthPage type="signup" />} />
+
+                    <Route path="/" element={<ArchivePage />} />
+                </Routes>
+            </div>
         </div>
+    );
+}
+
+function App() {
+    return (
+        <Router>
+            <AppContent />
+        </Router>
     );
 }
 
