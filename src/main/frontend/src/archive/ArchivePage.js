@@ -1,4 +1,10 @@
+import SubMenu from './SubMenu';
+import Archive from './Archive';
+
+import React, { useState } from 'react';
+
 export default function ArchivePage() {
+
     return(
         <div style={{ width: "100%", height: "100%" }}>
             <div
@@ -8,33 +14,14 @@ export default function ArchivePage() {
                     gridTemplateColumns: "1fr 4fr"
                     }}
             >
-                    <div style={{backgroundColor:"yellow"}}>
-                        <div style={{
-                                display:"grid",
-                                gridTemplateRows: "1fr 9fr",
-                        }}>
-
-                            <div>프로필</div>
-
-                            <div style={{
-                                     display:"grid",
-                                     gridTemplateRows: "30px 30px",
-                            }}>
-                                <div>archive</div>
-                                <div><span>friend</span> <span>chat</span></div>
-                                <div>chat list
+                <div style={{backgroundColor:"yellow", margin: "20px 5px 20px 15px"}}>
+                    <SubMenu />
+                </div>
 
 
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div style={{backgroundColor:"red", scrollY: "auto"}}>
-
-                    </div>
-
+                <div style={{ margin: "20px 15px" }}>
+                    <Archive />
+                </div>
             </div>
         </div>
     );
