@@ -44,14 +44,14 @@ export default function Login() {
                     e.preventDefault();
                     doLogin();
                 }}>
-                    <div style={{ width:"100%", margin:"50px 0" }}>
-                        <div style={{textAlign: "left", fontSize: "50px", fontWeight: "bold"}}>Hello!</div>
+                    <div style={{ width:"100%", margin:"30px 0" }}>
+                        <div style={{textAlign: "left", fontSize: "40px", fontWeight: "bold"}}>Hello!</div>
                         <br />
 
                         <label htmlFor="id">ID</label>
                         <br />
 
-                        <input style={{ height:"40px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
+                        <input style={{ height:"35px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
                                type="text"
                                id="id"
                                name="id"
@@ -60,11 +60,11 @@ export default function Login() {
                         ></input>
                     </div>
 
-                    <div style={{ width:"100%", margin:"50px 0" }}>
+                    <div style={{ width:"100%", margin:"30px 0" }}>
                         <label htmlFor="pw">PASSWORD</label>
                         <br />
 
-                        <input style={{ height:"40px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
+                        <input style={{ height:"35px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
                                type="password"
                                id="pw"
                                name="pw"
@@ -77,7 +77,7 @@ export default function Login() {
                         <input type="submit"
                                value="LOG-IN"
                         />
-                        <div style={{ margin:"15px"}}>
+                        <div style={{ margin:"10px", textAlign:"center" }}>
                             <Link to="/signup">SIGN-UP</Link>
                         </div>
                     </div>
