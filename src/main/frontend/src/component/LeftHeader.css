@@ -1,0 +1,41 @@
+.header_wrapper {
+    width: 16%;
+    height: 100%;
+    background-color: silver;
+    display: inline-block;
+}
+
+.profile_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    background-color: lightsteelblue;
+    align-items: center;
+    padding: 10px;
+}
+
+.profile_wrapper > img {
+    width: 50px;
+    height: 50px;
+}
+
+.profile_wrapper > p {
+    font-size: 14px;
+}
+
+.header_archive {
+    background-color: brown;
+
+}
+
+.header_menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.header_friend {
+    background-color: lavender;
+}
+
+.header_chat {
+    background-color: lavenderblush;
+}

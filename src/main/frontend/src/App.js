@@ -1,7 +1,10 @@
 import ArchivePage from './pages/ArchivePage';
 import AuthPage from './pages/AuthPage';
+import ChattingPage from "./chatting/ChattingPage";
 
-import React from "react";
+import './App.css';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 
 function AppContent() {
