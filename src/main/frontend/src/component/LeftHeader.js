@@ -1,19 +1,40 @@
 import HeaderProfile from "./HeaderProfile";
 import "./LeftHeader.css";
-import ChattingRoom from "./ChattingRoom";
+import ChattingRoomList from "./ChattingRoomList";
+import FriendList from "./FriendList";
 
-export default function LeftHeader() {
+import React, { useState } from 'react';
+
+export default function LeftHeader({ setLeftType }) {
+    const [friendChatToggle, setFriendChatToggle] = useState(true);
+
     return (
         <div className={"header_wrapper"}>
             <HeaderProfile />
-            <div className={"header_archive"}>
+
+            <button className={"header_archive"}
+                    onClick={() => setLeftType('archive')}
+            >
                 archive
-            </div>
+            </button>
             <div className={"header_menu"}>
-                <div className={"header_friend"}>friend</div>
-                <div className={"header_chat"}>chat</div>
+                <button className={"header_friend"}
+                        onClick={() => setFriendChatToggle(true)}
+                >
+                    friend
+                </button>
+                <button className={"header_chat"}
+                        onClick={() => setFriendChatToggle(false)}
+                >
+                    chat
+                </button>
             </div>
-            <ChattingRoom />
+            { friendChatToggle ? (
+                <FriendList />
+            ) : (
+                <ChattingRoomList setLeftType={setLeftType} />
+            )}
+
         </div>
     );
 }

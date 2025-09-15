@@ -5,13 +5,11 @@ export default function AuthPage({ type }) {
     return (
         <div style={{ width: "100%", height: "100%" }}>
             <div style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
                 margin: 0,
                 padding: 0,
                 height: "100%"
             }}>
-                <div style={{ width: "70%", margin: "auto" }}>
+                <div style={{ width: "30%", margin: "auto" }}>
                     {type === "login" ? <Login /> : <></>}
                     {type === "signup" ? <Signup /> : <></>}
                 </div>

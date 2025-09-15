@@ -1,8 +1,7 @@
-import ArchivePage from './pages/ArchivePage';
+import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
 import ChattingPage from "./chatting/ChattingPage";
 
-import './App.css';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
@@ -30,7 +29,7 @@ function AppContent() {
                     <Route path="/login" element={<AuthPage type="login" />} />
                     <Route path="/signup" element={<AuthPage type="signup" />} />
 
-                    <Route path="/" element={<ArchivePage />} />
+                    <Route path="/" element={<HomePage type="archive"/>} />
                 </Routes>
             </div>
         </div>
