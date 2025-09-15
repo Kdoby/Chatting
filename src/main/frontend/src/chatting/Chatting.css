@@ -1,8 +1,8 @@
 .chatting_wrapper {
     margin: auto;
     background-color: #d9d9d9;
-    width: 82%;
-    height: 96%;
+    width: 83%;
+    height: 100%;
     display: grid;
     grid-template-rows: 6.5fr 1fr;
 }
