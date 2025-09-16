@@ -5,7 +5,7 @@ export default function Archive() {
 
     return(
         <div style={{
-                height: "100%", width:"100%",
+                height: "100%", width:"83%", margin:"auto",
                 display:"grid",
                 gridTemplateRows: "40px 10fr",
                 border: "1px solid black"
