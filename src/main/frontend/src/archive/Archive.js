@@ -8,7 +8,6 @@ export default function Archive() {
                 height: "100%", width:"83%", margin:"auto",
                 display:"grid",
                 gridTemplateRows: "40px 10fr",
-                border: "1px solid black"
         }}>
             <div>
                 <select defaultValue="newest">
@@ -25,7 +24,7 @@ export default function Archive() {
                     gridAutoRows: "300px",
                     gap: "10px",
                     margin: "10px",
-                    scrollY: "scroll",
+                    overflowY: "scroll",
                  }}
             >
                 <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>

@@ -11,14 +11,12 @@ export default function Signup() {
     const [id, setId] = useState('');
     const [nickname, setNickname] = useState('');
     const [pw, setPw] = useState('');
-    const [pwConfirm, setPwConfirm] = useState('');
-    const [email, setEmail] = useState('');
 
 
     const doSignup = async () => {
         if( !checkID() ){ return; }
 
-        console.log(id, pw, pwConfirm, email, nickname);
+        console.log(id, pw, nickname);
         try {
             await axios.post('/api/v1/auth', {  // '/auth/login' 으로 요청
                 username: id,

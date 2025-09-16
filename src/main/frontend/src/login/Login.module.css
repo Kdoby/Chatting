@@ -37,9 +37,6 @@ label {
     font-weight: 600;
     margin: 10px;
 }
-form div {
-   margin-bottom: 40px;
-}
 input[type="text"], input[type="password"], input[type="email"] {
    width: 450px;
    height: 45px;
