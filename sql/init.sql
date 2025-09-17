@@ -7,7 +7,7 @@ CREATE TABLE member
     user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    nickname VARCHAR(255) NOT NULL,
+    nickname VARCHAR(255) UNIQUE NOT NULL,
     refresh_token varchar(255),
     refresh_token_expiry DATETIME,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -44,7 +44,7 @@ CREATE TABLE chat
     chat_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     room_id BIGINT NOT NULL,    -- 어떤 채팅방의 메시지인지
     user_id BIGINT NOT NULL,    -- 메시지 보낸 사람
-    message TEXT,
+    message TEXT NOT NULL,
     message_type ENUM('CHAT', 'IMAGE', 'JOIN', 'LEAVE'),
     send_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (room_id) REFERENCES chat_room(room_id),
