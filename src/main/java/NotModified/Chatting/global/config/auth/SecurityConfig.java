@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -28,9 +28,9 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/v1/token/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/friend/list/{userId}").permitAll()
+                        .requestMatchers("/v1/auth/**").permitAll()
+                        .requestMatchers("/v1/token/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/v1/friend/list/{userId}").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex
