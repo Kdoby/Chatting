@@ -12,7 +12,7 @@ import static org.springframework.http.HttpHeaders.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/token")
+@RequestMapping("/v1/token")
 public class TokenController {
 
     private final TokenService tokenService;
