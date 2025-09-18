@@ -10,7 +10,7 @@ const api = axios.create({
 // 새로고침 시 refresh 실행
 (async () => {
   try {
-    const refreshRes = await axios.post("/api/auth/refresh", {}, { withCredentials: true });
+    const refreshRes = await axios.post("/api/v1/token", {}, { withCredentials: true });
 
     const newAccessToken = refreshRes.data.accessToken;
     TokenStore.setToken(newAccessToken);
