@@ -9,17 +9,23 @@
 
 .ChatInput_wrapper {
     display: grid;
-    grid-template-columns: 11fr 1fr;
+    grid-template-columns: 11fr 0.5fr 1.5fr;
     margin: 2% 2%;
     background-color: #ffffff;
     border-radius: 13px;
+    align-items: center;
 }
 
-.ChatInput_wrapper > input {
+.ChatInput_message {
     outline: none;
     border: none;
     margin: 0 3%;
     font-size: medium;
+    width: 100%;
+}
+
+.ChatInput_wrapper > label {
+    margin: 0;
 }
 
 .ChatInput_wrapper > button {
@@ -28,6 +34,7 @@
     margin: 7%;
     background-color: #d9d9d9;
     font-size: medium;
+    height: 70%;
 }
 
 .ChatLog_wrapper {

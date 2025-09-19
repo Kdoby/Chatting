@@ -37,7 +37,7 @@ label {
     font-weight: 600;
     margin: 10px;
 }
-input[type="text"], input[type="password"], input[type="email"] {
+.logbox > form > div > input[type="text"], input[type="password"], input[type="email"] {
    width: 450px;
    height: 45px;
    border-radius: 10px;
