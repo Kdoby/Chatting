@@ -1,11 +1,16 @@
+import Logout from "../login/Logout";
 import "./LeftHeader.css";
 
-export default function HeaderProfile() {
+import api from '../api';
+
+import React, { useState, useEffect } from "react";
+
+export default function HeaderProfile({ userInfo} ) {
     return (
         <div className={"profile_wrapper"}>
             <img src="images/defaultProfile.png" alt="profileimg"></img>
-            <p>유저이름</p>
-            <button>로그아웃</button>
+            <p>{userInfo.nickname}</p>
+            <Logout />
         </div>
     );
 }

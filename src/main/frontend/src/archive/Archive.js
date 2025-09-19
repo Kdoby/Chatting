@@ -1,7 +1,10 @@
+import ArchiveDetail from "./ArchiveDetail";
+
 import React, { useState } from 'react';
 
 export default function Archive() {
     const [friendChatToggle, setFriendChatToggle] = useState(true);
+    const [showArchiveDetail, setShowArchiveDetail] = useState(false);
 
     return(
         <div style={{
@@ -27,7 +30,9 @@ export default function Archive() {
                     overflowY: "scroll",
                  }}
             >
-                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>
+                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                     onClick={() => setShowArchiveDetail(true)}
+                >
                     <div style={{width: "100%", height: "200px", margin: "auto  0", border: "1px solid black", }}></div>
                     <div style={{marginTop: "5px"}}>
                         <div style={{ fontSize: "15px" }}>2025.09.15</div>
@@ -35,7 +40,9 @@ export default function Archive() {
                         <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
                     </div>
                 </div>
-                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>
+                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                     onClick={() => setShowArchiveDetail(true)}
+                >
                     <div style={{width: "100%", height: "200px", margin: "auto  0", border: "1px solid black", }}></div>
                     <div style={{marginTop: "5px"}}>
                         <div style={{ fontSize: "15px" }}>2025.09.15</div>
@@ -43,7 +50,9 @@ export default function Archive() {
                         <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행2~</div>
                     </div>
                 </div>
-                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>
+                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                     onClick={() => setShowArchiveDetail(true)}
+                >
                     <div style={{width: "100%", height: "200px", margin: "auto  0", border: "1px solid black", }}></div>
                     <div style={{marginTop: "5px"}}>
                         <div style={{ fontSize: "15px" }}>2025.09.15</div>
@@ -51,7 +60,9 @@ export default function Archive() {
                         <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행3~</div>
                     </div>
                 </div>
-                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>
+                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                     onClick={() => setShowArchiveDetail(true)}
+                >
                     <div style={{width: "100%", height: "200px", margin: "auto  0", border: "1px solid black", }}></div>
                     <div style={{marginTop: "5px"}}>
                         <div style={{ fontSize: "15px" }}>2025.09.15</div>
@@ -59,23 +70,14 @@ export default function Archive() {
                         <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행4~</div>
                     </div>
                 </div>
-                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>
-                    <div style={{width: "100%", height: "200px", margin: "auto  0", border: "1px solid black", }}></div>
-                    <div style={{marginTop: "5px"}}>
-                        <div style={{ fontSize: "15px" }}>2025.09.15</div>
-                        <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
-                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행5~</div>
-                    </div>
-                </div>
-                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>
-                    <div style={{width: "100%", height: "200px", margin: "auto  0", border: "1px solid black", }}></div>
-                    <div style={{marginTop: "5px"}}>
-                        <div style={{ fontSize: "15px" }}>2025.09.15</div>
-                        <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
-                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행6~</div>
-                    </div>
-                </div>
             </div>
+        {/* 조건부 렌더링 */}
+        {showArchiveDetail && (
+            <ArchiveDetail
+                onClose={() => setShowArchiveDetail(false)}
+            />
+        )}
+
         </div>
     );
 }
