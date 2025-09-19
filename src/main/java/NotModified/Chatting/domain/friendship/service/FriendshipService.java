@@ -25,7 +25,7 @@ public interface FriendshipService {
     List<WaitingFriendshipResponse> getReceivedFriendshipRequest(Long userId);
 
     /* 친구 목록 조회 */
-    List<FriendshipListResponse> getFriendList(Long userId);
+    List<FriendshipListResponse> getFriendList(String nickname);
 
     /* 두 유저 사이의 관계 조회 */
     FriendshipStatusResponse getFriendshipBetween(Long myUserId, Long otherUserId);
