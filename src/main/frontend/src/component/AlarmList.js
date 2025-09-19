@@ -3,14 +3,14 @@ import api from '../api';
 import React, { useState, useEffect, useRef } from "react";
 
 export default function FriendList(){
-    const [results, setResults] = useState([]);
+    const [alarmList, setAlarmList] = useState([]);
 
     // 받은 친구 요청 조회
     const fetchReceivedFriendRequests = async () => {
         try {
             const res = await api.get("/v1/friend/requests/received");
-
-            setResults(res.data); // 결과를 상태에 저장
+            console.log("받은 응답:", res.data);
+            setAlarmList(res.data.data); // 결과를 상태에 저장
         } catch (err) {
             console.error("검색 에러:", err);
         }
@@ -19,26 +19,35 @@ export default function FriendList(){
     // 친구 요청 수락
     const approveFriendRequest = async (e) => {
         try {
-            const res = await api.get("/api/v1/friend/", { addresseeNickname: e });
-
-            setResults(res.data); // 결과를 상태에 저장
+            const res = await api.post("/v1/friend/" + e);
+            alert("성공");
+            fetchReceivedFriendRequests();
         } catch (err) {
             console.error("검색 에러:", err);
         }
     };
 
-    return (
-    <>
-        <div className={"ChattingRoom_wrapper"}>
-            <div className={"ChattingRoom_img"}>
+    useEffect(() => {
+        fetchReceivedFriendRequests();
+    }, [])
 
-            </div>
-            <div className={"ChattingRoom_info"}>
-                <div>'user'가 친구를 요청하였습니다.</div>
-                <button onClick={(e) => approveFriendRequest(e.target.value)}>수락</button>
-                <button>거절</button>
-            </div>
+    return (
+
+    <>
+    {alarmList ? (
+        <div>
+            {Array.isArray(alarmList) && alarmList.map((e) => (
+              <div key={e.friendshipId} className="ChattingRoom_wrapper">
+                <div className="ChattingRoom_img"></div>
+                <div className="ChattingRoom_info">
+                  <div>'{e.nickname}'가 친구를 요청하였습니다.</div>
+                  <button onClick={() => approveFriendRequest(e.friendshipId)}>수락</button>
+                  <button>거절</button>
+                </div>
+              </div>
+            ))}
         </div>
+    ) : (<div>not exist</div>) }
     </>
     );
 }
