@@ -70,12 +70,12 @@ public class FriendshipController {
         );
     }
 
-    @GetMapping("/list/{userId}")
+    @GetMapping("/list/{nickname}")
     public ResponseEntity<ApiResponse<List<FriendshipListResponse>>> getFriendList(
-            @PathVariable("userId") Long userId
+            @PathVariable("nickname") String nickname
     ) {
         List<FriendshipListResponse> responses =
-                friendshipService.getFriendList(userId);
+                friendshipService.getFriendList(nickname);
 
         return ResponseEntity.ok().body(
                 new ApiResponse<>("유저의 친구 목록 조회 성공", responses)
