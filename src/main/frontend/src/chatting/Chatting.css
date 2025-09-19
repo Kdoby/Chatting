@@ -9,17 +9,23 @@
 
 .ChatInput_wrapper {
     display: grid;
-    grid-template-columns: 11fr 1fr;
+    grid-template-columns: 11fr 0.5fr 1.5fr;
     margin: 2% 2%;
     background-color: #ffffff;
     border-radius: 13px;
+    align-items: center;
 }
 
-.ChatInput_wrapper > input {
+.ChatInput_message {
     outline: none;
     border: none;
     margin: 0 3%;
     font-size: medium;
+    width: 100%;
+}
+
+.ChatInput_wrapper > label {
+    margin: 0;
 }
 
 .ChatInput_wrapper > button {
@@ -28,6 +34,7 @@
     margin: 7%;
     background-color: #d9d9d9;
     font-size: medium;
+    height: 70%;
 }
 
 .ChatLog_wrapper {
@@ -96,8 +103,53 @@
     height: 60px;
     background-color: white;
     border-radius: 10px;
+    margin-right: 10px;
 }
 
 .ChattingRoom_info {
     margin: 0 10px;
+}
+
+.ChatHeader_wrapper {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: auto 10fr auto;
+    align-items: center;
+}
+
+.ChattingRoom_info > div > img {
+    width: 20px;
+    height: 20px;
+}
+
+.ChatHeader_menuDiv {
+    width: fit-content;
+}
+
+.ChatHeader_menuDiv > img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.DropdownMenu_wrapper {
+    width: 10%;
+    right: 10px;
+    text-align: center;
+    position: absolute;
+    background-color: white;
+    top: 80px
+}
+
+.DropdownMenu_wrapper > ul > li {
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.DropdownMenu_wrapper > ul > li:hover{
+    background-color: darkgray;
+}
+
+.previews {
+    margin: 10px 30px;
 }
