@@ -108,10 +108,11 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     @Override
-    public List<FriendshipListResponse> getFriendList(Long userId) {
+    public List<FriendshipListResponse> getFriendList(String nickname) {
 
-        List<Friendship> sentRequests = friendshipRepository.findByRequester_IdAndStatus(userId, FriendshipStatus.ACCEPTED);
-        List<Friendship> receivedRequests = friendshipRepository.findByAddressee_IdAndStatus(userId, FriendshipStatus.ACCEPTED);
+        Member member = memberService.findMember(nickname);
+        List<Friendship> sentRequests = friendshipRepository.findByRequester_IdAndStatus(member.getId(), FriendshipStatus.ACCEPTED);
+        List<Friendship> receivedRequests = friendshipRepository.findByAddressee_IdAndStatus(member.getId(), FriendshipStatus.ACCEPTED);
 
         List<FriendshipListResponse> responses = Stream.concat(
                 sentRequests.stream().map(req -> toResponse(req, true)),
