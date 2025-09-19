@@ -9,7 +9,7 @@ export default function Logout(){
 
     const doLogout = async () => {
         try {
-            await api.post('/auth/logout'); // axios -> api 로 변경
+            await api.delete('/v1/token'); // axios -> api 로 변경
 
             alert("로그아웃 성공");
             console.log("로그아웃 성공");
