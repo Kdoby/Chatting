@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 
 export default function ChatInput () {
@@ -70,7 +70,18 @@ export default function ChatInput () {
         <div>
             <div className="previews">
                 {files.map((f, i) => (
-                    <div key={i}>{f.name} ({Math.round(f.size/1024)} KB)</div>
+                    <div key={i}>
+                        {f.name} ({Math.round(f.size/1024)} KB)
+                        <img
+                            src={"images/close2.png"}
+                            onClick={() => removeFile(i)}
+                            style={{
+                                width: "20px",
+                                cursor: "pointer",
+                            }}
+                            alt={"취소"}
+                        />
+                    </div>
                 ))}
             </div>
             <form className={"ChatInput_wrapper"} onSubmit={handleSendMessage}>
