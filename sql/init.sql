@@ -35,7 +35,9 @@ DROP TABLE if EXISTS chat_room CASCADE;
 CREATE TABLE chat_room
 (
     room_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    room_name varchar(100) NOT NULL
+    user_id bigint NOT NULL,
+    room_name varchar(100) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES member(user_id)
 );
 
 DROP TABLE if EXISTS chat CASCADE;
