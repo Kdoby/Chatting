@@ -25,7 +25,13 @@ const api = axios.create({
 // 요청 시 Access Token 붙이기
 api.interceptors.request.use(cfg => {
     // 로그인 요청은 쿠키 전송 안 함
-    if (cfg.url === "/auth/login") {
+    if (cfg.url === "/v1/auth/login") {
+        cfg.withCredentials = false;
+        return cfg;
+    }
+
+    // 회원가입 요청은 쿠키 전송 안 함
+    if (cfg.url === "/v1/auth") {
         cfg.withCredentials = false;
         return cfg;
     }
@@ -55,7 +61,7 @@ api.interceptors.response.use(
 
       try {
         const refreshRes = await axios.post(
-          "/api/auth/refresh",
+          "/api/v1/token",
           {},
           { withCredentials: true }
         );
