@@ -30,7 +30,7 @@ export default function ChatDrawer ({ onClose }) {
                 }}>
                     <div style={{ textAlign: "center", fontSize: "25px", fontWeight: "bold", marginBottom:"20px" }}>Archive</div>
 
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
                                   gap: "10px", margin: "10px", overflowY: "scroll", }}>
                         <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
                             <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
