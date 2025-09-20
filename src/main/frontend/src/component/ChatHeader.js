@@ -1,9 +1,10 @@
 import ChatBubble from "./ChatBubble";
 import MyChatBubble from "./MyChatBubble";
-import {useState} from "react";
 import DropdownMenu from "./DropdownMenu";
 import ChatDrawer from "./ChatDrawer";
 import ChatPhotoAlbum from "./ChatPhotoAlbum";
+
+import {useState} from "react";
 
 export default function ChatHeader () {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
