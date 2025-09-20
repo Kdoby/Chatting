@@ -1,8 +1,13 @@
-import React from "react";
+import EditArchive from "./EditArchive";
 
 import './AddChattingRoom.css';
+import '../chatting/Chatting.css';
+
+import React, { useState } from "react";
 
 export default function ChatDrawer ({ onClose }) {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [modalType, setModalType] = useState(null); // 0=닫힘, 1=수정
 
     return (
         <div className="AddChattingRoom">
@@ -35,62 +40,48 @@ export default function ChatDrawer ({ onClose }) {
                         <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
                             <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
                             <div style={{ marginTop: "5px" }}>
-                                <div style={{ fontSize: "15px" }}>2025.09.15</div>
+                                <div style={{ fontSize: "15px", display: "flex", alignItems: "center", position: "relative" }}>
+                                    <span>2025.09.15</span>
+
+                                    <div style={{ marginLeft: "auto", position: "relative" }}>
+                                        <span style={{ cursor: "pointer" }}>set</span>
+
+                                        <div className="ChatDrawerDropdownMenu_wrapper">
+                                            <ul>
+                                                <li onClick={() => setModalType(1)}>수정</li>
+                                                <li onClick={() => setModalType(2)}>삭제</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
                             </div>
                         </div>
                         <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
                             <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
                             <div style={{ marginTop: "5px" }}>
-                                <div style={{ fontSize: "15px" }}>2025.09.15</div>
-                                <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
-                            </div>
-                        </div>
-                        <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
-                            <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
-                            <div style={{ marginTop: "5px" }}>
-                                <div style={{ fontSize: "15px" }}>2025.09.15</div>
-                                <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
-                            </div>
-                        </div>
-                        <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
-                            <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
-                            <div style={{ marginTop: "5px" }}>
-                                <div style={{ fontSize: "15px" }}>2025.09.15</div>
-                                <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
-                            </div>
-                        </div>
-                        <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
-                            <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
-                            <div style={{ marginTop: "5px" }}>
-                                <div style={{ fontSize: "15px" }}>2025.09.15</div>
-                                <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
-                            </div>
-                        </div>
-                        <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
-                            <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
-                            <div style={{ marginTop: "5px" }}>
-                                <div style={{ fontSize: "15px" }}>2025.09.15</div>
-                                <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
-                            </div>
-                        </div>
-                        <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
-                            <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
-                            <div style={{ marginTop: "5px" }}>
-                                <div style={{ fontSize: "15px" }}>2025.09.15</div>
-                                <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
-                            </div>
-                        </div>
-                        <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
-                            <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
-                            <div style={{ marginTop: "5px" }}>
-                                <div style={{ fontSize: "15px" }}>2025.09.15</div>
+                                <div style={{ fontSize: "15px", display: "flex", alignItems: "center", position: "relative" }}>
+                                    <span>2025.09.15</span>
+
+                                    <div style={{ marginLeft: "auto", position: "relative" }}>
+                                        <span style={{ cursor: "pointer" }}>set</span>
+
+                                        <div className="ChatDrawerDropdownMenu_wrapper">
+                                            <ul>
+                                                <li onClick={() => setModalType(1)}>수정</li>
+                                                <li onClick={() => setModalType(2)}>삭제</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {modalType === 1 && (<EditArchive onClose={() => setModalType(0)}/>)}
         </div>
     );
 }
