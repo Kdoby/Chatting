@@ -3,11 +3,24 @@ import EditArchive from "./EditArchive";
 import './AddChattingRoom.css';
 import '../chatting/Chatting.css';
 
+import api from '../api';
+
 import React, { useState } from "react";
 
 export default function ChatDrawer ({ onClose }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [modalType, setModalType] = useState(null); // 0=닫힘, 1=수정
+
+    // 아카이브 삭제 -> 아직 연결 안 함
+    const deleteArchive = async () => {
+        try {
+            const res = await api.get("/v1/friend/list/");
+
+            console.log(res.data.data);
+        } catch (err) {
+            console.error("검색 에러:", err);
+        }
+    };
 
     return (
         <div className="AddChattingRoom">
@@ -69,7 +82,7 @@ export default function ChatDrawer ({ onClose }) {
                                         <div className="ChatDrawerDropdownMenu_wrapper">
                                             <ul>
                                                 <li onClick={() => setModalType(1)}>수정</li>
-                                                <li onClick={() => setModalType(2)}>삭제</li>
+                                                <li onClick={() => deleteArchive()}>삭제</li>
                                             </ul>
                                         </div>
                                     </div>
