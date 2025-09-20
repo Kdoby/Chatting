@@ -8,7 +8,8 @@ export default function ChatDrawer ({ onClose }) {
     const [modalType, setModalType] = useState(null); // 0=닫힘, 1=수정
 
     return (
-        <div className="AddChattingRoom">
+        <div className="AddChattingRoom"
+             style={{backgroundColor: "rgba(0,0,0,0)"}}>
             <div style={{
                 position: "relative", border: "1px solid gray", padding: "10px",
                 borderRadius: "15px", backgroundColor: "white",
