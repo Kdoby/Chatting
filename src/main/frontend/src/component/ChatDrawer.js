@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ChatDrawer ({onClose}) {
+export default function ChatDrawer ({ onClose }) {
     return (
         <div className="AddChattingRoom">
             <div style={{
