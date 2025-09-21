@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class FriendshipListResponse {
     private Long friendshipId;
+    private Long friendId;  // 상대방 id
     private String friendNickname;
     private FriendshipStatus status;
     private LocalDateTime createdAt;
