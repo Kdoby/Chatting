@@ -60,7 +60,7 @@ export default function FriendList({ userInfo }){
         {friendsList ? (
             <div>
             {Array.isArray(friendsList) && friendsList.map((e) => (
-                <div key={e.friendshipId}
+                <div key={e.friendId}
                      className={"ChattingRoom_wrapper"}>
                     <div className={"ChattingRoom_img"}>
 
