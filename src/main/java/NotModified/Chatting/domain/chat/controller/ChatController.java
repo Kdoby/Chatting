@@ -1,6 +1,7 @@
 package NotModified.Chatting.domain.chat.controller;
 
 import NotModified.Chatting.domain.chat.dto.request.ChatRequest;
+import NotModified.Chatting.domain.chat.dto.response.ChatImageResponse;
 import NotModified.Chatting.domain.chat.dto.response.ChatResponse;
 import NotModified.Chatting.domain.chat.service.ChatService;
 import NotModified.Chatting.global.auth.token.dto.jwt.JwtAuthentication;
@@ -12,6 +13,7 @@ import org.springframework.messaging.handler.annotation.*;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +36,7 @@ public class ChatController {
     ) {
         Long userId = (Long) simpSessionAttributes.get("userId");
 
-        ChatResponse response = chatService.sendMessage(roomId, userId, request);
+        ChatResponse response = chatService.saveTextMessage(roomId, userId, request);
 
         messagingTemplate.convertAndSend("/sub/chat/room/" + roomId, response);
     }
@@ -44,11 +46,49 @@ public class ChatController {
             @PathVariable("roomId") Long roomId,
             @AuthenticationPrincipal JwtAuthentication auth
     ) {
+        List<ChatResponse> response = chatService.getChatList(roomId, auth.userId());
+
         return ResponseEntity.ok().body(
                 new ApiResponse<>(
                         "이전 채팅 목록 불러오기 성공",
-                        chatService.getChatList(roomId, auth.userId())
+                        response
                 )
         );
     }
+
+    @PostMapping("/uploads/{roomId}")
+    public ResponseEntity<ApiResponse<ChatResponse>> sendImageFiles(
+            @PathVariable("roomId") Long roomId,
+            @RequestParam("files") List<MultipartFile> files,
+            @AuthenticationPrincipal JwtAuthentication auth
+    ){
+        ChatResponse response =
+                chatService.saveImageMessage(roomId, auth.userId(), files);
+
+        messagingTemplate.convertAndSend("/sub/chat/room/" + roomId, response);
+
+        return ResponseEntity.ok().body(
+                new ApiResponse<>(
+                        "이미지 전송 성공",
+                        response
+                )
+        );
+    }
+
+    @GetMapping("/images/{roomId}")
+    public ResponseEntity<ApiResponse<List<ChatImageResponse>>> getImagesInChatRoom(
+            @PathVariable("roomId") Long roomId,
+            @AuthenticationPrincipal JwtAuthentication auth
+    ) {
+       List<ChatImageResponse> response =
+               chatService.getImagesInChatRoom(roomId, auth.userId());
+
+       return ResponseEntity.ok().body(
+               new ApiResponse<>(
+                       "이미지 목록 조회 성공",
+                       response
+               )
+       );
+    }
+
 }
