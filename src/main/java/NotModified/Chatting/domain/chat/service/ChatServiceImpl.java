@@ -1,38 +1,49 @@
 package NotModified.Chatting.domain.chat.service;
 
 import NotModified.Chatting.domain.chat.dto.request.ChatRequest;
+import NotModified.Chatting.domain.chat.dto.response.ChatImageResponse;
 import NotModified.Chatting.domain.chat.dto.response.ChatResponse;
 import NotModified.Chatting.domain.chat.dto.response.ChatRoomInfoResponse;
 import NotModified.Chatting.domain.chat.dto.response.ChatRoomResponse;
-import NotModified.Chatting.domain.chat.model.Chat;
-import NotModified.Chatting.domain.chat.model.ChatRoom;
-import NotModified.Chatting.domain.chat.model.ChatRoomMember;
-import NotModified.Chatting.domain.chat.model.MessageType;
+import NotModified.Chatting.domain.chat.model.*;
 import NotModified.Chatting.domain.chat.repository.ChatRepository;
+import NotModified.Chatting.domain.chat.repository.ChatImageRepository;
 import NotModified.Chatting.domain.chat.repository.ChatRoomMemberRepository;
 import NotModified.Chatting.domain.chat.repository.ChatRoomRepository;
+import NotModified.Chatting.domain.friendship.model.Friendship;
+import NotModified.Chatting.domain.friendship.repository.FriendshipRepository;
 import NotModified.Chatting.domain.member.model.Member;
 import NotModified.Chatting.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class ChatServiceImpl implements ChatService {
 
+    private static final String UPLOAD_DIR = System.getProperty("user.dir") + "/uploads/";
+
     private final MemberRepository memberRepository;
+    private final FriendshipRepository friendshipRepository;
+
     private final ChatRoomRepository chatRoomRepository;
     private final ChatRoomMemberRepository chatRoomMemberRepository;
     private final ChatRepository chatRepository;
+    private final ChatImageRepository chatImageRepository;
 
-    private final SimpMessagingTemplate messagingTemplate;
+    // private final SimpMessagingTemplate messagingTemplate;
 
     public ChatRoom findChatRoom(Long roomId) {
 
@@ -52,6 +63,12 @@ public class ChatServiceImpl implements ChatService {
         Member admin = memberRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
 
+        // 초대 권한 체크
+        validateInvitation(userId, participantsId);
+
+        // 로그인한 사용자도 포함
+        participantsId.add(userId);
+
         ChatRoom room = ChatRoom.builder()
                 .roomName(roomName)
                 .admin(admin)
@@ -66,7 +83,9 @@ public class ChatServiceImpl implements ChatService {
 
         ChatRoom room = findChatRoom(roomId);
 
-        if(!chatRoomMemberRepository.existsByRoom_IdAndMember_Id(roomId, userId)) {
+        // 초대 권한 체크
+        validateInvitation(userId, participants);
+        if (!chatRoomMemberRepository.existsByRoom_IdAndMember_Id(roomId, userId)) {
             throw new IllegalArgumentException("초대 권한이 없습니다.");
         }
 
@@ -84,7 +103,7 @@ public class ChatServiceImpl implements ChatService {
 
         for (Member member : members) {
 
-            if(chatRoomMemberRepository.existsByRoomAndMember(room, member)) continue;
+            if (chatRoomMemberRepository.existsByRoomAndMember(room, member)) continue;
 
             chatRoomMemberRepository.save(ChatRoomMember.builder()
                     .room(room)
@@ -95,7 +114,7 @@ public class ChatServiceImpl implements ChatService {
             memberNicknames.add(member.getNickname());
         }
 
-        if(memberNicknames.isEmpty()) {
+        if (memberNicknames.isEmpty()) {
             return ChatResponse.builder().build();
         }
 
@@ -115,34 +134,22 @@ public class ChatServiceImpl implements ChatService {
         return ChatResponse.from(chat);
     }
 
-    @Override
-    public ChatResponse enterRoom(Long roomId, Long userId) {
+    private void validateInvitation(Long userId, List<Long> participants) {
 
-        ChatRoom room = findChatRoom(roomId);
-        Member member = memberRepository.findById(userId).orElseThrow();
+        // 친구가 아닌 사용자가 한명이라도 있으면 초대할 수 x
+        List<Friendship> friendships = friendshipRepository.findAllFriendshipsWithMemberAndParticipants(userId, participants);
 
-        // 이미 방에 존재하는 경우
-        if (chatRoomMemberRepository.existsByRoomAndMember(room, member)) {
-            throw new IllegalStateException("이미 채팅방에 입장한 사용자입니다.");
+        Set<Long> friendIds = friendships.stream()
+                .map(f -> f.getRequester().getId().equals(userId)
+                        ? f.getAddressee().getId()
+                        : f.getRequester().getId())
+                .collect(Collectors.toSet());
+
+        for (Long pid : participants) {
+            if (!friendIds.contains(pid)) {
+                throw new IllegalArgumentException("친구가 아닌 사용자는 초대할 수 없습니다.");
+            }
         }
-
-        chatRoomMemberRepository.save(ChatRoomMember.builder()
-                .room(room)
-                .member(member)
-                .enterTime(LocalDateTime.now())
-                .build());
-
-        Chat chat = Chat.builder()
-                .room(room)
-                .sender(member)
-                .message(member.getNickname() + "님이 입장하셨습니다.")
-                .type(MessageType.JOIN)
-                .sendTime(LocalDateTime.now())
-                .build();
-
-        chatRepository.save(chat);
-
-        return ChatResponse.from(chat);
     }
 
     @Override
@@ -177,8 +184,21 @@ public class ChatServiceImpl implements ChatService {
         ChatRoom room = findChatRoom(roomId);
         ChatRoomMember member = findChatRoomMember(roomId, userId);
 
+        // 사용자가 채팅방에 입장한 이후의 메시지 목록만 조회
         return chatRepository.findAllByRoomAndSendTimeAfter(room, member.getEnterTime()).stream()
-                .map(ChatResponse::from)
+                .map(chat -> {
+                    // 이미지 메시지인 경우, images 배열에 추가
+                    if(chat.getType() == MessageType.IMAGE) {
+
+                        List<String> images = chatImageRepository.findByChat_Id(chat.getId()).stream()
+                                .map(img -> "/uploads/" + img.getStoredFileName())
+                                .toList();
+
+                        return ChatResponse.from(chat, images);
+                    }
+
+                    return ChatResponse.from(chat);
+                })
                 .toList();
     }
 
@@ -194,7 +214,6 @@ public class ChatServiceImpl implements ChatService {
         if (!chatRoomMemberRepository.existsByRoom_IdAndMember_Id(roomId, userId)) {
             throw new IllegalArgumentException("해당 채팅방에 대한 조회 권한이 없는 사용자입니다.");
         }
-
 
         List<ChatRoomMember> chatRoomMembers = chatRoomMemberRepository.findByRoom_Id(roomId);
 
@@ -218,7 +237,7 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public ChatResponse sendMessage(Long roomId, Long userId, ChatRequest request) {
+    public ChatResponse saveTextMessage(Long roomId, Long userId, ChatRequest request) {
 
         System.out.println("userId = " + userId);
 
@@ -236,5 +255,78 @@ public class ChatServiceImpl implements ChatService {
         chatRepository.save(chat);
 
         return ChatResponse.from(chat);
+    }
+
+    @Override
+    public ChatResponse saveImageMessage(Long roomId, Long userId, List<MultipartFile> files) {
+
+        ChatRoom room = findChatRoom(roomId);
+        Member sender = memberRepository.findById(userId).orElseThrow();
+
+        Chat chat = Chat.builder()
+                .room(room)
+                .sender(sender)
+                .message("")
+                .type(MessageType.IMAGE)
+                .sendTime(LocalDateTime.now())
+                .build();
+
+        chatRepository.save(chat);
+
+        return ChatResponse.from(chat, saveImages(chat, files));
+    }
+
+    @Override
+    public List<ChatImageResponse> getImagesInChatRoom(Long roomId, Long userId) {
+
+        // 접근 권한 체크
+        findChatRoomMember(roomId, userId);
+
+        return chatImageRepository.findByRoom_Id(roomId).stream()
+                .map(ChatImageResponse::from)
+                .toList();
+    }
+
+    private List<String> saveImages(Chat chat, List<MultipartFile> files) {
+
+        List<String> images = new ArrayList<>();
+
+        for (MultipartFile file : files) {
+
+            String path = saveImage(chat, file);
+            images.add(path);
+        }
+
+        return images;
+    }
+
+    private String saveImage(Chat chat, MultipartFile file) {
+
+        if (file.isEmpty()) {
+            throw new IllegalArgumentException("업로드된 파일이 없습니다.");
+        }
+
+        String originalFileName = file.getOriginalFilename();
+        String storedFileName = UUID.randomUUID() + "_" + originalFileName;
+
+        String path = UPLOAD_DIR + storedFileName;
+
+        try {
+            File destination = new File(path);
+            destination.getParentFile().mkdirs();
+            file.transferTo(destination);
+        } catch (IOException e) {
+            throw new RuntimeException("파일 저장 실패", e);
+        }
+
+        // 채팅 이미지 저장
+        chatImageRepository.save(ChatImage.builder()
+                .room(chat.getRoom())
+                .chat(chat)
+                .originalFileName(originalFileName)
+                .storedFileName(storedFileName)
+                .build());
+
+        return "/uploads/" + storedFileName;
     }
 }

@@ -42,6 +42,10 @@ public class FriendshipServiceImpl implements FriendshipService {
         // 요청 받은 사람
         Member addressee = memberService.findMember(addresseeNickname);
 
+        friendshipRepository.findFriendshipBetween(requesterId, addressee.getId())
+                .orElseThrow(() -> new IllegalArgumentException("친구 요청 대기중인 사용자이거나, " +
+                        "이미 친구인 사용자에게는 요청을 보낼 수 없습니다."));
+
         if(requester.getId().equals(addressee.getId())) {
             throw new IllegalArgumentException("자기 자신에게는 친구요청을 보낼 수 없습니다.");
         }
@@ -126,7 +130,7 @@ public class FriendshipServiceImpl implements FriendshipService {
     @Override
     public FriendshipStatusResponse getFriendshipBetween(Long myUserId, Long otherUserId) {
 
-        return friendshipRepository.findFriendshipBetween(myUserId, otherUserId)
+        return friendshipRepository.findFriendshipBetween(myUserId, otherUserId, FriendshipStatus.ACCEPTED)
                 .map(friendship -> {
 
                     FriendRequestDirection direction = friendship.getRequester().getId().equals(myUserId) ?
@@ -146,13 +150,14 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     private FriendshipListResponse toResponse(Friendship friendship, boolean isSent) {
 
-        String friendNickname = isSent ?
-                friendship.getAddressee().getNickname() :
-                friendship.getRequester().getNickname();
+        Member friend = isSent ?
+                friendship.getAddressee() :
+                friendship.getRequester();
 
         return FriendshipListResponse.builder()
                 .friendshipId(friendship.getId())
-                .friendNickname(friendNickname)
+                .friendId(friend.getId())
+                .friendNickname(friend.getNickname())
                 .status(friendship.getStatus())
                 .createdAt(friendship.getCreatedAt())
                 .build();
