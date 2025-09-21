@@ -24,15 +24,15 @@ export default function AddChattingRoom({ onClose, userInfo }) {
     }, [userInfo]);
 
     // 체크박스 선택 처리
-    const handleCheckboxChange = (friendshipId, nickname, checked) => {
+    const handleCheckboxChange = (friendId, nickname, checked) => {
         if (checked) {
             setChattingRoomMemberList((prev) => [
                 ...prev,
-                { friendshipId, nickname }
+                { friendId, nickname }
             ]);
         } else {
             setChattingRoomMemberList((prev) =>
-                prev.filter((f) => f.friendshipId !== friendshipId)
+                prev.filter((f) => f.friendId !== friendId)
             );
         }
     };
@@ -48,13 +48,13 @@ export default function AddChattingRoom({ onClose, userInfo }) {
             return;
         }
 
-        const friendshipIdList = chattingRoomMemberList.map(m => m.friendshipId);
+        const friendIdList = chattingRoomMemberList.map(m => m.friendId);
 
-        console.log(roomName, friendshipIdList);
+        console.log(roomName, friendIdList);
         try {
             const res = await api.post("/v1/chatroom", {
                 roomName: roomName,
-                participantsId: friendshipIdList
+                participantsId: friendIdList
             });
 
             console.log(res.data.message);
@@ -107,7 +107,7 @@ export default function AddChattingRoom({ onClose, userInfo }) {
                         <div style={{ overflowY: "auto" }}>
                             {friendsList.map((e) => (
                                 <div
-                                    key={e.friendshipId}
+                                    key={e.friendId}
                                     className={"ChattingRoom_wrapper"}
                                     style={{ gridTemplateColumns: "auto auto 9fr" }}
                                 >
@@ -115,7 +115,7 @@ export default function AddChattingRoom({ onClose, userInfo }) {
                                         type="checkbox"
                                         onChange={(event) =>
                                             handleCheckboxChange(
-                                                e.friendshipId,
+                                                e.friendId,
                                                 e.friendNickname,
                                                 event.target.checked
                                             )
