@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @Service
@@ -42,11 +43,14 @@ public class FriendshipServiceImpl implements FriendshipService {
         // 요청 받은 사람
         Member addressee = memberService.findMember(addresseeNickname);
 
-        friendshipRepository.findFriendshipBetween(requesterId, addressee.getId())
-                .orElseThrow(() -> new IllegalArgumentException("친구 요청 대기중인 사용자이거나, " +
-                        "이미 친구인 사용자에게는 요청을 보낼 수 없습니다."));
+        Optional<Friendship> friendshipOpt = friendshipRepository.findFriendshipBetween(requesterId, addressee.getId());
 
-        if(requester.getId().equals(addressee.getId())) {
+        if (friendshipOpt.isPresent()) {
+            throw new IllegalArgumentException("친구 요청 대기중인 사용자이거나, " +
+                    "이미 친구인 사용자에게는 요청을 보낼 수 없습니다.");
+        }
+
+        if (requester.getId().equals(addressee.getId())) {
             throw new IllegalArgumentException("자기 자신에게는 친구요청을 보낼 수 없습니다.");
         }
 
@@ -58,7 +62,7 @@ public class FriendshipServiceImpl implements FriendshipService {
 
         requester.getSentFriendships().add(friendship);
         addressee.getReceivedFriendships().add(friendship);
-        
+
         friendshipRepository.save(friendship);
     }
 
@@ -67,7 +71,7 @@ public class FriendshipServiceImpl implements FriendshipService {
 
         Friendship friendship = findFriendship(friendshipId);
 
-        if(!friendship.getAddressee().getId().equals(userId)) {
+        if (!friendship.getAddressee().getId().equals(userId)) {
 
             throw new IllegalArgumentException("권한이 없습니다.");
         }
