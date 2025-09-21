@@ -29,10 +29,25 @@ public interface FriendshipRepository extends JpaRepository<Friendship, Long> {
     List<Friendship> findByAddressee_IdAndStatus(@Param("userId") Long userId,
                                                  @Param("status") FriendshipStatus status);
 
-    /* 특정 유저와 친구관계인지 체크 */
+    /* 특정 유저와의 친구관계 체크 */
     @Query("SELECT f FROM Friendship f " +
             "WHERE (f.requester.id = :myUserId AND f.addressee.id = :otherUserId) " +
             "OR (f.requester.id = :otherUserId AND f.addressee.id = :myUserId)")
     Optional<Friendship> findFriendshipBetween(@Param("myUserId") Long myUserId,
                                                @Param("otherUserId") Long otherUserId);
+    @Query("SELECT f FROM Friendship f " +
+            "WHERE (f.requester.id = :myUserId AND f.addressee.id = :otherUserId) " +
+            "OR (f.requester.id = :otherUserId AND f.addressee.id = :myUserId) " +
+            "AND f.status = :status")
+    Optional<Friendship> findFriendshipBetween(@Param("myUserId") Long myUserId,
+                                               @Param("otherUserId") Long otherUserId,
+                                               @Param("status") FriendshipStatus status);
+
+    /* 친구가 아닌 사용자를 채팅방에 초대할 경우를 대비하기 위한 함수 */
+    @Query("SELECT f FROM Friendship f " +
+            "WHERE (f.requester.id = :userId AND f.addressee.id IN :participants) " +
+            "OR (f.requester.id IN :participants AND f.addressee.id = :userId) " +
+            "AND f.status = 'ACCEPTED'")
+    List<Friendship> findAllFriendshipsWithMemberAndParticipants(Long userId,
+                                                                 List<Long> participants);
 }
