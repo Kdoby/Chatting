@@ -39,6 +39,11 @@ public class ArchiveServiceImpl implements ArchiveService {
         ChatRoomMember chatRoomMember = chatRoomMemberRepository.findByRoomAndMember(request.getRoomId(), userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 아카이브의 생성 권한이 없습니다."));
 
+        if (request.getThumbnailImageId() == null
+                || !request.getImages().contains(request.getThumbnailImageId())) {
+            throw new IllegalArgumentException("썸네일 이미지는 선택한 이미지들 중에서 하나를 택해야 합니다.");
+        }
+
         Archive archive = Archive.builder()
                 .room(chatRoomMember.getRoom())
                 .content(request.getContent())
@@ -59,7 +64,7 @@ public class ArchiveServiceImpl implements ArchiveService {
                 throw new IllegalArgumentException("존재하지 않는 이미지입니다.");
             }
 
-            if(!image.getRoom().getId().equals(request.getRoomId())) {
+            if (!image.getRoom().getId().equals(request.getRoomId())) {
                 throw new IllegalArgumentException("해당 채팅방에 속한 이미지가 아닙니다.");
             }
 
@@ -103,9 +108,9 @@ public class ArchiveServiceImpl implements ArchiveService {
                 .collect(Collectors.toMap(
                         ai -> ai.getArchive().getId(),
                         Function.identity()
-        ));
+                ));
 
-        for(Archive ar : archives) {
+        for (Archive ar : archives) {
 
             responses.add(ArchiveResponse.builder()
                     .archiveId(ar.getId())
