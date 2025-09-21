@@ -1,9 +1,22 @@
 import React, {useState} from "react";
 import axios from "axios";
+import api from "../api";
+import {TokenStore} from "../TokenStore";
 
-export default function ChatInput () {
+export default function ChatInput ({roomId, stompClient}) {
     const [input, setInput] = useState('');
     const [files, setFiles] = useState([]); // 이미지 배열(묶음으로 보낼 시 배열로 저장)
+
+    const sendMessage = () => {
+        if (stompClient.current && input) {
+            stompClient.current.send(
+                `/pub/chat.send/${roomId}`,
+                {Authorization: `Bearer ${TokenStore.getToken()}`},
+                JSON.stringify({ message: input, type: "CHAT" })
+            );
+            setInput('');
+        }
+    };
 
     const handleFileChange = (e) => {
         const selected = Array.from(e.target.files || []);
@@ -47,7 +60,8 @@ export default function ChatInput () {
         if (!input && files.length === 0) {
             return;
         }
-
+        sendMessage();
+        /*
         const formData = new FormData();
 
         formData.append("text", input ?? "");
@@ -64,6 +78,7 @@ export default function ChatInput () {
         } catch (err) {
             console.error("전송 실패:", err);
         }
+         */
     };
 
     return (
