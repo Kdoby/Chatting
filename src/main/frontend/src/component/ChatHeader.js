@@ -7,7 +7,7 @@ import ChatSetting from "./ChatSetting";
 
 import { useState } from "react";
 
-export default function ChatHeader () {
+export default function ChatHeader ({ roomName, participants, memberCount }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [modalType, setModalType] = useState(null); // 0=닫힘, 1=archive, 2=photo
 
@@ -18,8 +18,8 @@ export default function ChatHeader () {
 
                 </div>
                 <div className={"ChattingRoom_info"}>
-                    <div>채팅방 이름</div>
-                    <div><img src={"images/user.png"} alt={"채팅인원"}/>3</div>
+                    <div>{roomName}</div>
+                    <div><img src={"images/user.png"} alt={"채팅인원"}/>{memberCount}</div>
                 </div>
                 <div className={"ChatHeader_menuDiv"}>
                     <img src={"images/menu.png"} alt={"메뉴"} onClick={() => setIsMenuOpen(prev => !prev)}/>

@@ -5,7 +5,7 @@ import api from'../api';
 
 import React, {useEffect, useState} from "react";
 
-export default function ChattingRoomList({ setLeftType, userInfo }){
+export default function ChattingRoomList({ setLeftType, userInfo, setRoomId }){
     const [chattingList, setChattingList] = useState([]);
     const [showAddChattingRoom, setShowAddChattingRoom] = useState(false);
 
@@ -33,19 +33,13 @@ export default function ChattingRoomList({ setLeftType, userInfo }){
                 create chatting room
             </button>
 
-
-            <div className="ChattingRoom_wrapper" onClick={() => setLeftType('chatting')}>
-                <div className="ChattingRoom_img"></div>
-                <div className="ChattingRoom_info">
-                    <div>채팅방 이름</div>
-                    <div>마지막 메세지...</div>
-                </div>
-            </div>
-
             {Array.isArray(chattingList) && chattingList.length > 0 ? (
                 <div>
                     {chattingList.map((e, idx) => (
-                        <div key={idx} className="ChattingRoom_wrapper" onClick={() => setLeftType('chatting')}>
+                        <div key={idx} className="ChattingRoom_wrapper" onClick={() => {
+                            setLeftType('chatting');
+                            setRoomId(e.roomId);
+                        }}>
                             <div className="ChattingRoom_img"></div>
                             <div className="ChattingRoom_info">
                                 <div>채팅방 이름</div>
