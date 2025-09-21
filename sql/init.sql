@@ -65,6 +65,19 @@ CREATE TABLE chat_room_member
     UNIQUE (room_id, user_id)   -- 한 채팅방에 같은 유저 중복 방지
 );
 
+DROP TABLE if EXISTS chat_image CASCADE;
+CREATE TABLE chat_image
+(
+    chat_image_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    room_id BIGINT NOT NULL,
+    chat_id BIGINT NOT NULL,
+    original_file_name varchar(255),
+    stored_file_name varchar(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (room_id) REFERENCES chat_room(room_id),
+    FOREIGN KEY (chat_id) REFERENCES chat(chat_id)
+);
 
 //**************************************************************************
 // Archive
@@ -83,12 +96,12 @@ CREATE TABLE archive
 DROP TABLE if EXISTS archive_image CASCADE;
 CREATE TABLE archive_image
 (
-    image_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    archive_image_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     archive_id BIGINT NOT NULL,
+    chat_image_id BIGINT NOT NULL,
     is_thumbnail BOOLEAN DEFAULT FALSE,
-    original_file_name varchar(255),
-    stored_file_name varchar(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (archive_id) REFERENCES archive(archive_id)
+    FOREIGN KEY (archive_id) REFERENCES archive(archive_id),
+    FOREIGN KEY (chat_image_id) REFERENCES chat_room_image(chat_image_id)
 );
