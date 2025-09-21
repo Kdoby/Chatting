@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @Getter
@@ -19,6 +20,7 @@ public class ChatResponse {
     private String senderNickname;
     private String message;
     private MessageType type;
+    private List<String> images;
     private LocalDateTime sendTime;
 
     // Entity -> DTO
@@ -30,6 +32,17 @@ public class ChatResponse {
                 .message(chat.getMessage())
                 .type(chat.getType())
                 .sendTime(chat.getSendTime())
+                .build();
+    }
+
+    public static ChatResponse from(Chat chat, List<String> images) {
+        return ChatResponse.builder()
+                .chatId(chat.getId())
+                .roomId(chat.getRoom().getId())
+                .senderNickname(chat.getSender().getNickname())
+                .type(chat.getType())
+                .sendTime(chat.getSendTime())
+                .images(images)
                 .build();
     }
 }
