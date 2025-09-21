@@ -10,31 +10,20 @@ export default function Archive() {
         <div style={{
                 height: "100%", width:"83%", margin:"auto",
                 display:"grid",
-                gridTemplateRows: "40px 10fr",
+                gridTemplateRows: "40px 10fr", overflowY:"scroll",
         }}>
-            <div>
-                <select defaultValue="newest">
-                  <option value="newest">Newest</option>
-                  <option value="oldest">Oldest</option>
-                </select>
-
-                <input placeholder="친구 검색"/>
-            </div>
-
             <div style={{
-                    display: "grid",
+                    display: "grid", height: "100%",
                     gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                    gridAutoRows: "300px",
                     gap: "10px",
                     margin: "10px",
-                    overflowY: "scroll",
                  }}
             >
                 <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
                      onClick={() => setShowArchiveDetail(true)}
                 >
-                    <div style={{width: "100%", height: "200px", margin: "auto  0", border: "1px solid black", }}></div>
-                    <div style={{marginTop: "5px"}}>
+                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
+                    <div style={{ marginTop: "5px" }}>
                         <div style={{ fontSize: "15px" }}>2025.09.15</div>
                         <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
                         <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
@@ -43,31 +32,111 @@ export default function Archive() {
                 <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
                      onClick={() => setShowArchiveDetail(true)}
                 >
-                    <div style={{width: "100%", height: "200px", margin: "auto  0", border: "1px solid black", }}></div>
-                    <div style={{marginTop: "5px"}}>
+                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
+                    <div style={{ marginTop: "5px" }}>
                         <div style={{ fontSize: "15px" }}>2025.09.15</div>
                         <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
-                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행2~</div>
+                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
                     </div>
                 </div>
                 <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
                      onClick={() => setShowArchiveDetail(true)}
                 >
-                    <div style={{width: "100%", height: "200px", margin: "auto  0", border: "1px solid black", }}></div>
-                    <div style={{marginTop: "5px"}}>
+                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
+                    <div style={{ marginTop: "5px" }}>
                         <div style={{ fontSize: "15px" }}>2025.09.15</div>
                         <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
-                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행3~</div>
+                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
                     </div>
                 </div>
                 <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
                      onClick={() => setShowArchiveDetail(true)}
                 >
-                    <div style={{width: "100%", height: "200px", margin: "auto  0", border: "1px solid black", }}></div>
-                    <div style={{marginTop: "5px"}}>
+                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
+                    <div style={{ marginTop: "5px" }}>
                         <div style={{ fontSize: "15px" }}>2025.09.15</div>
                         <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
-                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행4~</div>
+                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
+                    </div>
+                </div>
+                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                     onClick={() => setShowArchiveDetail(true)}
+                >
+                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
+                    <div style={{ marginTop: "5px" }}>
+                        <div style={{ fontSize: "15px" }}>2025.09.15</div>
+                        <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
+                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
+                    </div>
+                </div>
+                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                     onClick={() => setShowArchiveDetail(true)}
+                >
+                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
+                    <div style={{ marginTop: "5px" }}>
+                        <div style={{ fontSize: "15px" }}>2025.09.15</div>
+                        <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
+                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
+                    </div>
+                </div>
+                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                     onClick={() => setShowArchiveDetail(true)}
+                >
+                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
+                    <div style={{ marginTop: "5px" }}>
+                        <div style={{ fontSize: "15px" }}>2025.09.15</div>
+                        <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
+                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
+                    </div>
+                </div>
+                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                     onClick={() => setShowArchiveDetail(true)}
+                >
+                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
+                    <div style={{ marginTop: "5px" }}>
+                        <div style={{ fontSize: "15px" }}>2025.09.15</div>
+                        <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
+                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
+                    </div>
+                </div>
+                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                     onClick={() => setShowArchiveDetail(true)}
+                >
+                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
+                    <div style={{ marginTop: "5px" }}>
+                        <div style={{ fontSize: "15px" }}>2025.09.15</div>
+                        <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
+                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
+                    </div>
+                </div>
+                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                     onClick={() => setShowArchiveDetail(true)}
+                >
+                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
+                    <div style={{ marginTop: "5px" }}>
+                        <div style={{ fontSize: "15px" }}>2025.09.15</div>
+                        <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
+                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
+                    </div>
+                </div>
+                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                     onClick={() => setShowArchiveDetail(true)}
+                >
+                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
+                    <div style={{ marginTop: "5px" }}>
+                        <div style={{ fontSize: "15px" }}>2025.09.15</div>
+                        <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
+                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
+                    </div>
+                </div>
+                <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                     onClick={() => setShowArchiveDetail(true)}
+                >
+                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
+                    <div style={{ marginTop: "5px" }}>
+                        <div style={{ fontSize: "15px" }}>2025.09.15</div>
+                        <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
+                        <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
                     </div>
                 </div>
             </div>

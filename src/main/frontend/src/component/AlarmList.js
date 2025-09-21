@@ -32,22 +32,23 @@ export default function FriendList(){
     }, [])
 
     return (
-
     <>
-    {alarmList ? (
+    {Array.isArray(alarmList) && alarmList.length > 0 ? (
         <div>
-            {Array.isArray(alarmList) && alarmList.map((e) => (
-              <div key={e.friendshipId} className="ChattingRoom_wrapper">
-                <div className="ChattingRoom_img"></div>
-                <div className="ChattingRoom_info">
-                  <div>'{e.nickname}'가 친구를 요청하였습니다.</div>
-                  <button onClick={() => approveFriendRequest(e.friendshipId)}>수락</button>
-                  <button>거절</button>
+            {alarmList.map((e) => (
+                <div key={e.friendshipId} className="ChattingRoom_wrapper">
+                    <div className="ChattingRoom_img"></div>
+                    <div className="ChattingRoom_info">
+                        <div>'{e.nickname}'가 친구를 요청하였습니다.</div>
+                        <button onClick={() => approveFriendRequest(e.friendshipId)}>수락</button>
+                        <button>거절</button>
+                    </div>
                 </div>
-              </div>
             ))}
         </div>
-    ) : (<div>not exist</div>) }
+    ) : (
+        <div>not exist</div>
+    )}
     </>
     );
 }

@@ -11,6 +11,10 @@ export default function DropdownMenu ({setModalType, closeMenu}) {
                     setModalType(2);
                     closeMenu();
                 }}>photo</li>
+                <li onClick={() => {
+                    setModalType(3);
+                    closeMenu();
+                }}>setting</li>
             </ul>
         </div>
     );

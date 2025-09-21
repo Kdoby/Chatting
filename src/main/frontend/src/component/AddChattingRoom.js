@@ -1,5 +1,7 @@
 import './AddChattingRoom.css';
+
 import api from '../api';
+
 import React, { useEffect, useState } from "react";
 
 export default function AddChattingRoom({ onClose, userInfo }) {
@@ -37,11 +39,25 @@ export default function AddChattingRoom({ onClose, userInfo }) {
 
     // 친구 리스트 조회
     const createRoom = async () => {
+        if( !roomName ) {
+            alert("채팅방 이름을 작성하세요.");
+            return;
+        }
+        if( !chattingRoomMemberList ) {
+            alert("채팅방을 만들 친구를 선택하세요.");
+            return;
+        }
+
+        const friendshipIdList = chattingRoomMemberList.map(m => m.friendshipId);
+
+        console.log(roomName, friendshipIdList);
         try {
-            const res = await api.get("/v1/chatroom",{
+            const res = await api.post("/v1/chatroom", {
                 roomName: roomName,
-                participantsId: chattingRoomMemberList
+                participantsId: friendshipIdList
             });
+
+            console.log(res.data.message);
         } catch (err) {
             console.error("검색 에러:", err);
         }
@@ -77,14 +93,14 @@ export default function AddChattingRoom({ onClose, userInfo }) {
                     <br />
 
                     {/* 선택된 닉네임 표시 */}
-                        <div style={{ marginBottom: "10px", fontWeight: "bold" }}>
-                            선택됨:
-                            {chattingRoomMemberList.length > 0 && (
-                            <span>
-                                {chattingRoomMemberList.map((m) => m.nickname).join(", ")}
-                            </span>
-                            )}
-                        </div>
+                    <div style={{ marginBottom: "10px", fontWeight: "bold" }}>
+                        선택됨:
+                        {chattingRoomMemberList.length > 0 && (
+                        <span>
+                            {chattingRoomMemberList.map((m) => m.nickname).join(", ")}
+                        </span>
+                        )}
+                    </div>
 
 
                     {Array.isArray(friendsList) && friendsList.length > 0 ? (

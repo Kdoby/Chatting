@@ -1,9 +1,11 @@
 import ChatBubble from "./ChatBubble";
 import MyChatBubble from "./MyChatBubble";
-import {useState} from "react";
 import DropdownMenu from "./DropdownMenu";
 import ChatDrawer from "./ChatDrawer";
 import ChatPhotoAlbum from "./ChatPhotoAlbum";
+import ChatSetting from "./ChatSetting";
+
+import { useState } from "react";
 
 export default function ChatHeader () {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,6 +28,7 @@ export default function ChatHeader () {
             {isMenuOpen && (<DropdownMenu setModalType={setModalType} closeMenu={() => setIsMenuOpen(false)}/>)}
             {modalType === 1 && (<ChatDrawer onClose={() => setModalType(0)}/>)}
             {modalType === 2 && (<ChatPhotoAlbum onClose={() => setModalType(0)}/>)}
+            {modalType === 3 && (<ChatSetting onClose={() => setModalType(0)}/>)}
         </div>
 
     );

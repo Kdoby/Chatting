@@ -14,8 +14,10 @@ export default function FriendList({ userInfo }){
         try {
             const res = await api.post("/v1/friend", { addresseeNickname: searchInput });
 
+            alert(res.data.data);
             setResults(res.data);
         } catch (err) {
+            alert("닉네임이 존재하지 않습니다.");
             console.error("검색 에러:", err);
         }
     };

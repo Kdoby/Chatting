@@ -22,7 +22,24 @@ export default function ChatPhotoAlbum ({onClose}) {
                 />
 
                 {/* 내용 */}
-                <div>photo album</div>
+                <div style={{
+                    height: "100%", maxHeight: "100%", width: "100%",
+                    textAlign: "left", boxSizing: "border-box",
+                    padding: "45px 20px 20px",
+                    display: "flex", flexDirection: "column",
+                }}>
+                    <div style={{ textAlign: "center", fontSize: "25px", fontWeight: "bold", marginBottom:"20px" }}>Photo</div>
+
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
+                                  gap: "10px", margin: "10px", overflowY: "scroll", }}>
+                        <div style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>
+                        </div>
+                        <div style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>
+                        </div>
+                        <div style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

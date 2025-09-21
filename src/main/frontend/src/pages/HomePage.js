@@ -14,7 +14,8 @@ export default function HomePage({ type }) {
     const fetchUserInfo = async () => {
         try {
             const res = await api.get("/v1/member/me");
-            alert("userInfo 조회 상태: " +  res.data.message);
+
+            //alert("userInfo 조회 상태: " +  res.data.message);
             setUserInfo(res.data.data); // 결과를 상태에 저장
         } catch (err) {
             console.error("검색 에러:", err);
