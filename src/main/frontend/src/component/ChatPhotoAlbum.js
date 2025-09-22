@@ -1,7 +1,10 @@
+import ChatPhotoAlbumDetail from './ChatPhotoAlbumDetail';
+
 import React, {useState} from "react";
 
 export default function ChatPhotoAlbum ({onClose}) {
     const [imgList, setImgList] = useState([]);
+    const [showChatPhotoAlbumDetail, setShowChatPhotoAlbumDetail] = useState(false);
 
 
     return (
@@ -32,15 +35,25 @@ export default function ChatPhotoAlbum ({onClose}) {
 
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
                                   gap: "10px", margin: "10px", overflowY: "scroll", }}>
-                        <div style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>
+                        <div style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                             onClick={() => setShowChatPhotoAlbumDetail(true)}
+                        >
                         </div>
-                        <div style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>
-                        </div>
-                        <div style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}>
-                        </div>
+                        <div style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                             onClick={() => setShowChatPhotoAlbumDetail(true)}
+                        ></div>
+                        <div style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                             onClick={() => setShowChatPhotoAlbumDetail(true)}
+                        ></div>
                     </div>
                 </div>
             </div>
+            {/* 조건부 렌더링 */}
+            {showChatPhotoAlbumDetail && (
+                <ChatPhotoAlbumDetail
+                    onClose={() => setShowChatPhotoAlbumDetail(false)}
+                />
+            )}
         </div>
     );
 }
