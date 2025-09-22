@@ -6,7 +6,11 @@ export default function MyChatBubble ({message, formatTime}) {
                 <div className={"ChatBubble_time"}>
                     <p>{formatTime(message.sendTime)}</p>
                 </div>
-                <div className={"ChatBubble_text"}>{message.message}</div>
+                {message.type === "CHAT" && <div className={"ChatBubble_text"}>{message.message}</div>}
+                <div>
+                    {message.type === "IMAGE" &&
+                        message.images.map((image, idx) => (<img src={`${image}`} alt="imageMessage" className={"ChatBubble_img"}></img>))}
+                </div>
             </div>
         </div>
 
