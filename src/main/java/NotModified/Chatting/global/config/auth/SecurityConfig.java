@@ -31,6 +31,7 @@ public class SecurityConfig {
                         .requestMatchers("/v1/auth/**").permitAll()
                         .requestMatchers("/v1/token/**").permitAll()
                         .requestMatchers("/ws/**").permitAll()
+                        .requestMatchers("/uploads/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/v1/friend/list/{userId}").permitAll()
                         .anyRequest().authenticated()
                 )
