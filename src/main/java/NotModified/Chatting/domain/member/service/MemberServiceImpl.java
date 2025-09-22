@@ -1,6 +1,7 @@
 package NotModified.Chatting.domain.member.service;
 
 import NotModified.Chatting.domain.member.dto.response.MemberProfileResponse;
+import NotModified.Chatting.domain.member.exception.UserNotFoundException;
 import NotModified.Chatting.domain.member.model.Member;
 import NotModified.Chatting.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class MemberServiceImpl implements MemberService {
     public Member findMember(Long userId) {
 
         Member member = memberRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+                .orElseThrow(() -> new UserNotFoundException(userId));
 
         return member;
     }
@@ -27,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
     public Member findMember(String nickname) {
 
         Member member = memberRepository.findByNickname(nickname)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+                .orElseThrow(() -> new UserNotFoundException(nickname));
 
         return member;
     }

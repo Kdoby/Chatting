@@ -1,4 +1,4 @@
-package NotModified.Chatting.domain.archive.controller;
+package NotModified.Chatting.domain.archive.api;
 
 import NotModified.Chatting.domain.archive.dto.request.CreateArchiveRequest;
 import NotModified.Chatting.domain.archive.dto.request.UpdateArchiveRequest;

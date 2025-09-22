@@ -4,10 +4,16 @@ import NotModified.Chatting.domain.archive.dto.request.CreateArchiveRequest;
 import NotModified.Chatting.domain.archive.dto.request.UpdateArchiveRequest;
 import NotModified.Chatting.domain.archive.dto.response.ArchiveContentResponse;
 import NotModified.Chatting.domain.archive.dto.response.ArchiveResponse;
+import NotModified.Chatting.domain.archive.exception.ArchiveNotFoundException;
+import NotModified.Chatting.domain.archive.exception.InvalidArchiveAccessException;
+import NotModified.Chatting.domain.archive.exception.InvalidThumbnailInputException;
 import NotModified.Chatting.domain.archive.model.Archive;
 import NotModified.Chatting.domain.archive.model.ArchiveImage;
 import NotModified.Chatting.domain.archive.repository.ArchiveImageRepository;
 import NotModified.Chatting.domain.archive.repository.ArchiveRepository;
+import NotModified.Chatting.domain.chat.exception.ChatImageNotFoundException;
+import NotModified.Chatting.domain.chat.exception.InvalidChatImageAccessException;
+import NotModified.Chatting.domain.chat.exception.InvalidChatRoomAccessException;
 import NotModified.Chatting.domain.chat.model.ChatImage;
 import NotModified.Chatting.domain.chat.model.ChatRoomMember;
 import NotModified.Chatting.domain.chat.repository.ChatImageRepository;
@@ -33,15 +39,22 @@ public class ArchiveServiceImpl implements ArchiveService {
     private final ChatRoomMemberRepository chatRoomMemberRepository;
     private final ChatImageRepository chatImageRepository;
 
+    public Archive findArchive(Long id) {
+
+        return archiveRepository.findById(id)
+                .orElseThrow(() -> new ArchiveNotFoundException(id));
+    }
+
     @Override
     public void createArchive(Long userId, CreateArchiveRequest request) {
 
+        // 채팅방 접근 권한 체크
         ChatRoomMember chatRoomMember = chatRoomMemberRepository.findByRoomAndMember(request.getRoomId(), userId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 아카이브의 생성 권한이 없습니다."));
+                .orElseThrow(() -> new InvalidChatRoomAccessException(request.getRoomId(), userId));
 
         if (request.getThumbnailImageId() == null
                 || !request.getImages().contains(request.getThumbnailImageId())) {
-            throw new IllegalArgumentException("썸네일 이미지는 선택한 이미지들 중에서 하나를 택해야 합니다.");
+            throw new InvalidThumbnailInputException(request.getThumbnailImageId());
         }
 
         Archive archive = Archive.builder()
@@ -60,12 +73,14 @@ public class ArchiveServiceImpl implements ArchiveService {
         for (Long imgId : request.getImages()) {
 
             ChatImage image = imgMap.get(imgId);
+            // 1. 존재하지 않는 이미지 이거나,
             if (image == null) {
-                throw new IllegalArgumentException("존재하지 않는 이미지입니다.");
+                throw new ChatImageNotFoundException(imgId);
             }
 
+            // 2. 해당 채팅방에 속한 이미지가 아닌 경우
             if (!image.getRoom().getId().equals(request.getRoomId())) {
-                throw new IllegalArgumentException("해당 채팅방에 속한 이미지가 아닙니다.");
+                throw new InvalidChatImageAccessException(request.getRoomId(), imgId);
             }
 
             archiveImageRepository.save(ArchiveImage.builder()
@@ -79,11 +94,10 @@ public class ArchiveServiceImpl implements ArchiveService {
     @Override
     public void updateArchive(Long userId, UpdateArchiveRequest request) {
 
-        Archive archive = archiveRepository.findById(request.getArchiveId())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아카이브입니다."));
+        Archive archive = findArchive(request.getArchiveId());
 
         chatRoomMemberRepository.findByRoomAndMember(archive.getRoom().getId(), userId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 아카이브의 수정 권한이 없습니다."));
+                .orElseThrow(() -> new InvalidArchiveAccessException(userId, archive.getId()));
 
         archive.setContent(request.getContent());
     }
@@ -91,8 +105,9 @@ public class ArchiveServiceImpl implements ArchiveService {
     @Override
     public List<ArchiveResponse> getArchivesInRoom(Long roomId, Long userId) {
 
+        // 채팅방 접근 권한 체크
         chatRoomMemberRepository.findByRoomAndMember(roomId, userId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 아카이브의 열람 권한이 없습니다."));
+                .orElseThrow(() -> new InvalidChatRoomAccessException(roomId, userId));
 
         List<ArchiveResponse> responses = new ArrayList<>();
 
@@ -125,11 +140,10 @@ public class ArchiveServiceImpl implements ArchiveService {
     @Override
     public ArchiveContentResponse getArchiveContent(Long userId, Long archiveId) {
 
-        Archive archive = archiveRepository.findById(archiveId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 아카이브입니다."));
+        Archive archive = findArchive(archiveId);
 
         chatRoomMemberRepository.findByRoomAndMember(archive.getRoom().getId(), userId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 아카이브의 열람 권한이 없습니다."));
+                .orElseThrow(() -> new InvalidArchiveAccessException(userId, archiveId));
 
         List<ArchiveImage> images = archiveImageRepository.findByArchive(archive);
         Map<String, Boolean> archiveImages = images.stream()

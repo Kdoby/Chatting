@@ -2,6 +2,7 @@ package NotModified.Chatting.domain.chat.handler;
 
 import NotModified.Chatting.domain.chat.exception.WebSocketException;
 import NotModified.Chatting.domain.chat.repository.ChatRoomMemberRepository;
+import NotModified.Chatting.domain.member.exception.UserNotFoundException;
 import NotModified.Chatting.domain.member.model.Member;
 import NotModified.Chatting.domain.member.repository.MemberRepository;
 import NotModified.Chatting.global.auth.token.service.JwtTokenProvider;
@@ -75,7 +76,7 @@ public class StompHandler implements ChannelInterceptor {
         Long userId = Long.valueOf(claims.getSubject());
 
         return memberRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+                .orElseThrow(() -> new UserNotFoundException(userId));
     }
 
     private String getTokenByAuthorizationHeader(String authHeaderValue) {
