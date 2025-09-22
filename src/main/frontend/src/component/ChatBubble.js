@@ -1,15 +1,19 @@
 
-export default function ChatBubble () {
+export default function ChatBubble ({message, formatTime}) {
     return (
         <div style={{display: "flex", justifyContent: "flex-start"}}>
             <div className={"ChatBubble_wrapper"}>
                 <img src={"images/defaultProfile.png"} alt={"profileimg"}/>
                 <div style={{margin: "0 10px"}}>
-                    <p style={{margin: "10px 0", fontSize: "14px"}}>도담</p>
-                    <div className={"ChatBubble_text"}>채팅 내용이다이ㅏㄷㄷ이ㅏ이디ㅏ무어야뭔기준으로 줄이 바뀌는거야미ㅓ이ㅏ머dsssssssssssssssssssssssssssssssssssssssssssssssssssssdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</div>
+                    <p style={{margin: "10px 0", fontSize: "14px"}}>{message.senderNickname}</p>
+                    {message.type === "CHAT" && <div className={"ChatBubble_text"}>{message.message}</div>}
+                    <div>
+                        {message.type === "IMAGE" &&
+                            message.images.map((image, idx) => (<img src={`${image}`} alt="imageMessage" className={"ChatBubble_img"}></img>))}
+                    </div>
                 </div>
                 <div className={"ChatBubble_time"}>
-                    <p>오후 5:30</p>
+                    <p>{formatTime(message.sendTime)}</p>
                 </div>
             </div>
         </div>

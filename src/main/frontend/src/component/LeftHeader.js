@@ -7,7 +7,7 @@ import "./LeftHeader.css";
 
 import React, { useState } from 'react';
 
-export default function LeftHeader({ setLeftType, userInfo }) {
+export default function LeftHeader({ setLeftType, userInfo, setRoomId }) {
     const [friendChatAlarmToggle, setFriendChatAlarmToggle] = useState('friend');
 
     return (
@@ -38,7 +38,7 @@ export default function LeftHeader({ setLeftType, userInfo }) {
                 </button>
             </div>
             { friendChatAlarmToggle === 'friend' ? ( <FriendList userInfo={userInfo} /> ) : ( <></> )}
-            { friendChatAlarmToggle === 'chat' ? ( <ChattingRoomList setLeftType={setLeftType} userInfo={userInfo} /> ) : ( <></> )}
+            { friendChatAlarmToggle === 'chat' ? ( <ChattingRoomList setLeftType={setLeftType} userInfo={userInfo} setRoomId={setRoomId}/> ) : ( <></> )}
             { friendChatAlarmToggle === 'alarm' ? ( <AlarmList /> ) : ( <></> )}
 
         </div>
