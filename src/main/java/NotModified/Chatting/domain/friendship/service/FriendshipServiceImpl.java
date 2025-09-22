@@ -4,6 +4,9 @@ import NotModified.Chatting.domain.friendship.dto.response.FriendRequestDirectio
 import NotModified.Chatting.domain.friendship.dto.response.FriendshipStatusResponse;
 import NotModified.Chatting.domain.friendship.dto.response.FriendshipListResponse;
 import NotModified.Chatting.domain.friendship.dto.response.WaitingFriendshipResponse;
+import NotModified.Chatting.domain.friendship.exception.FriendshipNotFoundException;
+import NotModified.Chatting.domain.friendship.exception.InvalidFriendshipApproveException;
+import NotModified.Chatting.domain.friendship.exception.InvalidFriendshipRequestException;
 import NotModified.Chatting.domain.friendship.model.Friendship;
 import NotModified.Chatting.domain.friendship.model.FriendshipStatus;
 import NotModified.Chatting.domain.member.model.Member;
@@ -29,7 +32,7 @@ public class FriendshipServiceImpl implements FriendshipService {
     public Friendship findFriendship(Long id) {
 
         Friendship friendship = friendshipRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 요청입니다."));
+                .orElseThrow(() -> new FriendshipNotFoundException(id));
 
         return friendship;
     }
@@ -45,13 +48,14 @@ public class FriendshipServiceImpl implements FriendshipService {
 
         Optional<Friendship> friendshipOpt = friendshipRepository.findFriendshipBetween(requesterId, addressee.getId());
 
+        // 이미 요청 대기 중이거나, 친구인 경우 요청 보낼 수 x
         if (friendshipOpt.isPresent()) {
-            throw new IllegalArgumentException("친구 요청 대기중인 사용자이거나, " +
-                    "이미 친구인 사용자에게는 요청을 보낼 수 없습니다.");
+            throw new InvalidFriendshipRequestException(requester.getId(), addressee.getId());
         }
 
+        // 자기 자신에게는 요청 보낼 수 x
         if (requester.getId().equals(addressee.getId())) {
-            throw new IllegalArgumentException("자기 자신에게는 친구요청을 보낼 수 없습니다.");
+            throw new InvalidFriendshipRequestException(requester.getId(), addressee.getId());
         }
 
         Friendship friendship = Friendship.builder()
@@ -73,7 +77,7 @@ public class FriendshipServiceImpl implements FriendshipService {
 
         if (!friendship.getAddressee().getId().equals(userId)) {
 
-            throw new IllegalArgumentException("권한이 없습니다.");
+            throw new InvalidFriendshipApproveException(friendshipId);
         }
 
         friendship.setStatus(FriendshipStatus.ACCEPTED);
