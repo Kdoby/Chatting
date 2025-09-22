@@ -18,6 +18,12 @@ export default function ChatInput ({roomId, stompClient}) {
         }
     };
 
+    const sendImageFiles = () => {
+        if (stompClient.current && files) {
+            stompClient.current.
+        }
+    };
+
     const handleFileChange = (e) => {
         const selected = Array.from(e.target.files || []);
 
