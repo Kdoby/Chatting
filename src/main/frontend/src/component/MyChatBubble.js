@@ -1,8 +1,5 @@
 
 export default function MyChatBubble ({message, formatTime}) {
-
-    console.log(message.images);
-
     return (
         <div style={{display: "flex", justifyContent: "flex-end"}}>
             <div className={"MyChatBubble_wrapper"}>
