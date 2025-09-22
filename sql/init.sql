@@ -103,5 +103,5 @@ CREATE TABLE archive_image
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (archive_id) REFERENCES archive(archive_id),
-    FOREIGN KEY (chat_image_id) REFERENCES chat_room_image(chat_image_id)
+    FOREIGN KEY (chat_image_id) REFERENCES chat_image(chat_image_id)
 );

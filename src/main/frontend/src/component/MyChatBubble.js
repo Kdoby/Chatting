@@ -1,12 +1,16 @@
 
-export default function MyChatBubble () {
+export default function MyChatBubble ({message, formatTime}) {
     return (
         <div style={{display: "flex", justifyContent: "flex-end"}}>
             <div className={"MyChatBubble_wrapper"}>
                 <div className={"ChatBubble_time"}>
-                    <p>오후 5:30</p>
+                    <p>{formatTime(message.sendTime)}</p>
                 </div>
-                <div className={"ChatBubble_text"}>채팅 내용~~~~</div>
+                {message.type === "CHAT" && <div className={"ChatBubble_text"}>{message.message}</div>}
+                <div>
+                    {message.type === "IMAGE" &&
+                        message.images.map((image, idx) => (<img src={`${image}`} alt="imageMessage" className={"ChatBubble_img"}></img>))}
+                </div>
             </div>
         </div>
 

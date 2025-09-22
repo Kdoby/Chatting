@@ -5,7 +5,7 @@ import api from'../api';
 
 import React, {useEffect, useState} from "react";
 
-export default function ChattingRoomList({ setLeftType, userInfo }){
+export default function ChattingRoomList({ setLeftType, userInfo, setRoomId }){
     const [chattingList, setChattingList] = useState([]);
     const [showAddChattingRoom, setShowAddChattingRoom] = useState(false);
 
@@ -37,7 +37,10 @@ export default function ChattingRoomList({ setLeftType, userInfo }){
             {Array.isArray(chattingList) && chattingList.length > 0 ? (
                 <div>
                     {chattingList.map((e) => (
-                        <div key={e.roomId} className="ChattingRoom_wrapper" onClick={() => setLeftType('chatting')}>
+                            <div key={e.roomId} className="ChattingRoom_wrapper" onClick={() => {
+                                setLeftType('chatting');
+                                setRoomId(e.roomId);
+                            }}>
                             <div className="ChattingRoom_img"></div>
                             <div className="ChattingRoom_info">
                                 <div>{e.roomName}</div>
