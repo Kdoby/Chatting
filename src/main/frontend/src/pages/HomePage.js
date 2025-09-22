@@ -9,12 +9,13 @@ import React, { useState, useEffect } from 'react';
 export default function HomePage({ type }) {
     const [leftType, setLeftType] = useState(type);
     const [userInfo, setUserInfo] = useState('');
+    const [roomId, setRoomId] = useState(null);
 
     // 유저 정보 조회
     const fetchUserInfo = async () => {
         try {
             const res = await api.get("/v1/member/me");
-
+            console.log("유저정보 조회: ", userInfo);
             //alert("userInfo 조회 상태: " +  res.data.message);
             setUserInfo(res.data.data); // 결과를 상태에 저장
         } catch (err) {
@@ -28,10 +29,10 @@ export default function HomePage({ type }) {
 
     return(
         <div style={{ display: "flex", width: "100%", height: "100vh" }}>
-            <LeftHeader setLeftType={setLeftType} userInfo={userInfo} />
+            <LeftHeader setLeftType={setLeftType} userInfo={userInfo} setRoomId={setRoomId}/>
 
             { leftType === "archive" ? <Archive className={"chatting_wrapper"} /> : <></>}
-            { leftType === "chatting" ? <ChattingRoomView /> : <></>}
+            { leftType === "chatting" ? <ChattingRoomView userInfo={userInfo} roomId={roomId} /> : <></>}
         </div>
     );
 }
