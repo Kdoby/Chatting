@@ -3,7 +3,7 @@ import '../chatting/Chatting.css';
 
 import React, { useState } from "react";
 
-export default function EditArchive ({ onClose }) {
+export default function ChatPhotoAlbumDetail ({ onClose }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [modalType, setModalType] = useState(null); // 0=닫힘, 1=수정
 
@@ -43,20 +43,11 @@ export default function EditArchive ({ onClose }) {
                         flexDirection: "column",
                     }}>
 
-                        <div style={{ width: "100%", height: "50%", backgroundColor: "gray", flexShrink: 0 }} />
-
-                        <div style={{ margin: "20px 0 10px", flexShrink: 0, fontSize: "15px", color:"gray" }}>2025-09-18</div>
-
-                        <div style={{ overflowY: "auto", flexGrow: 1, fontSize: "15px" }}>
-                            <textarea style={{ width:"97%", height: "90%", overflowY: "auto", flexGrow: 1, fontSize: "15px" }}
-                                value="SSSSSSSS SSSSSSSSSSSSS sssssssss sssssssssssss sssss sss sssssss
-                                      ssssss ssssssss sssssssssss sssssssssssssssss ssssssssssss
-                                      sssssssss sssssssss ssssssss
-                                      SSSSSSSS SSSSSSSSSSSSS sssssssss ss"/>
-
+                        <div style={{ width: "100%", height: "80%", backgroundColor: "gray", flexShrink: 0 }} />
+                        <br/>
+                        <div>
+                            Photo Info: 2025-09-20
                         </div>
-
-                        <button style={{width: "20%", margin:"auto"}}>Edit</button>
                     </div>
                 </div>
             </div>
