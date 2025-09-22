@@ -5,11 +5,12 @@ import '../chatting/Chatting.css';
 
 import api from '../api';
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function ChatDrawer ({ onClose }) {
+export default function ChatDrawer ({ roomId, onClose }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [modalType, setModalType] = useState(null); // 0=닫힘, 1=수정
+    const [chattingRoomArchiveList, setChattingRoomArchiveList] = useState([]);
 
     // 아카이브 삭제 -> 아직 연결 안 함
     const deleteArchive = async () => {
@@ -21,6 +22,24 @@ export default function ChatDrawer ({ onClose }) {
             console.error("검색 에러:", err);
         }
     };
+
+    // 채팅방의 아카이브 fetch
+    const fetchChattingRoomArchiveList = async() => {
+        try {
+            const res = await api.get("/v1/archive/" + roomId);
+
+            setChattingRoomArchiveList(res.data.data);
+            console.log(res.data.data);
+        } catch (err) {
+            console.error("에러", err);
+        }
+    }
+
+    useEffect(() => {
+        if(!roomId) return;
+
+        fetchChattingRoomArchiveList();
+    }, [roomId]);
 
     return (
         <div className="AddChattingRoom">
@@ -50,46 +69,39 @@ export default function ChatDrawer ({ onClose }) {
 
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
                                   gap: "10px", margin: "10px", overflowY: "scroll", }}>
-                        <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
-                            <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
-                            <div style={{ marginTop: "5px" }}>
-                                <div style={{ fontSize: "15px", display: "flex", alignItems: "center", position: "relative" }}>
-                                    <span>2025.09.15</span>
+                        {chattingRoomArchiveList ? (
+                            <>
+                            {Array.isArray(chattingRoomArchiveList) && chattingRoomArchiveList.map((e) => (
+                                <div key={e.archiveId}
+                                     style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
+                                    <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}>
+                                        <img src={`http://localhost:8080${e.thumbnailImage}`}
+                                             style={{width:"100%"}} />
+                                    </div>
+                                    <div style={{ marginTop: "5px" }}>
+                                        <div style={{ fontSize: "15px", display: "flex", alignItems: "center", position: "relative" }}>
+                                            <span>{}</span>
 
-                                    <div style={{ marginLeft: "auto", position: "relative" }}>
-                                        <span style={{ cursor: "pointer" }}>set</span>
+                                            <div style={{ marginLeft: "auto", position: "relative" }}>
+                                                <span style={{ cursor: "pointer" }}>set</span>
 
-                                        <div className="ChatDrawerDropdownMenu_wrapper">
-                                            <ul>
-                                                <li onClick={() => setModalType(1)}>수정</li>
-                                                <li onClick={() => setModalType(2)}>삭제</li>
-                                            </ul>
+                                                <div className="ChatDrawerDropdownMenu_wrapper">
+                                                    <ul>
+                                                        <li onClick={() => setModalType(1)}>수정</li>
+                                                        <li onClick={() => setModalType(2)}>삭제</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div style={{ fontSize: "15px", fontWeight:"bold" }}>{e.content}</div>
                                     </div>
                                 </div>
-                                <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
-                            </div>
-                        </div>
-                        <div style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
-                            <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}></div>
-                            <div style={{ marginTop: "5px" }}>
-                                <div style={{ fontSize: "15px", display: "flex", alignItems: "center", position: "relative" }}>
-                                    <span>2025.09.15</span>
+                            ))}
 
-                                    <div style={{ marginLeft: "auto", position: "relative" }}>
-                                        <span style={{ cursor: "pointer" }}>set</span>
+                            </>
+                        ) : ( <div>not exist</div> )}
 
-                                        <div className="ChatDrawerDropdownMenu_wrapper">
-                                            <ul>
-                                                <li onClick={() => setModalType(1)}>수정</li>
-                                                <li onClick={() => deleteArchive()}>삭제</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style={{ fontSize: "20px", fontWeight:"bold" }}>부산 여행~</div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
