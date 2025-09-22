@@ -43,7 +43,7 @@ export default function AddChattingRoom({ onClose, userInfo }) {
             alert("채팅방 이름을 작성하세요.");
             return;
         }
-        if( !chattingRoomMemberList ) {
+        if( !chattingRoomMemberList || chattingRoomMemberList.length < 1 ) {
             alert("채팅방을 만들 친구를 선택하세요.");
             return;
         }
@@ -58,6 +58,8 @@ export default function AddChattingRoom({ onClose, userInfo }) {
             });
 
             console.log(res.data.message);
+
+            onClose(false);
         } catch (err) {
             console.error("검색 에러:", err);
         }
