@@ -3,7 +3,7 @@ import '../chatting/Chatting.css';
 
 import React, { useState } from "react";
 
-export default function ChatDrawer ({ onClose }) {
+export default function EditArchive ({ onClose }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [modalType, setModalType] = useState(null); // 0=닫힘, 1=수정
 
@@ -55,6 +55,8 @@ export default function ChatDrawer ({ onClose }) {
                                       SSSSSSSS SSSSSSSSSSSSS sssssssss ss"/>
 
                         </div>
+
+                        <button style={{width: "20%", margin:"auto"}}>Edit</button>
                     </div>
                 </div>
             </div>
