@@ -37,12 +37,10 @@ export default function ChattingRoomList({ setLeftType, userInfo, setRoomId }){
             {Array.isArray(chattingList) && chattingList.length > 0 ? (
                 <div>
                     {chattingList.map((e) => (
-                        <div key={e.roomId} className="ChattingRoom_wrapper" onClick={() => {
-                            setLeftType('chatting');
-                            setRoomId(e.roomId);
-                        }}>
-                    {chattingList.map((e) => (
-                        <div key={e.roomId} className="ChattingRoom_wrapper" onClick={() => setLeftType('chatting')}>
+                            <div key={e.roomId} className="ChattingRoom_wrapper" onClick={() => {
+                                setLeftType('chatting');
+                                setRoomId(e.roomId);
+                            }}>
                             <div className="ChattingRoom_img"></div>
                             <div className="ChattingRoom_info">
                                 <div>{e.roomName}</div>
