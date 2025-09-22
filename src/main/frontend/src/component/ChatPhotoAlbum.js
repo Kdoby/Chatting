@@ -1,11 +1,30 @@
 import ChatPhotoAlbumDetail from './ChatPhotoAlbumDetail';
 
-import React, {useState} from "react";
+import api from '../api';
+import React, { useEffect, useState } from "react";
 
-export default function ChatPhotoAlbum ({onClose}) {
+export default function ChatPhotoAlbum ({ roomId, onClose }) {
     const [imgList, setImgList] = useState([]);
     const [showChatPhotoAlbumDetail, setShowChatPhotoAlbumDetail] = useState(false);
+    const [chattingRoomPhotoList, setChattingRoomPhotoList] = useState([]);
 
+    // 채팅방의 사진 fetch
+    const fetchChattingRoomArchiveList = async() => {
+        try {
+            const res = await api.get("/v1/chat/images/" + roomId);
+
+            setChattingRoomPhotoList(res.data.data);
+            console.log(res.data.data);
+        } catch (err) {
+            console.error("에러", err);
+        }
+    }
+
+    useEffect(() => {
+        if(!roomId) return;
+
+        fetchChattingRoomArchiveList();
+    }, [roomId]);
 
     return (
         <div className="AddChattingRoom">
@@ -35,16 +54,23 @@ export default function ChatPhotoAlbum ({onClose}) {
 
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
                                   gap: "10px", margin: "10px", overflowY: "scroll", }}>
-                        <div style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
-                             onClick={() => setShowChatPhotoAlbumDetail(true)}
-                        >
-                        </div>
-                        <div style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
-                             onClick={() => setShowChatPhotoAlbumDetail(true)}
-                        ></div>
-                        <div style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
-                             onClick={() => setShowChatPhotoAlbumDetail(true)}
-                        ></div>
+
+                        {chattingRoomPhotoList ? (
+                            <>
+                            {Array.isArray(chattingRoomPhotoList) && chattingRoomPhotoList.map((e) => (
+                                <div key={e.imageId}
+                                     style={{ aspectRatio: "1/1", border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
+                                     onClick={() => setShowChatPhotoAlbumDetail(true)}>
+                                    <img src={`http://localhost:8080${e.imagePath}`}
+                                         style={{width: "100%"}}
+                                    />
+                                </div>
+                            ))}
+
+                            </>
+                        ) : ( <div>not exist</div> )}
+
+
                     </div>
                 </div>
             </div>
