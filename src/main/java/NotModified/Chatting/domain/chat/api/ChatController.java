@@ -1,4 +1,4 @@
-package NotModified.Chatting.domain.chat.controller;
+package NotModified.Chatting.domain.chat.api;
 
 import NotModified.Chatting.domain.chat.dto.request.ChatRequest;
 import NotModified.Chatting.domain.chat.dto.response.ChatImageResponse;

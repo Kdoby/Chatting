@@ -45,9 +45,9 @@ public interface FriendshipRepository extends JpaRepository<Friendship, Long> {
 
     /* 친구가 아닌 사용자를 채팅방에 초대할 경우를 대비하기 위한 함수 */
     @Query("SELECT f FROM Friendship f " +
-            "WHERE (f.requester.id = :userId AND f.addressee.id IN :participants) " +
-            "OR (f.requester.id IN :participants AND f.addressee.id = :userId) " +
+            "WHERE ((f.requester.id = :userId AND f.addressee.id IN :participants) " +
+            "OR (f.requester.id IN :participants AND f.addressee.id = :userId)) " +
             "AND f.status = 'ACCEPTED'")
-    List<Friendship> findAllFriendshipsWithMemberAndParticipants(Long userId,
-                                                                 List<Long> participants);
+    List<Friendship> findAllFriendshipsWithMemberAndParticipants(@Param("userId") Long userId,
+                                                                 @Param("participants") List<Long> participants);
 }

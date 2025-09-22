@@ -5,6 +5,7 @@ import NotModified.Chatting.domain.chat.dto.response.ChatImageResponse;
 import NotModified.Chatting.domain.chat.dto.response.ChatResponse;
 import NotModified.Chatting.domain.chat.dto.response.ChatRoomInfoResponse;
 import NotModified.Chatting.domain.chat.dto.response.ChatRoomResponse;
+import NotModified.Chatting.domain.chat.exception.*;
 import NotModified.Chatting.domain.chat.model.*;
 import NotModified.Chatting.domain.chat.repository.ChatRepository;
 import NotModified.Chatting.domain.chat.repository.ChatImageRepository;
@@ -12,6 +13,7 @@ import NotModified.Chatting.domain.chat.repository.ChatRoomMemberRepository;
 import NotModified.Chatting.domain.chat.repository.ChatRoomRepository;
 import NotModified.Chatting.domain.friendship.model.Friendship;
 import NotModified.Chatting.domain.friendship.repository.FriendshipRepository;
+import NotModified.Chatting.domain.member.exception.UserNotFoundException;
 import NotModified.Chatting.domain.member.model.Member;
 import NotModified.Chatting.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -48,20 +50,20 @@ public class ChatServiceImpl implements ChatService {
     public ChatRoom findChatRoom(Long roomId) {
 
         return chatRoomRepository.findById(roomId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 채팅방입니다."));
+                .orElseThrow(() -> new ChatRoomNotFoundException(roomId));
     }
 
     public ChatRoomMember findChatRoomMember(Long roomId, Long userId) {
 
         return chatRoomMemberRepository.findByRoomAndMember(roomId, userId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 채팅방 또는 사용자입니다."));
+                .orElseThrow(() -> new InvalidChatRoomAccessException(roomId, userId));
     }
 
     @Override
     public ChatResponse createChatRoom(String roomName, List<Long> participantsId, Long userId) {
 
         Member admin = memberRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+                .orElseThrow(() -> new UserNotFoundException(userId));
 
         // 초대 권한 체크
         validateInvitation(userId, participantsId);
@@ -83,11 +85,11 @@ public class ChatServiceImpl implements ChatService {
 
         ChatRoom room = findChatRoom(roomId);
 
-        // 초대 권한 체크
-        validateInvitation(userId, participants);
+        // 초대 권한 체크: 채팅방에 속해있는지, 친구인지
         if (!chatRoomMemberRepository.existsByRoom_IdAndMember_Id(roomId, userId)) {
-            throw new IllegalArgumentException("초대 권한이 없습니다.");
+            throw new InvalidChatRoomAccessException(roomId, userId);
         }
+        validateInvitation(userId, participants);
 
         return addMembersToRoom(room, participants);
     }
@@ -103,6 +105,7 @@ public class ChatServiceImpl implements ChatService {
 
         for (Member member : members) {
 
+            // 이미 채팅방에 존재하는 사용자인 경우 pass
             if (chatRoomMemberRepository.existsByRoomAndMember(room, member)) continue;
 
             chatRoomMemberRepository.save(ChatRoomMember.builder()
@@ -147,7 +150,8 @@ public class ChatServiceImpl implements ChatService {
 
         for (Long pid : participants) {
             if (!friendIds.contains(pid)) {
-                throw new IllegalArgumentException("친구가 아닌 사용자는 초대할 수 없습니다.");
+                // 친구인 사용자가 아닌 경우 error
+                throw new InvalidInvitationException(userId, pid);
             }
         }
     }
@@ -212,7 +216,7 @@ public class ChatServiceImpl implements ChatService {
     public ChatRoomInfoResponse getChatRoomInfo(Long roomId, Long userId) {
 
         if (!chatRoomMemberRepository.existsByRoom_IdAndMember_Id(roomId, userId)) {
-            throw new IllegalArgumentException("해당 채팅방에 대한 조회 권한이 없는 사용자입니다.");
+            throw new InvalidChatRoomAccessException(roomId, userId);
         }
 
         List<ChatRoomMember> chatRoomMembers = chatRoomMemberRepository.findByRoom_Id(roomId);
@@ -303,7 +307,7 @@ public class ChatServiceImpl implements ChatService {
     private String saveImage(Chat chat, MultipartFile file) {
 
         if (file.isEmpty()) {
-            throw new IllegalArgumentException("업로드된 파일이 없습니다.");
+            throw new EmptyFileException();
         }
 
         String originalFileName = file.getOriginalFilename();
@@ -316,7 +320,7 @@ public class ChatServiceImpl implements ChatService {
             destination.getParentFile().mkdirs();
             file.transferTo(destination);
         } catch (IOException e) {
-            throw new RuntimeException("파일 저장 실패", e);
+            throw new FileSaveException(originalFileName);
         }
 
         // 채팅 이미지 저장
