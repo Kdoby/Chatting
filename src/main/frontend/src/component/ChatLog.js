@@ -2,9 +2,14 @@ import ChatBubble from "./ChatBubble";
 import MyChatBubble from "./MyChatBubble";
 import ChatHeader from "./ChatHeader";
 import api from "../api";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 export default function ChatLog ({userInfo, roomName, participants, memberCount, messages}) {
+    const bottomRef = useRef(null);
+
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
+    }, [messages.length]);
 
     return (
         <div className={"ChatLog_wrapper"}>
@@ -18,6 +23,7 @@ export default function ChatLog ({userInfo, roomName, participants, memberCount,
                             : <ChatBubble message={m}/>
                 );
             })}
+            <div ref={bottomRef}/>
         </div>
     );
 }
