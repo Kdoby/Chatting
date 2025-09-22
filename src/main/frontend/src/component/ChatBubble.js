@@ -9,7 +9,7 @@ export default function ChatBubble ({message, formatTime}) {
                     {message.type === "CHAT" && <div className={"ChatBubble_text"}>{message.message}</div>}
                     <div>
                         {message.type === "IMAGE" &&
-                            message.images.map((image, idx) => (<img src={`${image}`} alt="imageMessage" className={"ChatBubble_img"}></img>))}
+                            message.images.map((image, idx) => (<img src={`http://localhost:8080${image}`} alt="imageMessage" className={"ChatBubble_img"}></img>))}
                     </div>
                 </div>
                 <div className={"ChatBubble_time"}>
