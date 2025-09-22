@@ -24,15 +24,17 @@ export default function ChatLog ({userInfo, roomName, participants, memberCount,
     return (
         <div className={"ChatLog_wrapper"}>
             <ChatHeader roomName={roomName} participants={participants} memberCount={memberCount}/>
-            {messages.map((m, idx) => {
-                return (
-                    (m.senderNickname === 'system')
-                        ? <div>{m.message}</div>
-                        : (m.senderNickname === userInfo.nickname)
-                            ? <MyChatBubble message={m} formatTime={formatTime}/>
-                            : <ChatBubble message={m} formatTime={formatTime}/>
-                );
-            })}
+            <div style={{overflowY: "auto"}}>
+                {messages.map((m, idx) => {
+                    return (
+                        (m.senderNickname === 'system')
+                            ? <div>{m.message}</div>
+                            : (m.senderNickname === userInfo.nickname)
+                                ? <MyChatBubble message={m} formatTime={formatTime}/>
+                                : <ChatBubble message={m} formatTime={formatTime}/>
+                    );
+                })}
+            </div>
             <div ref={bottomRef}/>
         </div>
     );
