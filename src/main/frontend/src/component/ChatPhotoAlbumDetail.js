@@ -3,9 +3,10 @@ import '../chatting/Chatting.css';
 
 import React, { useState } from "react";
 
-export default function ChatPhotoAlbumDetail ({ onClose }) {
+export default function ChatPhotoAlbumDetail ({ onClose, selectedImagePath }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [modalType, setModalType] = useState(null); // 0=닫힘, 1=수정
+    console.log(selectedImagePath);
 
     return (
         <div className="AddChattingRoom"
@@ -43,10 +44,13 @@ export default function ChatPhotoAlbumDetail ({ onClose }) {
                         flexDirection: "column",
                     }}>
 
-                        <div style={{ width: "100%", height: "80%", backgroundColor: "gray", flexShrink: 0 }} />
-                        <br/>
-                        <div>
-                            Photo Info: 2025-09-20
+                        <div style={{ width: "100%", height: "100%", border:"1px solid black", flexShrink: 0,
+                                      aspectRatio: "1/1", border: "1px solid black", display: "flex",
+                                      justifyContent: "center", alignItems: "center", textAlign: "center",}}
+                        >
+                            <img src={`http://localhost:8080${selectedImagePath}`}
+                                 style={{ width:"100%", height:"100%", objectFit: "contain", }}
+                            />
                         </div>
                     </div>
                 </div>
