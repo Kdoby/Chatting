@@ -76,4 +76,17 @@ public class ArchiveController {
                 )
         );
     }
+
+    @GetMapping("/list")
+    public ResponseEntity<ApiResponse<List<ArchiveResponse>>> getArchiveList(
+            @AuthenticationPrincipal JwtAuthentication auth
+    ) {
+
+        return ResponseEntity.ok().body(
+                new ApiResponse<>(
+                        "사용자의 아카이브 목록 조회 성공",
+                        archiveService.getArchivesOfUser(auth.userId())
+                )
+        );
+    }
 }

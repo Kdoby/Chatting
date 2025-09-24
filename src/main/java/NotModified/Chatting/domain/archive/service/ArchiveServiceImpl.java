@@ -15,6 +15,7 @@ import NotModified.Chatting.domain.chat.exception.ChatImageNotFoundException;
 import NotModified.Chatting.domain.chat.exception.InvalidChatImageAccessException;
 import NotModified.Chatting.domain.chat.exception.InvalidChatRoomAccessException;
 import NotModified.Chatting.domain.chat.model.ChatImage;
+import NotModified.Chatting.domain.chat.model.ChatRoom;
 import NotModified.Chatting.domain.chat.model.ChatRoomMember;
 import NotModified.Chatting.domain.chat.repository.ChatImageRepository;
 import NotModified.Chatting.domain.chat.repository.ChatRoomMemberRepository;
@@ -59,6 +60,7 @@ public class ArchiveServiceImpl implements ArchiveService {
 
         Archive archive = Archive.builder()
                 .room(chatRoomMember.getRoom())
+                .thumbnailId(request.getThumbnailImageId())
                 .content(request.getContent())
                 .build();
 
@@ -161,4 +163,36 @@ public class ArchiveServiceImpl implements ArchiveService {
                 .build();
     }
 
+    @Override
+    public List<ArchiveResponse> getArchivesOfUser(Long userId) {
+
+        List<ArchiveResponse> responses = new ArrayList<>();
+
+        // 특정 사용자가 속한 채팅방 목록
+        List<ChatRoom> rooms = chatRoomMemberRepository.findByMember_Id(userId).stream()
+                .map(ChatRoomMember::getRoom)
+                .toList();
+
+        // 채팅방의 아카이브 목록들
+        List<Archive> archives = archiveRepository.findAllByRoomIn(rooms);
+        List<Long> thumbnailIds = archives.stream()
+                .map(Archive::getThumbnailId)
+                .toList();
+
+        // 아카이브들의 썸네일 이미지 목록을 id와 맵핑
+        Map<Long, ChatImage> chatImageMap = chatImageRepository.findAllById(thumbnailIds).stream()
+                .collect(Collectors.toMap(ChatImage::getId, Function.identity()));
+
+        for(Archive ar : archives) {
+
+            responses.add(ArchiveResponse.builder()
+                    .archiveId(ar.getId())
+                    .content(ar.getContent())
+                    // 썸네일 이미지를 Map 에서 찾아서 넣음
+                    .thumbnailImage(chatImageMap.get(ar.getThumbnailId()).getStoredFileName())
+                    .build());
+        }
+        
+        return responses;
+    }
 }

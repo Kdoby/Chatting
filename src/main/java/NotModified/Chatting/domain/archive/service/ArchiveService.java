@@ -20,4 +20,7 @@ public interface ArchiveService {
 
     /* 특정 아카이브의 내용 조회 */
     ArchiveContentResponse getArchiveContent(Long userId, Long archiveId);
+    
+    /* 사용자가 속한 채팅방의 아카이브 목록 조회 */
+    List<ArchiveResponse> getArchivesOfUser(Long userId);
 }
