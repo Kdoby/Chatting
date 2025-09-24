@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ChatSetting ({ onClose }) {
+export default function ChatSetting ({ roomId, onClose }) {
 
     return (
         <div className="AddChattingRoom">

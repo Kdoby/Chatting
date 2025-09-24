@@ -7,7 +7,7 @@ import "./LeftHeader.css";
 
 import React, { useState } from 'react';
 
-export default function LeftHeader({ setLeftType, userInfo, setRoomId }) {
+export default function LeftHeader({ setLeftType, userInfo, setRoomId, fetchMyArchive }) {
     const [friendChatAlarmToggle, setFriendChatAlarmToggle] = useState('friend');
 
     return (
@@ -15,7 +15,10 @@ export default function LeftHeader({ setLeftType, userInfo, setRoomId }) {
             <HeaderProfile userInfo={userInfo}/>
 
             <button className={"header_archive"}
-                    onClick={() => setLeftType('archive')}
+                    onClick={() => {
+                        setLeftType('archive');
+                        fetchMyArchive();
+                    }}
                     style={{ width: "100%"}}
             >
                 archive

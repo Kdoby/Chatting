@@ -1,4 +1,3 @@
-import ChattingRoom from "./ChattingRoom";
 import AddChattingRoom from "./AddChattingRoom";
 
 import api from'../api';
