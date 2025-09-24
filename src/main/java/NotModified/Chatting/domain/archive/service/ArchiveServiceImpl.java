@@ -133,6 +133,8 @@ public class ArchiveServiceImpl implements ArchiveService {
                     .archiveId(ar.getId())
                     .content(ar.getContent())
                     .thumbnailImage("/uploads/" + archiveImageMap.get(ar.getId()).getImage().getStoredFileName())
+                    .createdAt(ar.getCreatedAt())
+                    .updatedAt(ar.getUpdatedAt())
                     .build());
         }
 
@@ -172,6 +174,21 @@ public class ArchiveServiceImpl implements ArchiveService {
         List<ChatRoom> rooms = chatRoomMemberRepository.findByMember_Id(userId).stream()
                 .map(ChatRoomMember::getRoom)
                 .toList();
+        List<Long> roomIds = rooms.stream()
+                .map(ChatRoom::getId)
+                .toList();
+
+        // 같은 채팅방에 속한 멤버 목록
+        List<ChatRoomMember> allMembers = chatRoomMemberRepository.findAllByRoom_IdIn(roomIds);
+
+        // (채팅방 id, 거기에 속한 멤버 닉네임 리스트) map
+        Map<Long, List<String>> chatRoomMembersMap = allMembers.stream()
+                .collect(Collectors.groupingBy(
+                        m -> m.getRoom().getId(),
+                        Collectors.mapping(
+                                c -> c.getMember().getNickname(),
+                                Collectors.toList())
+                ));
 
         // 채팅방의 아카이브 목록들
         List<Archive> archives = archiveRepository.findAllByRoomIn(rooms);
@@ -183,16 +200,19 @@ public class ArchiveServiceImpl implements ArchiveService {
         Map<Long, ChatImage> chatImageMap = chatImageRepository.findAllById(thumbnailIds).stream()
                 .collect(Collectors.toMap(ChatImage::getId, Function.identity()));
 
-        for(Archive ar : archives) {
+        for (Archive ar : archives) {
 
             responses.add(ArchiveResponse.builder()
                     .archiveId(ar.getId())
                     .content(ar.getContent())
                     // 썸네일 이미지를 Map 에서 찾아서 넣음
                     .thumbnailImage(chatImageMap.get(ar.getThumbnailId()).getStoredFileName())
+                    .createdAt(ar.getCreatedAt())
+                    .updatedAt(ar.getUpdatedAt())
+                    .members(chatRoomMembersMap.get(ar.getRoom().getId()))
                     .build());
         }
-        
+
         return responses;
     }
 }
