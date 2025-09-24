@@ -22,7 +22,13 @@ export default function ChattingRoomList({ setLeftType, userInfo, setRoomId }){
 
     useEffect(() => {
         fetchChattingList();
-    },[])
+    },[]);
+
+    useEffect(() => {
+        if(!showAddChattingRoom){
+            fetchChattingList();
+        }
+    }, [showAddChattingRoom])
 
     return (
     <>
