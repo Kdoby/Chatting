@@ -21,6 +21,9 @@ public interface ChatRoomMemberRepository extends JpaRepository<ChatRoomMember, 
                                                  @Param("userId") Long userId);
     List<ChatRoomMember> findByRoom_Id(Long roomId);
 
+    /* 특정 사용자가 속한 채팅방 목록 조회 */
+    List<ChatRoomMember> findByMember_Id(Long userId);
+
     /* 채팅방에 특정 사용자 존재 여부 확인 */
     boolean existsByRoomAndMember(ChatRoom room, Member member);
     boolean existsByRoom_IdAndMember_Id(Long roomId, Long userId);
