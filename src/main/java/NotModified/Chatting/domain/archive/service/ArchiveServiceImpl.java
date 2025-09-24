@@ -61,6 +61,7 @@ public class ArchiveServiceImpl implements ArchiveService {
         Archive archive = Archive.builder()
                 .room(chatRoomMember.getRoom())
                 .thumbnailId(request.getThumbnailImageId())
+                .title(request.getTitle())
                 .content(request.getContent())
                 .build();
 
@@ -101,6 +102,7 @@ public class ArchiveServiceImpl implements ArchiveService {
         chatRoomMemberRepository.findByRoomAndMember(archive.getRoom().getId(), userId)
                 .orElseThrow(() -> new InvalidArchiveAccessException(userId, archive.getId()));
 
+        archive.setTitle(request.getTitle());
         archive.setContent(request.getContent());
     }
 
@@ -131,6 +133,7 @@ public class ArchiveServiceImpl implements ArchiveService {
 
             responses.add(ArchiveResponse.builder()
                     .archiveId(ar.getId())
+                    .title(ar.getTitle())
                     .content(ar.getContent())
                     .thumbnailImage("/uploads/" + archiveImageMap.get(ar.getId()).getImage().getStoredFileName())
                     .createdAt(ar.getCreatedAt())
@@ -158,6 +161,7 @@ public class ArchiveServiceImpl implements ArchiveService {
 
         return ArchiveContentResponse.builder()
                 .archiveId(archiveId)
+                .title(archive.getTitle())
                 .content(archive.getContent())
                 .images(archiveImages)
                 .createdAt(archive.getCreatedAt())
@@ -204,6 +208,7 @@ public class ArchiveServiceImpl implements ArchiveService {
 
             responses.add(ArchiveResponse.builder()
                     .archiveId(ar.getId())
+                    .title(ar.getTitle())
                     .content(ar.getContent())
                     // 썸네일 이미지를 Map 에서 찾아서 넣음
                     .thumbnailImage(chatImageMap.get(ar.getThumbnailId()).getStoredFileName())

@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ArchiveResponse {
     private Long archiveId;
+    private String title;
     private String content;
     private String thumbnailImage;
     private List<String> members;
