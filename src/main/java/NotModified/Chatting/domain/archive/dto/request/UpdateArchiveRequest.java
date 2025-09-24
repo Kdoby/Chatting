@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UpdateArchiveRequest {
     private Long archiveId;
+    private String title;
     private String content;
 }

@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CreateArchiveRequest {
     private Long roomId;
+    private String title;
     private String content;
     private List<Long> images;
     private Long thumbnailImageId;
