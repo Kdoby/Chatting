@@ -1,5 +1,6 @@
 package NotModified.Chatting.domain.archive.model;
 
+import NotModified.Chatting.domain.chat.model.ChatImage;
 import NotModified.Chatting.domain.chat.model.ChatRoom;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,9 @@ public class Archive {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private ChatRoom room;
+
+    @Column(name = "thumbnail_id")
+    private Long thumbnailId;
 
     private String content;
 
