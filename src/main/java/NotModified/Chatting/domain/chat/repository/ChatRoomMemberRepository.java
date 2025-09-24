@@ -20,6 +20,7 @@ public interface ChatRoomMemberRepository extends JpaRepository<ChatRoomMember, 
     Optional<ChatRoomMember> findByRoomAndMember(@Param("roomId") Long roomId,
                                                  @Param("userId") Long userId);
     List<ChatRoomMember> findByRoom_Id(Long roomId);
+    List<ChatRoomMember> findAllByRoom_IdIn(List<Long> roomIds);
 
     /* 특정 사용자가 속한 채팅방 목록 조회 */
     List<ChatRoomMember> findByMember_Id(Long userId);
