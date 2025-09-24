@@ -4,7 +4,7 @@ import api from '../api';
 
 import { useState, useEffect } from 'react';
 
-export default function ArchiveDetail({ onClose, archiveId }) {
+export default function ArchiveDetail({ onClose, setArchiveId, archiveId }) {
     const [archiveDetail, setArchiveDetail] = useState([]);
     const [selectedImage, setSelectedImage] = useState([]);
     const [imageList, setImageList] = useState([]);

@@ -122,6 +122,7 @@ export default function ChatDrawer ({ roomId, onClose }) {
             {showArchiveDetail && (
                 <ArchiveDetail
                     onClose={() => setShowArchiveDetail(false)}
+                    setArchiveId={setArchiveId}
                     archiveId={archiveId}
                 />
             )}

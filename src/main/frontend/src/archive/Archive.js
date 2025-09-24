@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 export default function Archive({ myArchiveList }) {
     const [friendChatToggle, setFriendChatToggle] = useState(true);
     const [showArchiveDetail, setShowArchiveDetail] = useState(false);
+    const [SelectedArchiveId, setSelectedArchiveId] = useState('');
 
 
     return(
@@ -28,7 +29,10 @@ export default function Archive({ myArchiveList }) {
                         {myArchiveList.map((e) => (
                             <div key={e.archiveId}
                                  style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
-                                 onClick={() => setShowArchiveDetail(true)}
+                                 onClick={() => {
+                                    setSelectedArchiveId(e.archiveId);
+                                    setShowArchiveDetail(true);
+                                 }}
                             >
                                 <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}>
                                     <img src={`http://localhost:8080/uploads/${e.thumbnailImage}`}
@@ -52,6 +56,8 @@ export default function Archive({ myArchiveList }) {
         {showArchiveDetail && (
             <ArchiveDetail
                 onClose={() => setShowArchiveDetail(false)}
+                setArchiveId={setSelectedArchiveId}
+                archiveId={SelectedArchiveId}
             />
         )}
 
