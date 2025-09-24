@@ -14,6 +14,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class ArchiveContentResponse {
     private Long archiveId;
+    private String title;
     private String content;
     private Map<String, Boolean> images;
     private LocalDateTime createdAt;
