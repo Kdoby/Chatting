@@ -36,6 +36,18 @@ export default function HomePage({ type }) {
         }
     };
 
+    // 채팅방 삭제
+    const deleteChattingRoom = async() => {
+        try {
+            const res = await api.delete("/v1/chatroom/" + roomId);
+
+            setLeftType("archive");
+            console.log(res.data);
+        } catch (err) {
+            console.error("검색 에러:", err);
+        }
+    };
+
     useEffect(() => {
         fetchUserInfo();
         console.log("fetchMyArchive: ");
@@ -44,10 +56,10 @@ export default function HomePage({ type }) {
 
     return(
         <div style={{ display: "flex", width: "100%", height: "100vh" }}>
-            <LeftHeader setLeftType={setLeftType} userInfo={userInfo} setRoomId={setRoomId} fetchMyArchive={fetchMyArchive} />
+            <LeftHeader leftType={leftType} setLeftType={setLeftType} userInfo={userInfo} setRoomId={setRoomId} fetchMyArchive={fetchMyArchive} />
 
             { leftType === "archive" ? <Archive className={"chatting_wrapper"} myArchiveList={myArchiveList} /> : <></>}
-            { leftType === "chatting" ? <ChattingRoomView userInfo={userInfo} roomId={roomId} /> : <></>}
+            { leftType === "chatting" ? <ChattingRoomView userInfo={userInfo} roomId={roomId} deleteChattingRoom={deleteChattingRoom} /> : <></>}
         </div>
     );
 }

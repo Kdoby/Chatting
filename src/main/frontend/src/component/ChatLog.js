@@ -14,7 +14,7 @@ const formatTime = (t) => {
     return `${ampm} ${h12}:${m}`;
 }
 
-export default function ChatLog ({userInfo, roomId, roomName, participants, memberCount, messages}) {
+export default function ChatLog ({ userInfo, roomId, roomName, participants, memberCount, messages, deleteChattingRoom }) {
     const bottomRef = useRef(null);
 
     useEffect(() => {
@@ -23,7 +23,8 @@ export default function ChatLog ({userInfo, roomId, roomName, participants, memb
 
     return (
         <div className={"ChatLog_wrapper"}>
-            <ChatHeader roomId={roomId} roomName={roomName} participants={participants} memberCount={memberCount}/>
+            <ChatHeader roomId={roomId} roomName={roomName} participants={participants} memberCount={memberCount}
+                deleteChattingRoom={deleteChattingRoom} />
             <div style={{overflowY: "auto"}}>
                 {messages.map((m, idx) => {
                     return (

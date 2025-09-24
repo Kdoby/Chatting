@@ -4,7 +4,7 @@ import api from'../api';
 
 import React, {useEffect, useState} from "react";
 
-export default function ChattingRoomList({ setLeftType, userInfo, setRoomId }){
+export default function ChattingRoomList({ leftType, setLeftType, userInfo, setRoomId }){
     const [chattingList, setChattingList] = useState([]);
     const [showAddChattingRoom, setShowAddChattingRoom] = useState(false);
 
@@ -23,6 +23,10 @@ export default function ChattingRoomList({ setLeftType, userInfo, setRoomId }){
     useEffect(() => {
         fetchChattingList();
     },[]);
+
+    useEffect(() => {
+        fetchChattingList();
+    }, [leftType])
 
     useEffect(() => {
         if(!showAddChattingRoom){
