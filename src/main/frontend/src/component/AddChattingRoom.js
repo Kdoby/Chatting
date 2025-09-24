@@ -37,7 +37,7 @@ export default function AddChattingRoom({ onClose, userInfo }) {
         }
     };
 
-    // 친구 리스트 조회
+    // 채팅방 만들기
     const createRoom = async () => {
         if( !roomName ) {
             alert("채팅방 이름을 작성하세요.");
@@ -58,6 +58,7 @@ export default function AddChattingRoom({ onClose, userInfo }) {
             });
 
             console.log(res.data.message);
+            alert(res.data.message);
 
             onClose(false);
         } catch (err) {
