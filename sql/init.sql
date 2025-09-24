@@ -87,6 +87,7 @@ CREATE TABLE archive
 (
     archive_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     room_id BIGINT NOT NULL,    -- 어떤 채팅방의 아카이브(게시물)인지
+    thumbnail_id BIGINT NOT NULL,
     content TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
