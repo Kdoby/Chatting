@@ -14,6 +14,7 @@ export default function ChatDrawer ({ roomId, onClose }) {
     const [chattingRoomArchiveList, setChattingRoomArchiveList] = useState([]);
     const [showArchiveDetail, setShowArchiveDetail] = useState(false);
     const [archiveId, setArchiveId] = useState('');
+    const [selectedArchive, setSelectedArchive] = useState([]);
 
     // 아카이브 삭제 -> 아직 연결 안 함
     const deleteArchive = async () => {
@@ -76,7 +77,9 @@ export default function ChatDrawer ({ roomId, onClose }) {
                             <>
                             {Array.isArray(chattingRoomArchiveList) && chattingRoomArchiveList.map((e) => (
                                 <div key={e.archiveId}
-                                     style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}>
+                                     style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}
+                                     onClick={() => setSelectedArchive(e)}
+                                >
                                     <div style={{ aspectRatio: "1/1", border: "1px solid black", display: "flex",
                                                   justifyContent: "center", alignItems: "center", textAlign: "center",
                                          }}
@@ -90,7 +93,7 @@ export default function ChatDrawer ({ roomId, onClose }) {
                                     </div>
                                     <div style={{ marginTop: "5px" }}>
                                         <div style={{ fontSize: "15px", display: "flex", alignItems: "center", position: "relative" }}>
-                                            <span>{}</span>
+                                            <span>{e.createdAt}</span>
 
                                             <div style={{ marginLeft: "auto", position: "relative" }}>
                                                 <span style={{ cursor: "pointer" }}>set</span>
@@ -103,7 +106,7 @@ export default function ChatDrawer ({ roomId, onClose }) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div style={{ fontSize: "15px", fontWeight:"bold" }}>{e.content}</div>
+                                        <div style={{ fontSize: "15px", fontWeight:"bold" }}>{e.title}</div>
                                     </div>
                                 </div>
                             ))}
@@ -116,7 +119,13 @@ export default function ChatDrawer ({ roomId, onClose }) {
                 </div>
             </div>
 
-            {modalType === 1 && (<EditArchive onClose={() => setModalType(0)}/>)}
+            {modalType === 1 && (
+                <EditArchive
+                    onClose={() => setModalType(0)}
+                    selectedArchive={selectedArchive}
+                    setSelectedArchive={setSelectedArchive}
+                />
+            )}
 
             {/* 조건부 렌더링 */}
             {showArchiveDetail && (
