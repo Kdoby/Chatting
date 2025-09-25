@@ -39,9 +39,14 @@ export default function Archive({ myArchiveList }) {
                                          style={{ width:"100%", height:"100%", objectFit: "contain", }} />
                                 </div>
                                 <div style={{ marginTop: "5px" }}>
-                                    <div style={{ fontSize: "15px" }}>2025-90-10</div>
-                                    <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
-                                    <div style={{ fontSize: "20px", fontWeight:"bold" }}>{e.content}</div>
+                                    <div style={{ fontSize: "15px" }}>{e.createdAt}</div>
+                                    <div style={{ fontSize: "13px", fontWeight:"bold" }}>
+                                        with
+                                        {e.members.map((em) => (
+                                            <span key={em}> {em}</span>
+                                        ))}
+                                    </div>
+                                    <div style={{ fontSize: "20px", fontWeight:"bold" }}>{e.title}</div>
                                 </div>
                             </div>
                         ))}
