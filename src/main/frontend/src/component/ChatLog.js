@@ -29,7 +29,7 @@ export default function ChatLog ({ userInfo, roomId, roomName, participants, mem
                 {messages.map((m, idx) => {
                     return (
                         (m.senderNickname === 'system')
-                            ? <div>{m.message}</div>
+                            ? <div key={idx}>{m.message}</div>
                             : (m.senderNickname === userInfo.nickname)
                                 ? <MyChatBubble message={m} formatTime={formatTime}/>
                                 : <ChatBubble message={m} formatTime={formatTime}/>
