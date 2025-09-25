@@ -10,26 +10,9 @@ export default function EditArchive ({ onClose, selectedArchive, setSelectedArch
     const [archiveTitle, setArchiveTitle] = useState('');
     const [archiveContent, setArchiveContent] = useState('');
 
-    // 아카이브 내용 조회
+    // 아카이브 수정
     const EditArchive = async () => {
         //console.log(selectedArchive.archiveId, archiveTitle, archiveContent);
-        try {
-            const res = await api.put("/v1/archive", {
-                archiveId: selectedArchive.archiveId,
-                title: archiveTitle,
-                content: archiveContent
-            });
-
-            alert(res.data.data);
-            fetchChattingRoomArchiveList();
-            onClose(false);
-        } catch (err) {
-            console.error("검색 에러:", err);
-        }
-    };
-
-    // 아카이브 내용 조회
-    const deleteArchive = async () => {
         try {
             const res = await api.put("/v1/archive", {
                 archiveId: selectedArchive.archiveId,
