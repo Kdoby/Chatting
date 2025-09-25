@@ -109,23 +109,14 @@ export default function ArchiveDetail({ onClose, setArchiveId, archiveId }) {
                     </div>
                     ))}
 
-                    {archiveDetail.images ? (
-                        <>
-                        {Object.entries(archiveDetail.images).map(([path, isThumbnail]) => (
-                            <div>
-                                <img key={path}
-                                     src={`http://localhost:8080${path}`} alt={path}
-                                     style={{width:"100%"}}
-                                />
-                            </div>
-                        ))}
-                        </>
-                        ) : (
-                        <div>not exist</div>
-                    )}
+
                     </div>
 
                     <div style={{ margin: "20px 0 10px", flexShrink: 0, fontSize: "15px", color:"gray" }}>{archiveDetail.createdAt}</div>
+
+                    <div style={{ overflowY: "auto", flexGrow: 1, fontSize: "15px" }}>
+                        {archiveDetail.title}
+                    </div>
 
                     <div style={{ overflowY: "auto", flexGrow: 1, fontSize: "15px" }}>
                         {archiveDetail.content}
