@@ -40,13 +40,12 @@ export default function Archive({ myArchiveList }) {
                                 </div>
                                 <div style={{ marginTop: "5px" }}>
                                     <div style={{ fontSize: "15px" }}>{e.createdAt}</div>
-                                    <div style={{ fontSize: "13px", fontWeight:"bold" }}>
-                                        with
+                                    <div style={{ fontSize: "13px" }}>
                                         {e.members.map((em) => (
                                             <span key={em}> {em}</span>
                                         ))}
                                     </div>
-                                    <div style={{ fontSize: "20px", fontWeight:"bold" }}>{e.title}</div>
+                                    <div style={{ fontSize: "23px", fontWeight:"bold" }}>{e.title}</div>
                                 </div>
                             </div>
                         ))}

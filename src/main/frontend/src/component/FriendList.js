@@ -54,9 +54,6 @@ export default function FriendList({ userInfo }){
             <button onClick={() => handleSearch()}>send</button>
         </div>
 
-
-
-
         {friendsList ? (
             <div>
             {Array.isArray(friendsList) && friendsList.map((e) => (

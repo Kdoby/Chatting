@@ -39,20 +39,6 @@ export default function ArchiveDetail({ onClose, setArchiveId, archiveId }) {
 
     return (
         <div className="ArchiveDetail">
-            {/* 왼쪽 버튼 */}
-            <img src="images/close.png"
-                 style={{ position: "absolute", left: "25%", top: "50%",
-                          transform: "translateY(-50%)", width: "30px", cursor: "pointer",
-                          zIndex: 1010, }}
-            />
-
-            {/* 오른쪽 버튼 */}
-            <img src="images/close.png"
-                 style={{ position: "absolute", right: "25%", top: "50%",
-                          transform: "translateY(-50%)", width: "30px", cursor: "pointer",
-                          zIndex: 1010, }}
-            />
-
             {/* ArchiveDetail 본체 */}
             <div style={{ position: "relative", border: "1px solid gray", padding: "10px",
                           borderRadius: "15px", backgroundColor: "white",
@@ -114,11 +100,11 @@ export default function ArchiveDetail({ onClose, setArchiveId, archiveId }) {
 
                     <div style={{ margin: "20px 0 10px", flexShrink: 0, fontSize: "15px", color:"gray" }}>{archiveDetail.createdAt}</div>
 
-                    <div style={{ overflowY: "auto", flexGrow: 1, fontSize: "15px" }}>
+                    <div style={{ overflowY: "auto", flexGrow: 1, fontSize: "25px", fontWeight:"bold" }}>
                         {archiveDetail.title}
                     </div>
 
-                    <div style={{ overflowY: "auto", flexGrow: 1, fontSize: "15px" }}>
+                    <div style={{ overflowY: "auto", flexGrow: 2, fontSize: "15px" }}>
                         {archiveDetail.content}
                     </div>
                 </div>
