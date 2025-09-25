@@ -32,6 +32,8 @@ public class Archive {
     @Column(name = "thumbnail_id")
     private Long thumbnailId;
 
+    private String title;
+
     private String content;
 
     @CreationTimestamp
