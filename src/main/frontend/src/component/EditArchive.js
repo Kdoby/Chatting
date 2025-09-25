@@ -2,9 +2,9 @@ import './AddChattingRoom.css';
 import '../chatting/Chatting.css';
 
 import api from '../api';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function EditArchive ({ onClose, selectedArchive, setSelectedArchive }) {
+export default function EditArchive ({ onClose, selectedArchive, setSelectedArchive, fetchChattingRoomArchiveList }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [modalType, setModalType] = useState(null); // 0=닫힘, 1=수정
     const [archiveTitle, setArchiveTitle] = useState('');
@@ -12,17 +12,44 @@ export default function EditArchive ({ onClose, selectedArchive, setSelectedArch
 
     // 아카이브 내용 조회
     const EditArchive = async () => {
+        //console.log(selectedArchive.archiveId, archiveTitle, archiveContent);
         try {
-            const res = await api.get("v1/archive", {
+            const res = await api.put("/v1/archive", {
                 archiveId: selectedArchive.archiveId,
+                title: archiveTitle,
                 content: archiveContent
             });
 
-            console.log(res.data.data);
+            alert(res.data.data);
+            fetchChattingRoomArchiveList();
+            onClose(false);
         } catch (err) {
             console.error("검색 에러:", err);
         }
     };
+
+    // 아카이브 내용 조회
+    const deleteArchive = async () => {
+        try {
+            const res = await api.put("/v1/archive", {
+                archiveId: selectedArchive.archiveId,
+                title: archiveTitle,
+                content: archiveContent
+            });
+
+            alert(res.data.data);
+            fetchChattingRoomArchiveList();
+            onClose(false);
+        } catch (err) {
+            console.error("검색 에러:", err);
+        }
+    };
+
+    useEffect(() => {
+        setArchiveContent(selectedArchive.content);
+        setArchiveTitle(selectedArchive.title);
+    }, [selectedArchive]);
+
 
     return (
         <div className="AddChattingRoom"
@@ -72,12 +99,14 @@ export default function EditArchive ({ onClose, selectedArchive, setSelectedArch
                         </div>
 
 
-                        <div style={{ margin: "20px 0 10px", flexShrink: 0, fontSize: "15px", color:"gray" }}>{selectedArchive.createdAt}</div>
+                        <div style={{ margin: "20px 0 10px", flexShrink: 0, fontSize: "15px", color:"gray" }}>
+                            {selectedArchive.createdAt}
+                        </div>
 
                         <div>
                             <input
                                 style={{width: "97%", fontSize: "19px", fontWeight:"bold", margin:"0 0 10px 0"}}
-                                defaultValue={selectedArchive.title}
+                                defaultValue={archiveTitle}
                                 onChange={(e) => setArchiveTitle(e.target.value)}
                             />
                         </div>
@@ -85,15 +114,14 @@ export default function EditArchive ({ onClose, selectedArchive, setSelectedArch
                         <div style={{ overflowY: "auto", flexGrow: 1, fontSize: "15px" }}>
                             <textarea
                                 style={{ width:"97%", height: "90%", overflowY: "auto", flexGrow: 1, fontSize: "15px" }}
-                                defaultValue={selectedArchive.content}
+                                defaultValue={archiveContent}
                                 onChange={(e) => setArchiveContent(e.target.value)}
                             />
 
                         </div>
 
                         <button style={{width: "20%", margin:"auto"}}
-                                onClick={() => EditArchive()}
-                        >
+                                onClick={() => EditArchive()} >
                             Edit
                         </button>
                     </div>

@@ -124,6 +124,7 @@ export default function ChatDrawer ({ roomId, onClose }) {
                     onClose={() => setModalType(0)}
                     selectedArchive={selectedArchive}
                     setSelectedArchive={setSelectedArchive}
+                    fetchChattingRoomArchiveList={fetchChattingRoomArchiveList}
                 />
             )}
 
