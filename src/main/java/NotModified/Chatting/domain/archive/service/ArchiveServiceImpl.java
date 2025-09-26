@@ -11,18 +11,21 @@ import NotModified.Chatting.domain.archive.model.Archive;
 import NotModified.Chatting.domain.archive.model.ArchiveImage;
 import NotModified.Chatting.domain.archive.repository.ArchiveImageRepository;
 import NotModified.Chatting.domain.archive.repository.ArchiveRepository;
+import NotModified.Chatting.domain.chat.dto.response.ChatResponse;
 import NotModified.Chatting.domain.chat.exception.ChatImageNotFoundException;
 import NotModified.Chatting.domain.chat.exception.InvalidChatImageAccessException;
 import NotModified.Chatting.domain.chat.exception.InvalidChatRoomAccessException;
-import NotModified.Chatting.domain.chat.model.ChatImage;
-import NotModified.Chatting.domain.chat.model.ChatRoom;
-import NotModified.Chatting.domain.chat.model.ChatRoomMember;
+import NotModified.Chatting.domain.chat.model.*;
 import NotModified.Chatting.domain.chat.repository.ChatImageRepository;
+import NotModified.Chatting.domain.chat.repository.ChatRepository;
 import NotModified.Chatting.domain.chat.repository.ChatRoomMemberRepository;
+import NotModified.Chatting.domain.member.model.Member;
+import NotModified.Chatting.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +42,9 @@ public class ArchiveServiceImpl implements ArchiveService {
 
     private final ChatRoomMemberRepository chatRoomMemberRepository;
     private final ChatImageRepository chatImageRepository;
+    private final ChatRepository chatRepository;
+
+    private final MemberRepository memberRepository;
 
     public Archive findArchive(Long id) {
 
@@ -47,11 +53,12 @@ public class ArchiveServiceImpl implements ArchiveService {
     }
 
     @Override
-    public void createArchive(Long userId, CreateArchiveRequest request) {
+    public ChatResponse createArchive(Long userId, CreateArchiveRequest request) {
 
         // 채팅방 접근 권한 체크
         ChatRoomMember chatRoomMember = chatRoomMemberRepository.findByRoomAndMember(request.getRoomId(), userId)
                 .orElseThrow(() -> new InvalidChatRoomAccessException(request.getRoomId(), userId));
+        ChatRoom room = chatRoomMember.getRoom();
 
         if (request.getThumbnailImageId() == null
                 || !request.getImages().contains(request.getThumbnailImageId())) {
@@ -59,7 +66,7 @@ public class ArchiveServiceImpl implements ArchiveService {
         }
 
         Archive archive = Archive.builder()
-                .room(chatRoomMember.getRoom())
+                .room(room)
                 .thumbnailId(request.getThumbnailImageId())
                 .title(request.getTitle())
                 .content(request.getContent())
@@ -92,6 +99,22 @@ public class ArchiveServiceImpl implements ArchiveService {
                     .isThumbnail(request.getThumbnailImageId().equals(imgId))
                     .build());
         }
+
+        Member systemUser = memberRepository.findByUsername("SYSTEM")
+                .orElseThrow(() -> new IllegalStateException("USER_NOT_FOUND"));
+
+        // 아카이브 생성 챗 추가
+        Chat chat = Chat.builder()
+                .room(room)
+                .sender(systemUser)
+                .message("새로운 아카이브가 등록되었습니다.")
+                .type(MessageType.CHAT)
+                .sendTime(LocalDateTime.now())
+                .build();
+
+        chatRepository.save(chat);
+
+        return ChatResponse.from(chat);
     }
 
     @Override
@@ -125,8 +148,7 @@ public class ArchiveServiceImpl implements ArchiveService {
         List<ArchiveImage> archiveImages = archiveImageRepository.findByArchive_IdInAndIsThumbnail(archiveIds, true);
         Map<Long, ArchiveImage> archiveImageMap = archiveImages.stream()
                 .collect(Collectors.toMap(
-                        ai -> ai.getArchive().getId(),
-                        Function.identity()
+                        ai -> ai.getArchive().getId(), Function.identity()
                 ));
 
         for (Archive ar : archives) {
@@ -178,6 +200,8 @@ public class ArchiveServiceImpl implements ArchiveService {
         List<ChatRoom> rooms = chatRoomMemberRepository.findByMember_Id(userId).stream()
                 .map(ChatRoomMember::getRoom)
                 .toList();
+
+        /* ChatService 의 getChatRoomMembersMap 과 기능이 같음 - 리팩토링 여지 o*/
         List<Long> roomIds = rooms.stream()
                 .map(ChatRoom::getId)
                 .toList();
@@ -189,10 +213,9 @@ public class ArchiveServiceImpl implements ArchiveService {
         Map<Long, List<String>> chatRoomMembersMap = allMembers.stream()
                 .collect(Collectors.groupingBy(
                         m -> m.getRoom().getId(),
-                        Collectors.mapping(
-                                c -> c.getMember().getNickname(),
-                                Collectors.toList())
+                        Collectors.mapping(c -> c.getMember().getNickname(), Collectors.toList())   // 멤버 닉네임 리스트
                 ));
+        /* 리팩토링 여지 o */
 
         // 채팅방의 아카이브 목록들
         List<Archive> archives = archiveRepository.findAllByRoomIn(rooms);

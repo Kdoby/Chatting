@@ -4,13 +4,14 @@ import NotModified.Chatting.domain.archive.dto.request.CreateArchiveRequest;
 import NotModified.Chatting.domain.archive.dto.request.UpdateArchiveRequest;
 import NotModified.Chatting.domain.archive.dto.response.ArchiveContentResponse;
 import NotModified.Chatting.domain.archive.dto.response.ArchiveResponse;
+import NotModified.Chatting.domain.chat.dto.response.ChatResponse;
 
 import java.util.List;
 
 public interface ArchiveService {
 
     /* 아카이브 생성 */
-    void createArchive(Long userId, CreateArchiveRequest request);
+    ChatResponse createArchive(Long userId, CreateArchiveRequest request);
 
     /* 아카이브 수정 */
     void updateArchive(Long userId, UpdateArchiveRequest request);
