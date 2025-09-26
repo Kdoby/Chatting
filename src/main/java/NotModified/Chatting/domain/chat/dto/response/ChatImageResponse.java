@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
@@ -16,6 +17,7 @@ public class ChatImageResponse {
     private Long imageId;
     private String senderNickname;
     private String imagePath;
+    private LocalDateTime sendTime;
 
     public static ChatImageResponse from(ChatImage image) {
 
@@ -23,6 +25,7 @@ public class ChatImageResponse {
                 .imageId(image.getId())
                 .senderNickname(image.getChat().getSender().getNickname())
                 .imagePath("/uploads/" + image.getStoredFileName())
+                .sendTime(image.getChat().getSendTime())
                 .build();
     }
 }
