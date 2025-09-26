@@ -24,10 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -192,7 +189,7 @@ public class ChatServiceImpl implements ChatService {
         return chatRepository.findAllByRoomAndSendTimeAfter(room, member.getEnterTime()).stream()
                 .map(chat -> {
                     // 이미지 메시지인 경우, images 배열에 추가
-                    if(chat.getType() == MessageType.IMAGE) {
+                    if (chat.getType() == MessageType.IMAGE) {
 
                         List<String> images = chatImageRepository.findByChat_Id(chat.getId()).stream()
                                 .map(img -> "/uploads/" + img.getStoredFileName())
@@ -209,7 +206,46 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public List<ChatRoomResponse> getChatRoomList(Long userId) {
 
-        return chatRoomMemberRepository.findChatRoomList(userId);
+        List<ChatRoomResponse> responses = new ArrayList<>();
+
+        // 특정 사용자가 속한 채팅방 목록
+        List<ChatRoom> rooms = chatRoomMemberRepository.findByMember_Id(userId).stream()
+                .map(ChatRoomMember::getRoom)
+                .toList();
+
+        Map<Long, List<String>> chatRoomMemberMap = getChatRoomMembersMap(rooms);
+
+        for(ChatRoom room : rooms) {
+
+            List<String> members = chatRoomMemberMap.get(room.getId());
+
+            responses.add(ChatRoomResponse.builder()
+                    .roomId(room.getId())
+                    .roomName(room.getRoomName())
+                    .memberCount((long) members.size())
+                    .members(members)
+                    .build());
+        }
+
+        return responses;
+    }
+
+    /* 각 채팅방에 속한 멤버들의 닉네임 목록 조회 */
+    private Map<Long, List<String>> getChatRoomMembersMap(List<ChatRoom> rooms) {
+
+        List<Long> roomIds = rooms.stream()
+                .map(ChatRoom::getId)
+                .toList();
+
+        // 같은 채팅방에 속한 멤버 목록
+        List<ChatRoomMember> allMembers = chatRoomMemberRepository.findAllByRoom_IdIn(roomIds);
+
+        // (채팅방 id, 거기에 속한 멤버 닉네임 리스트) map
+        return allMembers.stream()
+                .collect(Collectors.groupingBy(
+                        m -> m.getRoom().getId(),
+                        Collectors.mapping(c -> c.getMember().getNickname(), Collectors.toList())
+                ));
     }
 
     @Override
