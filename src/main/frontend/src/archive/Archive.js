@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 export default function Archive({ myArchiveList }) {
     const [friendChatToggle, setFriendChatToggle] = useState(true);
     const [showArchiveDetail, setShowArchiveDetail] = useState(false);
+    const [SelectedArchiveId, setSelectedArchiveId] = useState('');
 
 
     return(
@@ -28,16 +29,23 @@ export default function Archive({ myArchiveList }) {
                         {myArchiveList.map((e) => (
                             <div key={e.archiveId}
                                  style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left" }}
-                                 onClick={() => setShowArchiveDetail(true)}
+                                 onClick={() => {
+                                    setSelectedArchiveId(e.archiveId);
+                                    setShowArchiveDetail(true);
+                                 }}
                             >
                                 <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0", border: "1px solid black", }}>
                                     <img src={`http://localhost:8080/uploads/${e.thumbnailImage}`}
                                          style={{ width:"100%", height:"100%", objectFit: "contain", }} />
                                 </div>
                                 <div style={{ marginTop: "5px" }}>
-                                    <div style={{ fontSize: "15px" }}>2025-90-10</div>
-                                    <div style={{ fontSize: "10px", fontWeight:"bold" }}>with 도담, 도연, 유민</div>
-                                    <div style={{ fontSize: "20px", fontWeight:"bold" }}>{e.content}</div>
+                                    <div style={{ fontSize: "15px" }}>{e.createdAt}</div>
+                                    <div style={{ fontSize: "13px" }}>
+                                        {e.members.map((em) => (
+                                            <span key={em}> {em}</span>
+                                        ))}
+                                    </div>
+                                    <div style={{ fontSize: "23px", fontWeight:"bold" }}>{e.title}</div>
                                 </div>
                             </div>
                         ))}
@@ -52,6 +60,8 @@ export default function Archive({ myArchiveList }) {
         {showArchiveDetail && (
             <ArchiveDetail
                 onClose={() => setShowArchiveDetail(false)}
+                setArchiveId={setSelectedArchiveId}
+                archiveId={SelectedArchiveId}
             />
         )}
 

@@ -8,6 +8,7 @@ export default function AddChattingRoom({ onClose, userInfo }) {
     const [friendsList, setFriendsList] = useState([]);
     const [chattingRoomMemberList, setChattingRoomMemberList] = useState([]);
     const [roomName, setRoomName] = useState('');
+
     // 친구 리스트 조회
     const fetchFriendList = async () => {
         try {
@@ -20,6 +21,7 @@ export default function AddChattingRoom({ onClose, userInfo }) {
 
     useEffect(() => {
         if (!userInfo) return;
+        console.log(userInfo);
         fetchFriendList();
     }, [userInfo]);
 
@@ -37,7 +39,7 @@ export default function AddChattingRoom({ onClose, userInfo }) {
         }
     };
 
-    // 친구 리스트 조회
+    // 채팅방 만들기
     const createRoom = async () => {
         if( !roomName ) {
             alert("채팅방 이름을 작성하세요.");
@@ -58,10 +60,12 @@ export default function AddChattingRoom({ onClose, userInfo }) {
             });
 
             console.log(res.data.message);
+            alert(res.data.message);
 
             onClose(false);
         } catch (err) {
             console.error("검색 에러:", err);
+            alert(err);
         }
     };
 

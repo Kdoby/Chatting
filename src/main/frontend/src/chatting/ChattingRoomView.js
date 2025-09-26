@@ -7,7 +7,7 @@ import {Stomp} from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import {TokenStore} from "../TokenStore";
 
-export default function ChattingRoomView ({ roomId, userInfo }){
+export default function ChattingRoomView ({ roomId, userInfo, deleteChattingRoom }){
     const stompClient = useRef(null); // 웹소켓 연결 객체
     const subIdRef = useRef(null); // 구독 ID보관 (중복 구독 방지)
     const isMountedRef = useRef(false); // 언마운트 후 setState 방지
@@ -123,7 +123,9 @@ export default function ChattingRoomView ({ roomId, userInfo }){
 
     return (
         <div className={"chatting_wrapper"}>
-            <ChatLog userInfo={userInfo} roomId={roomId} roomName={roomInfo.roomName} participants={roomInfo.participants} memberCount={roomInfo.memberCount} messages={messages}/>
+            <ChatLog userInfo={userInfo} roomId={roomId} roomName={roomInfo.roomName}
+                participants={roomInfo.participants} memberCount={roomInfo.memberCount} messages={messages}
+                deleteChattingRoom={deleteChattingRoom} />
             <ChatInput roomId={roomId} stompClient={stompClient}/>
         </div>
     );

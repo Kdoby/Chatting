@@ -1,7 +1,8 @@
+import api from '../api';
+
 import React from "react";
 
-export default function ChatSetting ({ roomId, onClose }) {
-
+export default function ChatSetting ({ roomId, onClose, deleteChattingRoom }) {
     return (
         <div className="AddChattingRoom">
             <div style={{
@@ -43,7 +44,9 @@ export default function ChatSetting ({ roomId, onClose }) {
 
                         <button style={{ gridColumn: "1 / span 2",
                                          width: "100%", backgroundColor:"red", color:"white", borderRadius: "5px",
-                                         padding:"5px"}}>
+                                         padding:"5px"}}
+                                onClick={() => deleteChattingRoom()}
+                        >
                             채팅방 나가기
                         </button>
                     </div>
