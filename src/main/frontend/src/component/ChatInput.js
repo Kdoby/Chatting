@@ -2,8 +2,9 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import api from "../api";
 import {TokenStore} from "../TokenStore";
+import AddArchive from "./AddArchive";
 
-export default function ChatInput ({roomId, stompClient}) {
+export default function ChatInput ({roomId, stompClient, OpenAddArchive}) {
     const [input, setInput] = useState('');
     const [files, setFiles] = useState([]); // 이미지 배열(묶음으로 보낼 시 배열로 저장)
     const [previews, setPreviews] = useState([]);
@@ -166,12 +167,18 @@ export default function ChatInput ({roomId, stompClient}) {
                        onChange={handleFileChange}
                        multiple
                 />
-                <label htmlFor={"imageUpload"}>
-                    <img src={"images/uploadImg.png"} alt={"이미지 업로드"}
-                         style={{width: "60%", height: "60%"}}
+                <div>
+                    <label htmlFor={"imageUpload"}>
+                        <img src={"images/uploadImg.png"} alt={"이미지 업로드"}
+                             style={{width: "30%", height: "30%"}}
+                        />
+                    </label>
+                    <img src={"images/uploadArchive.png"}
+                         alt={"아카이브 생성"}
+                         style={{width: "30%", height: "30%"}}
+                         onClick={() => OpenAddArchive()}
                     />
-                </label>
-
+                </div>
                 <button type={"submit"} disabled={isSending || (!input.trim() && files.length === 0)}>전송</button>
             </form>
         </div>

@@ -9,7 +9,7 @@
 
 .ChatInput_wrapper {
     display: grid;
-    grid-template-columns: 11fr 0.5fr 1.5fr;
+    grid-template-columns: 11fr 1fr 1.5fr;
     margin: 2% 2%;
     background-color: #ffffff;
     border-radius: 13px;
@@ -60,6 +60,10 @@
     white-space: normal;  /* 여러 줄 허용 */
     word-break: break-word; /* 단어 단위로 줄바꿈 */
     overflow-wrap: break-word; /* 긴 단어도 강제로 줄바꿈 */
+}
+
+.ChatBubble_img {
+
 }
 
 .MyChatBubble_wrapper {
@@ -182,7 +186,12 @@ div:hover > .ChatDrawerDropdownMenu_wrapper {
     display: block;
 }
 
-
 .previews {
     margin: 10px 30px;
+}
+
+.AddForm_wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 93%;
 }

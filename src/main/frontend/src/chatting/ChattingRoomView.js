@@ -6,6 +6,7 @@ import {useEffect, useRef, useState} from "react";
 import {Stomp} from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import {TokenStore} from "../TokenStore";
+import AddArchive from "../component/AddArchive";
 
 export default function ChattingRoomView ({ roomId, userInfo, deleteChattingRoom }){
     const stompClient = useRef(null); // 웹소켓 연결 객체
@@ -13,6 +14,8 @@ export default function ChattingRoomView ({ roomId, userInfo, deleteChattingRoom
     const isMountedRef = useRef(false); // 언마운트 후 setState 방지
     const [messages, setMessages] = useState([]);// 메세지 리스트
     const [roomInfo, setRoomInfo] = useState([]);
+
+    const [isAddArchiveOpen, setIsAddArchiveOpen] = useState(false);
 
     // 웹소켓 / STOMP 연결
     const connect = () => {
@@ -126,7 +129,8 @@ export default function ChattingRoomView ({ roomId, userInfo, deleteChattingRoom
             <ChatLog userInfo={userInfo} roomId={roomId} roomName={roomInfo.roomName}
                 participants={roomInfo.participants} memberCount={roomInfo.memberCount} messages={messages}
                 deleteChattingRoom={deleteChattingRoom} />
-            <ChatInput roomId={roomId} stompClient={stompClient}/>
+            <ChatInput roomId={roomId} stompClient={stompClient} OpenAddArchive={() => setIsAddArchiveOpen(true)}/>
+            {isAddArchiveOpen && <AddArchive roomId={roomId} userInfo={userInfo} onClose={() => setIsAddArchiveOpen(false) } messages={messages}/>}
         </div>
     );
 }
