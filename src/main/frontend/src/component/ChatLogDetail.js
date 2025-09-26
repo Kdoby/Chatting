@@ -12,22 +12,38 @@ const formatTime = (t) => {
     return `${ampm} ${h12}:${m}`;
 }
 
-export default function ChatLogDetail ({ userInfo, messages}) {
+export default function ChatLogDetail ({ userInfo, messages, endTime, startTime}) {
     const bottomRef = useRef(null);
+    const msgRefs = useRef({}); // messageId(or sendTime) → DOM node
 
-    useEffect(() => {
+    useEffect(() => { // 새로운 메시지 추가되면 맨 아래로
         bottomRef.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
     }, [messages.length]);
+
+    useEffect(() => {
+        console.log("startTime: ", startTime);
+        if (startTime && msgRefs.current[startTime]) {
+            msgRefs.current[startTime].scrollIntoView({
+                behavior: "smooth",
+                block: "center", // 중앙에 오도록
+            });
+        }
+    }, [startTime]);
+
 
     return (
         <div style={{overflowY: "auto"}}>
             {messages.map((m, idx) => {
                 return (
-                    (m.senderNickname === 'system')
-                        ? <div key={idx}>{m.message}</div>
+                    <div key={m.chatId} ref={(el) => {
+                        if (el) msgRefs.current[m.sendTime] = el;
+                    }}>
+                        {(m.senderNickname === 'system')
+                        ? <div ></div>
                         : (m.senderNickname === userInfo.nickname)
-                            ? <MyChatBubble message={m} formatTime={formatTime}/>
-                            : <ChatBubble message={m} formatTime={formatTime}/>
+                        ? <MyChatBubble message={m} formatTime={formatTime}/>
+                        : <ChatBubble message={m} formatTime={formatTime}/>}
+                    </div>
                 );
             })}
             <div ref={bottomRef}/>

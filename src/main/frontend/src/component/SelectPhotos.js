@@ -24,12 +24,13 @@ export default function SelectPhotos ({roomId, onNext}) {
     }, [roomId]);
 
     // 이미지 선택/해제
-    const toggleSelect = (idx, path) => {
-        if (selectedPhotoList.some(photo => photo.idx === idx)) { // 선택 해제
-            setSelectedPhotoList(selectedPhotoList.filter((i) => i !== idx));
-        } else { // 선택 추가
-            setSelectedPhotoList([...selectedPhotoList, {idx, path}]);
-        }
+    const toggleSelect = (idx, path, sendTime) => {
+        setSelectedPhotoList(prev => {
+            const exists = prev.some(photo => photo.idx === idx);
+            return exists
+                ? prev.filter(photo => photo.idx !== idx)     // idx 기준으로 제거
+                : [...prev, { idx, path, sendTime }];         // 추가
+        });
     };
 
     // 이미지 날짜 범위 추출 (채팅 요약 범위에 사용)
@@ -37,6 +38,7 @@ export default function SelectPhotos ({roomId, onNext}) {
         const sorted = [...selectedPhotoList].sort((a, b) => a.idx - b.idx);
         const startTime = sorted[0].sendTime;
         const endTime = sorted[sorted.length - 1].sendTime;
+        console.log("selectPhotos start : ", startTime);
         onNext(sorted, startTime, endTime);
     };
 
@@ -54,7 +56,7 @@ export default function SelectPhotos ({roomId, onNext}) {
                                      justifyContent: "center", alignItems: "center", textAlign: "center",
                                      cursor:"pointer", position: "relative", minWidth: 0, // grid 아이템이 줄어들 수 있도록
                                  }}
-                                 onClick={() => toggleSelect(e.imageId, e.imagePath)}>
+                                 onClick={() => toggleSelect(e.imageId, e.imagePath, e.sendTime)}>
                                 <img src={`http://localhost:8080${e.imagePath}`}
                                      style={{ width:"100%", height:"100%", objectFit: "contain", }} />
                                 {selectedPhotoList.some(photo => photo.idx === e.imageId) && (
