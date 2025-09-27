@@ -141,11 +141,11 @@
 
 .DropdownMenu_wrapper {
     width: 10%;
-    right: 10px;
+    top: 60px;
+    right: 3%;
     text-align: center;
     position: absolute;
     background-color: white;
-    top: 80px
 }
 
 .DropdownMenu_wrapper > ul > li {
