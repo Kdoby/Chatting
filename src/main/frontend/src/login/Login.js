@@ -25,7 +25,6 @@ export default function Login() {
             console.log(res.data);
             TokenStore.setToken(res.data.accessToken);
 
-            alert("로그인 성공");
             console.log("로그인 성공");
             navigate('/');
 
@@ -51,7 +50,8 @@ export default function Login() {
                         <label htmlFor="id">ID</label>
                         <br />
 
-                        <input style={{ height:"35px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
+                        <input style={{ height:"35px", width:"100%", paddingLeft:"10px",
+                                        border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
                                type="text"
                                id="id"
                                name="id"
@@ -64,10 +64,9 @@ export default function Login() {
                         <label htmlFor="pw">PASSWORD</label>
                         <br />
 
-                        <input style={{ height:"35px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
-                               type="password"
-                               id="pw"
-                               name="pw"
+                        <input style={{ height:"35px", width:"100%", paddingLeft:"10px",
+                                        border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
+                               type="password" id="pw" name="pw"
                                value={pw}
                                onChange={(e) => setPw(e.target.value)}
                         ></input>
@@ -75,9 +74,12 @@ export default function Login() {
 
                     <div>
                         <input type="submit"
+                               style={{ backgroundColor:"#BCCCDC", color: "white",
+                                        padding:"8px", fontSize:"18px",
+                                        border:"1px solid black" }}
                                value="LOG-IN"
                         />
-                        <div style={{ margin:"10px", textAlign:"center" }}>
+                        <div style={{ margin:"10px", textAlign:"center", fontSize:"15px" }}>
                             <Link to="/signup">SIGN-UP</Link>
                         </div>
                     </div>
