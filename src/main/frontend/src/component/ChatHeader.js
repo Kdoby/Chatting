@@ -7,7 +7,7 @@ import ChatSetting from "./ChatSetting";
 
 import { useState } from "react";
 
-export default function ChatHeader ({ roomId, roomName, participants, memberCount, deleteChattingRoom }) {
+export default function ChatHeader ({ roomId, roomName, participants, memberCount, deleteChattingRoom, userInfo }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [modalType, setModalType] = useState(null); // 0=닫힘, 1=archive, 2=photo
 
@@ -28,7 +28,17 @@ export default function ChatHeader ({ roomId, roomName, participants, memberCoun
             {isMenuOpen && (<DropdownMenu setModalType={setModalType} closeMenu={() => setIsMenuOpen(false)}/>)}
             {modalType === 1 && (<ChatDrawer roomId={roomId} onClose={() => setModalType(0)}/>)}
             {modalType === 2 && (<ChatPhotoAlbum roomId={roomId} onClose={() => setModalType(0)}/>)}
-            {modalType === 3 && (<ChatSetting roomId={roomId} onClose={() => setModalType(0)} deleteChattingRoom={deleteChattingRoom}/>)}
+            {modalType === 3 && (
+                <ChatSetting
+                    roomId={roomId}
+                    roomName={roomName}
+                    participants={participants}
+                    memberCount={memberCount}
+                    onClose={() => setModalType(0)}
+                    deleteChattingRoom={deleteChattingRoom}
+                    userInfo={userInfo}
+                />
+            )}
         </div>
 
     );
