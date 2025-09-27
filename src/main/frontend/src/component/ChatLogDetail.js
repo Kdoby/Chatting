@@ -38,7 +38,7 @@ export default function ChatLogDetail ({ userInfo, messages, endTime, startTime,
                         if (el) msgRefs.current[m.sendTime] = el;
                     }} onClick={() => onPick(m.sendTime)}>
                         {m?.senderNickname === "system" ? (
-                            <div />
+                            <div>{m.message}</div>
                         ) : m?.senderNickname === userInfo?.nickname ? (
                             <MyChatBubble message={m} formatTime={formatTime}/>
                         ) : (

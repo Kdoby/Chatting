@@ -201,3 +201,18 @@ div:hover > .ChatDrawerDropdownMenu_wrapper {
     height: 93%;
 }
 
+.AddArchive_title {
+    border: none;
+    height: 50px;
+    width: 80%;
+    margin: 20px;
+    font-size: x-large;
+}
+
+.AddArchive_text {
+    border: none;
+    height: 100%;
+    width: 80%;
+    margin: 20px;
+    overflow-y: auto;
+}

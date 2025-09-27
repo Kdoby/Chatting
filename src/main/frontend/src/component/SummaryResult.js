@@ -8,19 +8,20 @@ export default function SummaryResult ({summary, onNext, selectedPhotos, thumbna
             <p>Archive has been created</p>
             <div>
                 title:
-                <input type={"text"} value={title} onChange={(e) => setTitle(e.target.value)}/>
+                <input type={"text"} value={title} placeholder={"제목을 입력해주세요"}
+                       onChange={(e) => setTitle(e.target.value)}
+                       className={"AddArchive_title"}
+                />
                 <div style={{ display: "flex", overflowX: "auto", padding: "10px", gap: "10px",
                     borderTop: "1px solid #ccc", flexShrink: 0 }}>
                     {selectedPhotos ? (
                         <>
                             {Array.isArray(selectedPhotos) && selectedPhotos.map((e) => (
                                 <div key={e.idx}
-                                     style={{ aspectRatio: "1/1", border: "1px solid black", display: "flex",
-                                         justifyContent: "center", alignItems: "center", textAlign: "center",
-                                         cursor:"pointer", position: "relative", minWidth: 0, // grid 아이템이 줄어들 수 있도록
-                                     }}>
+                                     style={{ flex: "0 0 auto", width: "100px", height: "100px",
+                                         border: "1px solid black", cursor: "pointer", position: "relative", }}>
                                     <img src={`http://localhost:8080${e.path}`}
-                                         style={{ width:"100%", height:"100%", objectFit: "contain", }} />
+                                         style={{ width: "100%", height: "100%", objectFit: "cover", }} />
                                     {e.idx === thumbnail && (
                                         <div
                                             style={{
@@ -39,7 +40,8 @@ export default function SummaryResult ({summary, onNext, selectedPhotos, thumbna
 
                 </div>
                 <div>
-                    <input type={"text"} value={content} onChange={(e) => setContent(e.target.value)}></input>
+                    <input type={"text"} value={content} className={"AddArchive_text"}
+                           onChange={(e) => setContent(e.target.value)}></input>
                 </div>
             </div>
             <button onClick={() => onNext(title, content)}>Next</button>

@@ -13,7 +13,8 @@ export default function AddArchive ({roomId, userInfo, onClose, messages}) {
     const [end, setEnd] = useState('');
     const [summary, setSummary] = useState('');
 
-    const handleSummary = async () => {
+    const handleSummary = async (start, end) => {
+        console.log("AI요약 범위 전달: ", start, end);
         try {
             const res = await api.post(`/v1/summary/${roomId}`,
                 { start, end });
@@ -28,15 +29,17 @@ export default function AddArchive ({roomId, userInfo, onClose, messages}) {
     const handleAddArchive = async (title, content) => {
         try {
             const images = selectedPhotos.map(p => p.idx);
+            console.log("roomId: ", roomId, "/ title: ", title, "/ content: ", content, "/ images: ", images, "/ thumbnailImageId: ", thumbnail);
             const res = await api.post(`/v1/archive`,
                 {
                     roomId,
                     title,
                     content,
-                    images: images,
+                    images,
                     thumbnailImageId: thumbnail
                 });
             setStep(0);
+            onClose();
         } catch (err) {
             console.error("아카이브 등록 오류:", err);
         }
@@ -57,7 +60,7 @@ export default function AddArchive ({roomId, userInfo, onClose, messages}) {
     const handleContentNext = (startT, endT) => {
         setStart(startT);
         setEnd(endT);
-        handleSummary();
+        handleSummary(startT, endT);
     }
 
     const handleResultNext = (title, content) => {
@@ -74,10 +77,10 @@ export default function AddArchive ({roomId, userInfo, onClose, messages}) {
                 {/* 닫기 버튼 */}
                 <img
                     src="images/close.png"
-                    onClick={() => onClose()}
+                    onClick={onClose}
                     style={{
                         width: "20px", position: "absolute", top: "20px", right: "28px",
-                        cursor: "pointer",
+                        cursor: "pointer", zIndex: "100"
                     }}
                 />
 
