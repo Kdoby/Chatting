@@ -62,8 +62,13 @@
     overflow-wrap: break-word; /* 긴 단어도 강제로 줄바꿈 */
 }
 
+.ChatBubble_imgDiv {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
 .ChatBubble_img {
-
+    width: 200px;
 }
 
 .MyChatBubble_wrapper {
@@ -195,3 +200,4 @@ div:hover > .ChatDrawerDropdownMenu_wrapper {
     flex-direction: column;
     height: 93%;
 }
+

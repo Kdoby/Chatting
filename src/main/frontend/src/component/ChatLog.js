@@ -11,7 +11,7 @@ export default function ChatLog ({ userInfo, roomId, roomName, participants, mem
         <div className={"ChatLog_wrapper"}>
             <ChatHeader roomId={roomId} roomName={roomName} participants={participants} memberCount={memberCount}
                 deleteChattingRoom={deleteChattingRoom} />
-            <ChatLogDetail userInfo={userInfo} messages={messages}/>
+            <ChatLogDetail userInfo={userInfo} messages={messages} onPick={() => {}}/>
         </div>
     );
 }
