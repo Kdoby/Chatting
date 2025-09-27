@@ -1,16 +1,22 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import api from "../api";
 
-export default function SelectPhotos ({roomId, onNext}) {
+export default function SelectPhotos ({roomId, onNext, onClose}) {
     const [chattingRoomPhotoList, setChattingRoomPhotoList] = useState([]);
     const [selectedPhotoList, setSelectedPhotoList] = useState([]);
+    const alertedRef = useRef(false); // alert 2번 뜨는 문제 방지
 
     // 채팅방의 사진 fetch
     const fetchChattingRoomArchiveList = async() => {
         try {
             const res = await api.get("/v1/chat/images/" + roomId);
-
             setChattingRoomPhotoList(res.data.data);
+            if (!alertedRef.current && chattingRoomPhotoList.length < 1) {
+                alertedRef.current = true;
+                alert("아카이브를 등록하려면 먼저 채팅에서 이미지를 전송해주세요.");
+                onClose();
+                return;
+            }
             console.log(res.data.data);
         } catch (err) {
             console.error("에러", err);
@@ -19,7 +25,7 @@ export default function SelectPhotos ({roomId, onNext}) {
 
     useEffect(() => {
         if(!roomId) return;
-
+        alertedRef.current = false;
         fetchChattingRoomArchiveList();
     }, [roomId]);
 
@@ -35,6 +41,10 @@ export default function SelectPhotos ({roomId, onNext}) {
 
     // 이미지 날짜 범위 추출 (채팅 요약 범위에 사용)
     const handleNext = () => {
+        if (selectedPhotoList.length < 1) {
+            alert("업로드할 이미지를 한 개 이상 선택해주세요");
+            return;
+        }
         const sorted = [...selectedPhotoList].sort((a, b) => a.idx - b.idx);
         const startTime = sorted[0].sendTime;
         const endTime = sorted[sorted.length - 1].sendTime;

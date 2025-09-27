@@ -92,7 +92,7 @@ export default function AddArchive ({roomId, userInfo, onClose, messages}) {
                     display: "flex", flexDirection: "column", position: "absolute"
                 }}>
                     <div style={{fontSize: "xx-large", fontWeight: "500"}}>Create archive</div>
-                    {step === 0 && <SelectPhotos roomId={roomId} onNext={handlePhotoNext}/> }
+                    {step === 0 && <SelectPhotos roomId={roomId} onNext={handlePhotoNext} onClose={onClose}/> }
                     {step === 1 &&  <SelectThumb onNext={handleThumbNext} photos={selectedPhotos} thumbnail={thumbnail}/> }
                     {step === 2 && <SetContent userInfo={userInfo} messages={messages} start={start} end={end} onNext={handleContentNext}/>}
                     {step === 3 && <SummaryResult summary={summary} selectedPhotos={selectedPhotos} thumbnail={thumbnail} onNext={handleResultNext}/>}
