@@ -41,11 +41,11 @@ export default function ArchiveDetail({ onClose, setArchiveId, archiveId }) {
         <div className="ArchiveDetail">
             {/* ArchiveDetail 본체 */}
             <div style={{ position: "relative", border: "1px solid gray", padding: "10px",
-                          borderRadius: "15px", backgroundColor: "white",
+                          borderRadius: "15px", backgroundColor: "#F8FAFC",
                           width: "40%", height: "80%", textAlign: "center", }}
             >
                 {/* 닫기 버튼 */}
-                <img src="images/close.png"
+                <img src="images/close2.png"
                      onClick={() => {
                         setArchiveId('');
                         onClose(false);
@@ -56,18 +56,13 @@ export default function ArchiveDetail({ onClose, setArchiveId, archiveId }) {
 
                 {/* 내용 */}
                 <div style={{
-                    height: "100%",           // 부모 높이를 꽉 채움
-                    maxHeight: "100%",        // 최대 높이 제한
-                    width: "100%",
-                    textAlign: "left",
-                    boxSizing: "border-box",
-                    padding: "45px 20px 20px",
-                    display: "flex",
-                    flexDirection: "column",
+                    height: "100%", maxHeight: "100%", width: "100%",
+                    textAlign: "left", boxSizing: "border-box", padding: "45px 20px 20px",
+                    display: "flex", flexDirection: "column",
                 }}>
 
-                    <div style={{ width: "100%", height: "50%", flexShrink: 0,
-                                  border: "1px solid black", borderRadius:"15px", overflow: "hidden", }}>
+                    <div style={{ width: "100%", height: "50%", flexShrink: 0, backgroundColor: "white",
+                                  border: "1px solid gray", borderRadius:"15px", overflow: "hidden", }}>
                         <img src={`http://localhost:8080${selectedImage}`} alt={selectedImage}
                              style={{ width:"100%", height:"100%", objectFit: "contain", }}
                         />
@@ -76,12 +71,12 @@ export default function ArchiveDetail({ onClose, setArchiveId, archiveId }) {
 
                     {/* 썸네일 리스트 */}
                     <div style={{ display: "flex", overflowX: "auto", padding: "10px", gap: "10px",
-                                  borderTop: "1px solid #ccc", borderRadius:"15px", overflow: "hidden", flexShrink: 0 }}>
+                                  overflow: "hidden", flexShrink: 0 }}>
                     {imageList && Object.keys(imageList).map((path, isThumbnail) => (
                     <div key={path}
                          style={{ flex: "0 0 auto", width: "70px", height: "70px",
                                   border: "1px solid gray", borderRadius:"15px", overflow: "hidden",
-                                  cursor: "pointer", position: "relative", }}
+                                  cursor: "pointer", position: "relative", backgroundColor: "white", }}
                          onClick={() => setSelectedImage(path)}
                     >
                         <img src={`http://localhost:8080${path}`} alt={path}

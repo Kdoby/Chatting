@@ -26,6 +26,10 @@ export default function Logout(){
     };
 
     return (
-        <button onClick={doLogout}>로그아웃</button>
+        <button onClick={ doLogout }
+                style={{ padding:"7px", background:"white", fontSize:"13px",
+                         border: "1px solid gray", borderRadius:"10px"}}>
+            logout
+        </button>
     );
 }

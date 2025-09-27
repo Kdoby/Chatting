@@ -102,8 +102,6 @@
     display: grid;
     grid-template-columns: auto 9fr;
     padding: 10px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
 }
 
 .ChattingRoom_img {

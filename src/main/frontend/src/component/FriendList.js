@@ -60,11 +60,10 @@ export default function FriendList({ userInfo }){
             <>
                 <div key={e.friendId}
                      className={"ChattingRoom_wrapper"}>
-                    <div className={"ChattingRoom_img"}>
+                    <div className={"ChattingRoom_img"} style={{ background: "#F8FAFC" }}></div>
 
-                    </div>
                     <div className={"ChattingRoom_info"}>
-                        <div>{e.friendNickname}</div>
+                        <div style={{margin:"auto 0"}}>{e.friendNickname}</div>
                     </div>
                 </div>
 

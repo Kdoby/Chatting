@@ -102,20 +102,19 @@
     display: grid;
     grid-template-columns: auto 9fr;
     padding: 10px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
 }
 
 .ChattingRoom_img {
     width: 60px;
     height: 60px;
-    background-color: white;
+    background-color: #F8FAFC;
     border-radius: 10px;
     margin-right: 10px;
 }
 
 .ChattingRoom_info {
-    margin: 0 10px;
+    display: flex;
+    height: 100%;
 }
 
 .ChatHeader_wrapper {

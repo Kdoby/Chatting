@@ -14,12 +14,15 @@ export default function ChatHeader ({ roomId, roomName, participants, memberCoun
     return (
         <div style={{display: "relative"}}>
             <div className={"ChatHeader_wrapper"}>
-                <div className={"ChattingRoom_img"}>
+                <div className={"ChattingRoom_img"}
+                     style={{ backgroundColor:"#F8FAFC"}} >
 
                 </div>
                 <div className={"ChattingRoom_info"}>
-                    <div>{roomName}</div>
-                    <div><img src={"images/user.png"} alt={"채팅인원"}/>{memberCount}</div>
+                    <div style={{ margin: "auto 0", fontSize: "20px", fontWeight: "bold", }}>{roomName}</div>
+                    <div style={{ margin: "auto 10px", fontSize: "15px", }}>
+                        <img src={"images/user.png"} alt={"채팅인원"}/>{memberCount}
+                    </div>
                 </div>
                 <div className={"ChatHeader_menuDiv"}>
                     <img src={"images/menu.png"} alt={"메뉴"} onClick={() => setIsMenuOpen(prev => !prev)}/>

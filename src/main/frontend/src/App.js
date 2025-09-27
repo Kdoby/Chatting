@@ -15,13 +15,14 @@ function AppContent() {
         <div className="App"
              style={{
                  display: "flex",
-                 height: "100%"
+                 height: "100%",
              }}
         >
             <div className="screen"
                  style={{
                      height: "100%",
                      flex: 1,
+                     backgroundColor: "#F8FAFC",
                  }}
             >
                 <Routes>

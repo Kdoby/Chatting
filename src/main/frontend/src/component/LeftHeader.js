@@ -14,16 +14,20 @@ export default function LeftHeader({ leftType, setLeftType, userInfo, setRoomId,
         <div className={"header_wrapper"} style={{ background: "linear-gradient(to bottom, #F8FAFC, #D9EAFD, #BCCCDC)" }}>
             <HeaderProfile userInfo={userInfo}/>
 
-            <img src="images/archive.png"
-                 style={{ weight:"100%", height:"25px" }}
-                 onClick={() => {
-                     setLeftType('archive');
-                     fetchMyArchive();
-                 }}
-            />
-            <div style={{display:"grid", gridTemplateColumns:"1fr 1fr 1fr"}}>
+
+            <div style={{ width:"100%", textAlign:"center", margin:"5px 0 15px" }}>
+                <img src="images/archive.png"
+                     style={{ height:"25px", margin:"auto", }}
+                     onClick={() => {
+                         setLeftType('archive');
+                         fetchMyArchive();
+                     }}
+                />
+            </div>
+
+            <div style={{ width:"90%", margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr 1fr" }}>
                 <img src="images/friend.png"
-                     style={{ height:"25px", margin:"auto" }}
+                     style={{ height:"25px", margin:"auto", }}
                      onClick={() => setFriendChatAlarmToggle('friend')}/>
                 <img src="images/chat.png"
                      style={{ height:"25px", margin:"auto" }}

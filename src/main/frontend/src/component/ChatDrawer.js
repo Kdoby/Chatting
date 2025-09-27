@@ -49,12 +49,12 @@ export default function ChatDrawer ({ roomId, onClose }) {
         <div className="AddChattingRoom">
             <div style={{
                 position: "relative", border: "1px solid gray", padding: "10px",
-                borderRadius: "15px", backgroundColor: "white",
+                borderRadius: "15px", backgroundColor: "#F8FAFC",
                 width: "40%", height: "80%", textAlign: "center",
             }}>
                 {/* 닫기 버튼 */}
                 <img
-                    src="images/close.png"
+                    src="images/close2.png"
                     onClick={() => onClose(false)}
                     style={{
                         width: "20px", position: "absolute", top: "20px", right: "28px",
@@ -77,11 +77,11 @@ export default function ChatDrawer ({ roomId, onClose }) {
                             <>
                             {Array.isArray(chattingRoomArchiveList) && chattingRoomArchiveList.map((e) => (
                                 <div key={e.archiveId}
-                                     style={{ border: "1px solid black", borderRadius:"15px", overflow: "hidden",
+                                     style={{ border: "1px solid gray", borderRadius:"15px", overflow: "hidden", backgroundColor: "white",
                                               textAlign: "center", padding: "10px", textAlign:"left", }}
                                      onClick={() => setSelectedArchive(e)}
                                 >
-                                    <div style={{ aspectRatio: "1/1", border: "0.5px solid black", borderRadius:"15px", overflow: "hidden",
+                                    <div style={{ aspectRatio: "1/1", border: "0.5px solid gray", borderRadius:"15px", overflow: "hidden",
                                                   display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center",
                                          }}
                                          onClick={() => {

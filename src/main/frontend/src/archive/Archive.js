@@ -11,11 +11,8 @@ export default function Archive({ myArchiveList }) {
 
 
     return(
-        <div style={{
-                height: "100%", width:"83%", margin:"auto",
-                display:"grid",
-                gridTemplateRows: "40px 10fr", overflowY:"scroll",
-                backgroundColor: "#F8FAFC",
+        <div style={{ height: "100%", width:"83%", margin:"auto", background: "#F8FAFC",
+                      display:"grid", gridTemplateRows: "40px 10fr", overflowY:"scroll",
         }}>
             <div style={{
                     display: "grid", height: "100%",
@@ -29,14 +26,15 @@ export default function Archive({ myArchiveList }) {
                     <>
                         {myArchiveList.map((e) => (
                             <div key={e.archiveId}
-                                 style={{ border: "1px solid black", borderRadius:"15px", textAlign: "center", padding: "13px", textAlign:"left" }}
+                                 style={{ border: "1px solid gray", borderRadius:"15px", background:"white",
+                                          textAlign: "center", padding: "13px", textAlign:"left" }}
                                  onClick={() => {
                                     setSelectedArchiveId(e.archiveId);
                                     setShowArchiveDetail(true);
                                  }}
                             >
                                 <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0",
-                                              border: "1px solid black", borderRadius:"15px", overflow: "hidden", }}>
+                                              border: "1px solid gray", borderRadius:"13px", overflow: "hidden", }}>
                                     <img src={`http://localhost:8080/uploads/${e.thumbnailImage}`}
                                          style={{ width:"100%", height:"100%", objectFit: "contain", }} />
                                 </div>

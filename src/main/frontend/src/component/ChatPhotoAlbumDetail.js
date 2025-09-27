@@ -13,12 +13,12 @@ export default function ChatPhotoAlbumDetail ({ onClose, selectedImagePath }) {
              style={{backgroundColor: "rgba(0,0,0,0)"}}>
             <div style={{
                 position: "relative", border: "1px solid gray", padding: "10px",
-                borderRadius: "15px", backgroundColor: "white",
+                borderRadius: "15px", backgroundColor: "#F8FAFC",
                 width: "40%", height: "80%", textAlign: "center",
             }}>
                 {/* 닫기 버튼 */}
                 <img
-                    src="images/close.png"
+                    src="images/close2.png"
                     onClick={() => onClose(false)}
                     style={{
                         width: "20px", position: "absolute", top: "20px", right: "28px",
@@ -33,15 +33,9 @@ export default function ChatPhotoAlbumDetail ({ onClose, selectedImagePath }) {
                     padding: "0 20px 20px",
                     display: "flex", flexDirection: "column",
                 }}>
-                    <div style={{
-                        height: "100%",           // 부모 높이를 꽉 채움
-                        maxHeight: "100%",        // 최대 높이 제한
-                        width: "100%",
-                        textAlign: "left",
-                        boxSizing: "border-box",
-                        padding: "45px 20px 20px",
-                        display: "flex",
-                        flexDirection: "column",
+                    <div style={{ height: "100%", maxHeight: "100%", width: "100%",
+                                  textAlign: "left", boxSizing: "border-box", padding: "45px 20px 20px",
+                                  display: "flex", flexDirection: "column",
                     }}>
 
                         <div style={{ width: "100%", height: "100%", flexShrink: 0,

@@ -31,12 +31,12 @@ export default function ChatPhotoAlbum ({ roomId, onClose }) {
         <div className="AddChattingRoom">
             <div style={{
                 position: "relative", border: "1px solid gray", padding: "10px",
-                borderRadius: "15px", backgroundColor: "white",
+                borderRadius: "15px", backgroundColor: "#F8FAFC",
                 width: "40%", height: "80%", textAlign: "center",
             }}>
                 {/* 닫기 버튼 */}
                 <img
-                    src="images/close.png"
+                    src="images/close2.png"
                     onClick={() => onClose()}
                     style={{
                         width: "20px", position: "absolute", top: "20px", right: "28px",
@@ -60,8 +60,9 @@ export default function ChatPhotoAlbum ({ roomId, onClose }) {
                             <>
                             {Array.isArray(chattingRoomPhotoList) && chattingRoomPhotoList.map((e) => (
                                 <div key={e.imageId}
-                                     style={{ aspectRatio: "1/1", border: "1px solid black", borderRadius:"15px", overflow: "hidden",
+                                     style={{ aspectRatio: "1/1", border: "1px solid gray", borderRadius:"15px", overflow: "hidden",
                                               display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center",
+                                              backgroundColor:"white",
                                      }}
                                      onClick={() => {
                                         setShowChatPhotoAlbumDetail(true);
@@ -69,7 +70,8 @@ export default function ChatPhotoAlbum ({ roomId, onClose }) {
                                      }}
                                 >
                                     <img src={`http://localhost:8080${e.imagePath}`}
-                                         style={{ width:"100%", height:"100%", objectFit: "contain", }} />
+                                         style={{ width:"100%", height:"100%", objectFit: "contain", }}
+                                    />
                                 </div>
                             ))}
 
