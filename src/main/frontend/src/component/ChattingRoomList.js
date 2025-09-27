@@ -46,10 +46,14 @@ export default function ChattingRoomList({ leftType, setLeftType, userInfo, setR
             {Array.isArray(chattingList) && chattingList.length > 0 ? (
                 <div>
                     {chattingList.map((e) => (
-                            <div key={e.roomId} className="ChattingRoom_wrapper" onClick={() => {
-                                setLeftType('chatting');
-                                setRoomId(e.roomId);
-                            }}>
+                            <div key={e.roomId}
+                                 className="ChattingRoom_wrapper"
+                                 onClick={() => {
+                                    setLeftType('chatting');
+                                    setRoomId(e.roomId);
+                                    }}
+                                 style={{ cursor: "pointer" }}
+                            >
                             <div className="ChattingRoom_img"></div>
                             <div className="ChattingRoom_info"
                                  style={{display:"grid", fridTemplateRows:"1fr 1fr"}}>
