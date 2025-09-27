@@ -11,7 +11,7 @@ export default function SelectPhotos ({roomId, onNext, onClose}) {
         try {
             const res = await api.get("/v1/chat/images/" + roomId);
             setChattingRoomPhotoList(res.data.data);
-            if (!alertedRef.current && chattingRoomPhotoList.length < 1) {
+            if (!alertedRef.current && (res.data.data.length < 1)) {
                 alertedRef.current = true;
                 alert("아카이브를 등록하려면 먼저 채팅에서 이미지를 전송해주세요.");
                 onClose();
