@@ -10,7 +10,7 @@ export default function ChatLog ({ userInfo, roomId, roomName, participants, mem
     return (
         <div className={"ChatLog_wrapper"}>
             <ChatHeader roomId={roomId} roomName={roomName} participants={participants} memberCount={memberCount}
-                deleteChattingRoom={deleteChattingRoom} />
+                deleteChattingRoom={deleteChattingRoom} userInfo={userInfo} />
             <ChatLogDetail userInfo={userInfo} messages={messages}/>
         </div>
     );
