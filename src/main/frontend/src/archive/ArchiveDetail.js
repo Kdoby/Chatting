@@ -98,7 +98,9 @@ export default function ArchiveDetail({ onClose, setArchiveId, archiveId }) {
 
                     </div>
 
-                    <div style={{ margin: "20px 0 10px", flexShrink: 0, fontSize: "15px", color:"gray" }}>{archiveDetail.createdAt}</div>
+                    <div style={{ margin: "20px 0 10px", flexShrink: 0, fontSize: "15px", color:"gray" }}>
+                        {new Date(archiveDetail.createdAt).toLocaleDateString()}
+                    </div>
 
                     <div style={{ overflowY: "auto", flexGrow: 1, fontSize: "25px", fontWeight:"bold" }}>
                         {archiveDetail.title}

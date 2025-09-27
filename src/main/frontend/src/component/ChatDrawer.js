@@ -92,8 +92,8 @@ export default function ChatDrawer ({ roomId, onClose }) {
                                              style={{ width:"100%", height:"100%", objectFit: "contain", }} />
                                     </div>
                                     <div style={{ marginTop: "5px" }}>
-                                        <div style={{ fontSize: "15px", display: "flex", alignItems: "center", position: "relative" }}>
-                                            <span>{e.createdAt}</span>
+                                        <div style={{ fontSize: "14px", display: "flex", alignItems: "center", position: "relative" }}>
+                                            <span style={{ fontSize: "13px", color:"gray", }}>{new Date(e.createdAt).toLocaleDateString()}</span>
 
                                             <div style={{ marginLeft: "auto", position: "relative" }}>
                                                 <span style={{ cursor: "pointer" }}>set</span>
