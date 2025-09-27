@@ -72,7 +72,7 @@ export default function ChatDrawer ({ roomId, onClose }) {
                     <div style={{ textAlign: "center", fontSize: "25px", fontWeight: "bold", marginBottom:"20px" }}>Archive</div>
 
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-                                  gap: "10px", margin: "10px", overflowY: "scroll", }}>
+                                  gap: "10px", margin: "10px", overflowY: "auto", }}>
                         {chattingRoomArchiveList ? (
                             <>
                             {Array.isArray(chattingRoomArchiveList) && chattingRoomArchiveList.map((e) => (
