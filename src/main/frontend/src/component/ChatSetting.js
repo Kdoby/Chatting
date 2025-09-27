@@ -1,8 +1,12 @@
+import AddChattingRoomMember from "./AddChattingRoomMember";
+
 import api from '../api';
 
-import React from "react";
+import React, { useState } from "react";
 
-export default function ChatSetting ({ roomId, onClose, deleteChattingRoom }) {
+export default function ChatSetting ({ roomId, roomName, participants, memberCount, onClose, deleteChattingRoom, userInfo }) {
+    const [showAddChattingRoomMember, setShowAddChattingRoomMember] = useState(false);
+
     return (
         <div className="AddChattingRoom">
             <div style={{
@@ -32,26 +36,44 @@ export default function ChatSetting ({ roomId, onClose, deleteChattingRoom }) {
                     <div style={{ display:"grid", gridTemplateColumns:"1fr 3fr", gap: "20px",
                                   width:"100%", }}>
                         <div>채팅방 이름</div>
-                        <div>name</div>
+                        <div>{roomName}</div>
+                        <div>채팅방 멤버</div>
+                        <div>
+                            {participants.map((e) => (
+                                <span key={e}>{e} </span>
+                            ))}
+                        </div>
                         <div>채팅방 인원</div>
-                        <div>setting</div>
+                        <div>{memberCount}</div>
+                        <br />
 
-                        <button style={{ gridColumn: "1 / span 2",
-                                         width: "100%", borderRadius: "5px",
-                                         padding:"5px"}}>
-                            친구 초대하기
-                        </button>
-
-                        <button style={{ gridColumn: "1 / span 2",
-                                         width: "100%", backgroundColor:"red", color:"white", borderRadius: "5px",
-                                         padding:"5px"}}
-                                onClick={() => deleteChattingRoom()}
-                        >
-                            채팅방 나가기
-                        </button>
+                        <div style={{ gridColumn: "1 / span 2",}}>
+                            <button style={{ width: "100%", borderRadius: "5px",
+                                             padding:"5px"}}
+                                     onClick={() => { console.log("클릭됨"); setShowAddChattingRoomMember(true);}}
+                            >
+                                친구 초대하기
+                            </button>
+                        </div>
+                        <div style={{ gridColumn: "1 / span 2",}}>
+                            <button style={{ width: "100%", backgroundColor:"red", color:"white", borderRadius: "5px",
+                                             padding:"5px"}}
+                                    onClick={() => deleteChattingRoom()}
+                            >
+                                채팅방 나가기
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            { showAddChattingRoomMember &&
+                <AddChattingRoomMember
+                    onClose={() => { setShowAddChattingRoomMember(false); onClose(false); }}
+                    userInfo={userInfo}
+                    participants={participants}
+                    roomId={roomId}
+                />}
         </div>
     );
 }
