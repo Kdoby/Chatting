@@ -40,10 +40,11 @@ export default function LeftHeader({ leftType, setLeftType, userInfo, setRoomId,
                     alarm
                 </button>
             </div>
-            { friendChatAlarmToggle === 'friend' ? ( <FriendList userInfo={userInfo} /> ) : ( <></> )}
-            { friendChatAlarmToggle === 'chat' ? ( <ChattingRoomList leftType={leftType} setLeftType={setLeftType} userInfo={userInfo} setRoomId={setRoomId}/> ) : ( <></> )}
-            { friendChatAlarmToggle === 'alarm' ? ( <AlarmList /> ) : ( <></> )}
-
+            <div style={{height:"80vh", display:"flex", flexDirection:"column", }}>
+                { friendChatAlarmToggle === 'friend' ? ( <FriendList userInfo={userInfo} /> ) : ( <></> )}
+                { friendChatAlarmToggle === 'chat' ? ( <ChattingRoomList leftType={leftType} setLeftType={setLeftType} userInfo={userInfo} setRoomId={setRoomId}/> ) : ( <></> )}
+                { friendChatAlarmToggle === 'alarm' ? ( <AlarmList /> ) : ( <></> )}
+            </div>
         </div>
     );
 }

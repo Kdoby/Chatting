@@ -78,7 +78,7 @@ export default function ArchiveDetail({ onClose, setArchiveId, archiveId }) {
                                   borderTop: "1px solid #ccc", flexShrink: 0 }}>
                     {imageList && Object.keys(imageList).map((path, isThumbnail) => (
                     <div key={path}
-                         style={{ flex: "0 0 auto", width: "100px", height: "100px",
+                         style={{ flex: "0 0 auto", width: "70px", height: "70px",
                                   border: "1px solid black", cursor: "pointer", position: "relative", }}
                          onClick={() => setSelectedImage(path)}
                     >
@@ -87,25 +87,22 @@ export default function ArchiveDetail({ onClose, setArchiveId, archiveId }) {
                         />
                         {imageList[path] && imageList[path] === true && (
                         <span style={{ position: "absolute", top: "2px", right: "2px",
-                                     backgroundColor: "yellow", fontSize: "12px", padding: "2px"
+                                     backgroundColor: "yellow", fontSize: "7px", padding: "2px"
                         }}>
                             썸네일
                         </span>
                         )}
                     </div>
                     ))}
-
-
                     </div>
 
-                    <div style={{ margin: "20px 0 10px", flexShrink: 0, fontSize: "15px", color:"gray" }}>{archiveDetail.createdAt}</div>
 
-                    <div style={{ overflowY: "auto", flexGrow: 1, fontSize: "25px", fontWeight:"bold" }}>
-                        {archiveDetail.title}
-                    </div>
-
-                    <div style={{ overflowY: "auto", flexGrow: 2, fontSize: "15px" }}>
-                        {archiveDetail.content}
+                    <div style={{ overflowY: "auto", flexGrow: 0 }}>
+                        <span style={{fontSize: "15px", color:"gray"}}>{new Date(archiveDetail.createdAt).toLocaleDateString()}</span>
+                        <br />
+                        <span style={{fontSize: "25px", fontWeight:"bold"}}>{archiveDetail.title}</span>
+                        <br/>
+                        <span style={{fontSize: "15px"}}>{archiveDetail.content}</span>
                     </div>
                 </div>
 

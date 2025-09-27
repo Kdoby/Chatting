@@ -39,7 +39,9 @@ export default function Archive({ myArchiveList }) {
                                          style={{ width:"100%", height:"100%", objectFit: "contain", }} />
                                 </div>
                                 <div style={{ marginTop: "5px" }}>
-                                    <div style={{ fontSize: "15px" }}>{e.createdAt}</div>
+                                    <div style={{ fontSize: "15px" }}>
+                                        {new Date(e.createdAt).toLocaleDateString()}
+                                    </div>
                                     <div style={{ fontSize: "13px" }}>
                                         {e.members.map((em) => (
                                             <span key={em}> {em}</span>

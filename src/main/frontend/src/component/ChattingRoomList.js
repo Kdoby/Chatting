@@ -36,41 +36,42 @@ export default function ChattingRoomList({ leftType, setLeftType, userInfo, setR
 
     return (
     <>
-        <div>
-            <button style={{width : "100%"}}
-                    onClick={() => setShowAddChattingRoom(true)}
-            >
-                create chatting room
-            </button>
+        <button style={{width : "100%"}}
+                onClick={() => setShowAddChattingRoom(true)}
+        >
+            create chatting room
+        </button>
 
-            {Array.isArray(chattingList) && chattingList.length > 0 ? (
-                <div>
-                    {chattingList.map((e) => (
-                            <div key={e.roomId} className="ChattingRoom_wrapper" onClick={() => {
-                                setLeftType('chatting');
-                                setRoomId(e.roomId);
-                            }}>
-                            <div className="ChattingRoom_img"></div>
-                            <div className="ChattingRoom_info"
-                                 style={{display:"grid", fridTemplateRows:"1fr 1fr"}}>
-                                <div>
-                                    <span style={{ fontSize:"19px", fontWeight:"bold" }}>{e.roomName} </span>
-                                    <span style={{ fontSize:"13px" }}>({e.memberCount})</span>
-                                </div>
-                                <div>
-                                {e.members.map((em) => (
-                                    <span style={{ fontSize:"15px" }}>{em} </span>
-                                ))}
-                                </div>
-                            </div>
+        {Array.isArray(chattingList) && chattingList.length > 0 ? (
+        <div style={{ overflowY: "auto" }}>
+            {chattingList.map((e) => (
+                <div key={e.roomId}
+                     className="ChattingRoom_wrapper"
+                     onClick={() => {
+                        setLeftType('chatting');
+                        setRoomId(e.roomId);
+                        }}
+                     style={{ cursor: "pointer" }}
+                >
+                    <div className="ChattingRoom_img"></div>
+                    <div className="ChattingRoom_info"
+                         style={{display:"grid", fridTemplateRows:"1fr 1fr"}}>
+                        <div>
+                            <span style={{ fontSize:"19px", fontWeight:"bold" }}>{e.roomName} </span>
+                            <span style={{ fontSize:"13px" }}>({e.memberCount})</span>
                         </div>
-                    ))}
+                        <div>
+                        {e.members.map((em) => (
+                            <span style={{ fontSize:"15px" }}>{em} </span>
+                        ))}
+                        </div>
+                    </div>
                 </div>
-            ) : (
-                <div>not exist</div>
-            )}
-
+            ))}
         </div>
+        ) : (
+            <div>not exist</div>
+        )}
 
         {/* 조건부 렌더링 */}
         {showAddChattingRoom && (

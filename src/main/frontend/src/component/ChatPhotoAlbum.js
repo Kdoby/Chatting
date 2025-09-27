@@ -54,7 +54,7 @@ export default function ChatPhotoAlbum ({ roomId, onClose }) {
                     <div style={{ textAlign: "center", fontSize: "25px", fontWeight: "bold", marginBottom:"20px" }}>Photo</div>
 
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-                                  gap: "10px", margin: "10px", overflowY: "scroll", }}>
+                                  gap: "10px", margin: "10px", overflowY: "auto", }}>
 
                         {chattingRoomPhotoList ? (
                             <>

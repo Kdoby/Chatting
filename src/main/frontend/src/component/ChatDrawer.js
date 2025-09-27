@@ -72,7 +72,7 @@ export default function ChatDrawer ({ roomId, onClose }) {
                     <div style={{ textAlign: "center", fontSize: "25px", fontWeight: "bold", marginBottom:"20px" }}>Archive</div>
 
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-                                  gap: "10px", margin: "10px", overflowY: "scroll", }}>
+                                  gap: "10px", margin: "10px", overflowY: "auto", }}>
                         {chattingRoomArchiveList ? (
                             <>
                             {Array.isArray(chattingRoomArchiveList) && chattingRoomArchiveList.map((e) => (
@@ -92,8 +92,8 @@ export default function ChatDrawer ({ roomId, onClose }) {
                                              style={{ width:"100%", height:"100%", objectFit: "contain", }} />
                                     </div>
                                     <div style={{ marginTop: "5px" }}>
-                                        <div style={{ fontSize: "15px", display: "flex", alignItems: "center", position: "relative" }}>
-                                            <span>{e.createdAt}</span>
+                                        <div style={{ fontSize: "14px", display: "flex", alignItems: "center", position: "relative" }}>
+                                            <span style={{ fontSize: "13px", color:"gray", }}>{new Date(e.createdAt).toLocaleDateString()}</span>
 
                                             <div style={{ marginLeft: "auto", position: "relative" }}>
                                                 <span style={{ cursor: "pointer" }}>set</span>
@@ -101,7 +101,6 @@ export default function ChatDrawer ({ roomId, onClose }) {
                                                 <div className="ChatDrawerDropdownMenu_wrapper">
                                                     <ul>
                                                         <li onClick={() => setModalType(1)}>수정</li>
-                                                        <li onClick={() => setModalType(2)}>삭제</li>
                                                     </ul>
                                                 </div>
                                             </div>
