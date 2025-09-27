@@ -12,7 +12,7 @@ const formatTime = (t) => {
     return `${ampm} ${h12}:${m}`;
 }
 
-export default function ChatLogDetail ({ userInfo, messages, endTime, startTime}) {
+export default function ChatLogDetail ({ userInfo, messages, endTime, startTime, onPick}) {
     const bottomRef = useRef(null);
     const msgRefs = useRef({}); // messageId(or sendTime) → DOM node
 
@@ -29,20 +29,22 @@ export default function ChatLogDetail ({ userInfo, messages, endTime, startTime}
             });
         }
     }, [startTime]);
-
-
     return (
         <div style={{overflowY: "auto"}}>
-            {messages.map((m, idx) => {
+            {messages?.map((m, idx) => {
+                if (!m) return null; // m이 undefined인 경우 방어
                 return (
                     <div key={m.chatId} ref={(el) => {
                         if (el) msgRefs.current[m.sendTime] = el;
-                    }}>
-                        {(m.senderNickname === 'system')
-                        ? <div ></div>
-                        : (m.senderNickname === userInfo.nickname)
-                        ? <MyChatBubble message={m} formatTime={formatTime}/>
-                        : <ChatBubble message={m} formatTime={formatTime}/>}
+                    }} onClick={() => onPick(m.sendTime)}>
+                        {m?.senderNickname === "system" ? (
+                            <div />
+                        ) : m?.senderNickname === userInfo?.nickname ? (
+                            <MyChatBubble message={m} formatTime={formatTime}/>
+                        ) : (
+                            <ChatBubble message={m} formatTime={formatTime}/>
+                        )}
+
                     </div>
                 );
             })}
