@@ -35,10 +35,10 @@ public interface ChatRoomMemberRepository extends JpaRepository<ChatRoomMember, 
     int countMembersInRoom(@Param("roomId") Long roomId);
 
     /* 특정 사용자가 속한 채팅방 목록 조회 - DTO projection */
-    @Query("SELECT new NotModified.Chatting.domain.chat.dto.response.ChatRoomResponse(crm.room.id, crm.room.roomName, COUNT(crm2)) " +
+    /*@Query("SELECT new NotModified.Chatting.domain.chat.dto.response.ChatRoomResponse(crm.room.id, crm.room.roomName, COUNT(crm2)) " +
             "FROM ChatRoomMember crm " +
             "JOIN ChatRoomMember crm2 ON crm.room.id = crm2.room.id " +
             "WHERE crm.member.id = :userId " +
             "GROUP BY crm.room.id, crm.room.roomName")
-    List<ChatRoomResponse> findChatRoomList(@Param("userId") Long userId);
+    List<ChatRoomResponse> findChatRoomList(@Param("userId") Long userId);*/
 }

@@ -5,10 +5,12 @@ import NotModified.Chatting.domain.archive.dto.request.UpdateArchiveRequest;
 import NotModified.Chatting.domain.archive.dto.response.ArchiveContentResponse;
 import NotModified.Chatting.domain.archive.dto.response.ArchiveResponse;
 import NotModified.Chatting.domain.archive.service.ArchiveService;
+import NotModified.Chatting.domain.chat.dto.response.ChatResponse;
 import NotModified.Chatting.global.auth.token.dto.jwt.JwtAuthentication;
 import NotModified.Chatting.global.base.dto.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,15 +23,24 @@ public class ArchiveController {
 
     private final ArchiveService archiveService;
 
+    private final SimpMessagingTemplate messagingTemplate;
+
     @PostMapping
-    public ResponseEntity<ApiResponse<String>> createArchive(
+    public ResponseEntity<ApiResponse<ChatResponse>> createArchive(
             @RequestBody CreateArchiveRequest request,
             @AuthenticationPrincipal JwtAuthentication auth
     ) {
-           archiveService.createArchive(auth.userId(), request);
+           ChatResponse response = archiveService.createArchive(auth.userId(), request);
+
+           // 아카이브 생성 메시지 브로드캐스팅
+           messagingTemplate.convertAndSend("/sub/chat/room/" + response.getRoomId(), response);
 
            return ResponseEntity.ok().body(
-                   new ApiResponse<>("아카이브 생성 성공")
+                   new ApiResponse<>(
+                           "아카이브 생성 성공",
+                           response
+
+                   )
            );
     }
 
