@@ -42,21 +42,22 @@ export default function FriendList({ userInfo }){
 
     return (
     <>
-        <div style={{ height: "30px", margin:"10px 0",
+        <div style={{ height: "30px", margin:"10px 0", padding:"5px 10px",
                       display: "grid", gridTemplateColumns: "4fr 1fr",
                       backgroundColor: "white" }}>
-            <div>
-                <input value={searchInput} placeholder="친구 요청"
-                       onChange={(e) => setSearchInput(e.target.value)}
-                       style={{ width: "80%", padding: "5px 10px", borderWidth: "0", outline: "none" }}
-                />
-            </div>
-            <button onClick={() => handleSearch()}>send</button>
+            <input value={searchInput} placeholder="친구 요청"
+                   onChange={(e) => setSearchInput(e.target.value)}
+                   style={{ width: "100%", borderWidth: "0", outline: "none" }}
+            />
+            <button onClick={() => handleSearch()}
+                    style={{ border:"1px solid gray", borderRadius:"7px", background:"white" }}
+            >send</button>
         </div>
 
         {friendsList ? (
             <div>
             {Array.isArray(friendsList) && friendsList.map((e) => (
+            <>
                 <div key={e.friendId}
                      className={"ChattingRoom_wrapper"}>
                     <div className={"ChattingRoom_img"}>
@@ -66,6 +67,9 @@ export default function FriendList({ userInfo }){
                         <div>{e.friendNickname}</div>
                     </div>
                 </div>
+
+                <hr style={{ margin:"2px auto", width:"95%", color:"black" }}/>
+            </>
             ))}
 
             </div>
