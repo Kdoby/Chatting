@@ -11,15 +11,9 @@ export default function Archive({ myArchiveList }) {
 
 
     return(
-        <div style={{ height: "100%", width:"83%", margin:"auto", background: "#F8FAFC",
-                      display:"grid", gridTemplateRows: "40px 10fr", overflowY:"scroll",
-        }}>
-            <div style={{
-                    display: "grid", height: "100%",
-                    gridTemplateColumns: "repeat(5, 1fr)",
-                    gap: "10px",
-                    margin: "10px",
-                 }}
+        <div style={{ height: "100%", width:"83%", margin:"auto", background: "#F8FAFC", }}>
+            <div style={{ margin: "10px", overflowY: "auto",
+                          display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "10px", }}
             >
 
                 {Array.isArray(myArchiveList) && myArchiveList.length > 0 ? (
