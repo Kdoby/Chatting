@@ -11,34 +11,26 @@ export default function LeftHeader({ leftType, setLeftType, userInfo, setRoomId,
     const [friendChatAlarmToggle, setFriendChatAlarmToggle] = useState('friend');
 
     return (
-        <div className={"header_wrapper"}>
+        <div className={"header_wrapper"} style={{ background: "linear-gradient(to bottom, #F8FAFC, #D9EAFD, #BCCCDC)" }}>
             <HeaderProfile userInfo={userInfo}/>
 
-            <button className={"header_archive"}
-                    onClick={() => {
-                        setLeftType('archive');
-                        fetchMyArchive();
-                    }}
-                    style={{ width: "100%"}}
-            >
-                archive
-            </button>
-            <div className={"header_menu"}>
-                <button className={"header_friend"}
-                        onClick={() => setFriendChatAlarmToggle('friend')}
-                >
-                    friend
-                </button>
-                <button className={"header_chat"}
-                        onClick={() => setFriendChatAlarmToggle('chat')}
-                >
-                    chat
-                </button>
-                <button className={"header_alarm"}
-                        onClick={() => setFriendChatAlarmToggle('alarm')}
-                >
-                    alarm
-                </button>
+            <img src="images/archive.png"
+                 style={{ weight:"100%", height:"25px" }}
+                 onClick={() => {
+                     setLeftType('archive');
+                     fetchMyArchive();
+                 }}
+            />
+            <div style={{display:"grid", gridTemplateColumns:"1fr 1fr 1fr"}}>
+                <img src="images/friend.png"
+                     style={{ height:"25px", margin:"auto" }}
+                     onClick={() => setFriendChatAlarmToggle('friend')}/>
+                <img src="images/chat.png"
+                     style={{ height:"25px", margin:"auto" }}
+                     onClick={() => setFriendChatAlarmToggle('chat')}/>
+                <img src="images/alarm.png"
+                     style={{ height:"25px", margin:"auto" }}
+                     onClick={() => setFriendChatAlarmToggle('alarm')}/>
             </div>
             <div style={{height:"80vh", display:"flex", flexDirection:"column", }}>
                 { friendChatAlarmToggle === 'friend' ? ( <FriendList userInfo={userInfo} /> ) : ( <></> )}
