@@ -60,8 +60,8 @@ export default function ChatPhotoAlbum ({ roomId, onClose }) {
                             <>
                             {Array.isArray(chattingRoomPhotoList) && chattingRoomPhotoList.map((e) => (
                                 <div key={e.imageId}
-                                     style={{ aspectRatio: "1/1", border: "1px solid black", display: "flex",
-                                              justifyContent: "center", alignItems: "center", textAlign: "center",
+                                     style={{ aspectRatio: "1/1", border: "1px solid black", borderRadius:"15px", overflow: "hidden",
+                                              display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center",
                                      }}
                                      onClick={() => {
                                         setShowChatPhotoAlbumDetail(true);

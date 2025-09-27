@@ -77,11 +77,12 @@ export default function ChatDrawer ({ roomId, onClose }) {
                             <>
                             {Array.isArray(chattingRoomArchiveList) && chattingRoomArchiveList.map((e) => (
                                 <div key={e.archiveId}
-                                     style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}
+                                     style={{ border: "1px solid black", borderRadius:"15px", overflow: "hidden",
+                                              textAlign: "center", padding: "10px", textAlign:"left", }}
                                      onClick={() => setSelectedArchive(e)}
                                 >
-                                    <div style={{ aspectRatio: "1/1", border: "1px solid black", display: "flex",
-                                                  justifyContent: "center", alignItems: "center", textAlign: "center",
+                                    <div style={{ aspectRatio: "1/1", border: "0.5px solid black", borderRadius:"15px", overflow: "hidden",
+                                                  display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center",
                                          }}
                                          onClick={() => {
                                             setArchiveId(e.archiveId);
