@@ -60,7 +60,7 @@ export default function AddChattingRoom({ onClose, userInfo }) {
             });
 
             console.log(res.data.message);
-            alert(res.data.message);
+            alert("[ " + roomName + " ] 채팅방을 생성하였습니다.");
 
             onClose(false);
         } catch (err) {

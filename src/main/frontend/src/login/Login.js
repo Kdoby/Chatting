@@ -74,7 +74,7 @@ export default function Login() {
 
                     <div>
                         <input type="submit"
-                               style={{ backgroundColor:"#BCCCDC", color: "white",
+                               style={{ backgroundColor:"#BCCCDC",
                                         padding:"8px", fontSize:"18px",
                                         border:"1px solid black" }}
                                value="LOG-IN"

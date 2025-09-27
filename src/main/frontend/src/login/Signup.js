@@ -18,13 +18,13 @@ export default function Signup() {
 
         console.log(id, pw, nickname);
         try {
-            await axios.post('/api/v1/auth', {  // '/auth/login' 으로 요청
+            await axios.post('/api/v1/auth', {
                 username: id,
                 password: pw,
                 nickname
             });
 
-            alert("회원가입 성공");
+            alert("회원가입 성공. 로그인 하세요.");
             navigate('/login');
 
         } catch (err) {
@@ -95,7 +95,7 @@ export default function Signup() {
 
                     <div>
                         <input type="submit"
-                               style={{ backgroundColor:"#BCCCDC", color: "white",
+                               style={{ backgroundColor:"#BCCCDC",
                                         padding:"8px", fontSize:"18px",
                                         border:"1px solid black" }}
                                value="SIGN UP"

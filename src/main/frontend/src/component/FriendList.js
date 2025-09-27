@@ -56,7 +56,7 @@ export default function FriendList({ userInfo }){
         </div>
 
         {friendsList ? (
-            <div>
+            <div style={{ overflowY: "auto" }}>
             {Array.isArray(friendsList) && friendsList.map((e) => (
             <>
                 <div key={e.friendId}
