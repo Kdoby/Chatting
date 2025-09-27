@@ -49,7 +49,8 @@ export default function ChatSetting ({ roomId, roomName, participants, memberCou
 
                         <div style={{ gridColumn: "1 / span 2",}}>
                             <button style={{ width: "100%", borderRadius: "5px", padding:"8px",
-                                             backgroundColor:"#D9EAFD", border:"1px solid black", }}
+                                             backgroundColor:"#D9EAFD", border:"1px solid black",
+                                             boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                                      onClick={() => { console.log("클릭됨"); setShowAddChattingRoomMember(true);}}
                             >
                                 친구 초대하기
@@ -57,7 +58,8 @@ export default function ChatSetting ({ roomId, roomName, participants, memberCou
                         </div>
                         <div style={{ gridColumn: "1 / span 2",}}>
                             <button style={{ width: "100%", borderRadius: "5px", padding:"8px",
-                                             backgroundColor:"#9AA6B2", border:"1px solid black", }}
+                                             backgroundColor:"#9AA6B2", border:"1px solid black",
+                                             boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                                     onClick={() => deleteChattingRoom()}
                             >
                                 채팅방 나가기

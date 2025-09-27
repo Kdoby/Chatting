@@ -47,10 +47,11 @@ export default function FriendList({ userInfo }){
                       backgroundColor: "white" }}>
             <input value={searchInput} placeholder="친구 요청"
                    onChange={(e) => setSearchInput(e.target.value)}
-                   style={{ width: "100%", borderWidth: "0", outline: "none" }}
+                   style={{ width: "100%", borderWidth: "0", outline: "none", }}
             />
             <button onClick={() => handleSearch()}
-                    style={{ border:"1px solid gray", borderRadius:"7px", background:"white" }}
+                    style={{ border:"1px solid gray", borderRadius:"7px", background:"white",
+                             boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
             >send</button>
         </div>
 

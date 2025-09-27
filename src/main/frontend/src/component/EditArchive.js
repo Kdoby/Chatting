@@ -68,8 +68,8 @@ export default function EditArchive ({ onClose, selectedArchive, setSelectedArch
                         display: "flex", flexDirection: "column",
                     }}>
                         <div style={{ width: "100%", height: "50%", border: "1px solid black",
-                                      borderRadius:"15px", overflow: "hidden",
-                                      flexShrink: 0, backgroundColor: "white" }}>
+                                      borderRadius:"15px", overflow: "hidden", flexShrink: 0,
+                                      backgroundColor: "white", boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}>
                             {selectedArchive.thumbnailImage && (
                                 <img src={`http://localhost:8080${selectedArchive.thumbnailImage}`}
                                      alt={selectedArchive.thumbnailImage}
@@ -85,7 +85,8 @@ export default function EditArchive ({ onClose, selectedArchive, setSelectedArch
 
                         <div>
                             <input style={{ width: "96%", fontSize: "19px", fontWeight:"bold", margin:"0 0 10px 0",
-                                            padding:"5px 10px", border:"1px solid gray", borderRadius:"5px", }}
+                                            padding:"5px 10px", border:"1px solid gray", borderRadius:"5px",
+                                            boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                                    defaultValue={archiveTitle}
                                    onChange={(e) => setArchiveTitle(e.target.value)}
                             />
@@ -94,7 +95,8 @@ export default function EditArchive ({ onClose, selectedArchive, setSelectedArch
                         <div style={{ overflowY: "auto", flexGrow: 1, fontSize: "15px" }}>
                             <textarea
                                 style={{ width:"96%", height: "80%", overflowY: "auto", flexGrow: 1, fontSize: "15px",
-                                         padding:"5px 10px", border:"1px solid gray", borderRadius:"5px", resize: "none", }}
+                                         padding:"5px 10px", border:"1px solid gray", borderRadius:"5px", resize: "none",
+                                         boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                                 defaultValue={archiveContent}
                                 onChange={(e) => setArchiveContent(e.target.value)}
                             />
@@ -103,7 +105,8 @@ export default function EditArchive ({ onClose, selectedArchive, setSelectedArch
 
                         <br/>
                         <button style={{ margin: "auto 0 0", padding:"8px", border:"1px solid black",
-                                         borderRadius: "8px", backgroundColor:"#D9EAFD", }}
+                                         borderRadius: "8px", backgroundColor:"#D9EAFD",
+                                         boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                                 onClick={() => EditArchive()}
                         >
                             Edit

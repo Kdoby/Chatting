@@ -96,7 +96,7 @@ export default function AddChattingRoom({ onClose, userInfo }) {
                     <div style={{ display: "grid", gridTemplateColumns:"1fr 4fr", }}>
                         <div>채팅방 이름</div>
                         <input onChange={(e) => setRoomName(e.target.value)}
-                               style={{ border:"1px solid gray", borderRadius:"5px", padding:"5px 10px" }} />
+                               style={{ border:"1px solid gray", borderRadius:"5px", padding:"5px 10px", boxShadow: "0 0 4px rgba(0,0,0,0.2)", }} />
                     </div>
 
                     <br />
@@ -135,7 +135,7 @@ export default function AddChattingRoom({ onClose, userInfo }) {
                     )}
 
                     <button style={{ margin: "auto 0 0", padding:"8px", border:"1px solid black",
-                                     borderRadius: "8px", backgroundColor:"#D9EAFD" }}
+                                     borderRadius: "8px", backgroundColor:"#D9EAFD", boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                             onClick={() => createRoom()}
                     >
                         create

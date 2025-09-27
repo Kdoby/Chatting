@@ -45,11 +45,9 @@ export default function ChatPhotoAlbum ({ roomId, onClose }) {
                 />
 
                 {/* 내용 */}
-                <div style={{
-                    height: "100%", maxHeight: "100%", width: "100%",
-                    textAlign: "left", boxSizing: "border-box",
-                    padding: "45px 20px 20px",
-                    display: "flex", flexDirection: "column",
+                <div style={{ height: "100%", maxHeight: "100%", width: "100%",
+                              textAlign: "left", boxSizing: "border-box",
+                              padding: "45px 20px 20px", display: "flex", flexDirection: "column",
                 }}>
                     <div style={{ textAlign: "center", fontSize: "25px", fontWeight: "bold", marginBottom:"20px" }}>Photo</div>
 
@@ -62,7 +60,7 @@ export default function ChatPhotoAlbum ({ roomId, onClose }) {
                                 <div key={e.imageId}
                                      style={{ aspectRatio: "1/1", border: "1px solid gray", borderRadius:"15px", overflow: "hidden",
                                               display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center",
-                                              backgroundColor:"white",
+                                              backgroundColor:"white", boxShadow: "0 0 4px rgba(0,0,0,0.2)",
                                      }}
                                      onClick={() => {
                                         setShowChatPhotoAlbumDetail(true);

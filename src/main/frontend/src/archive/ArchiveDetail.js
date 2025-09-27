@@ -62,7 +62,8 @@ export default function ArchiveDetail({ onClose, setArchiveId, archiveId }) {
                 }}>
 
                     <div style={{ width: "100%", height: "50%", flexShrink: 0, backgroundColor: "white",
-                                  border: "1px solid gray", borderRadius:"15px", overflow: "hidden", }}>
+                                  border: "1px solid gray", borderRadius:"15px", overflow: "hidden",
+                                  boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}>
                         <img src={`http://localhost:8080${selectedImage}`} alt={selectedImage}
                              style={{ width:"100%", height:"100%", objectFit: "contain", }}
                         />

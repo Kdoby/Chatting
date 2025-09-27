@@ -27,14 +27,16 @@ export default function Archive({ myArchiveList }) {
                         {myArchiveList.map((e) => (
                             <div key={e.archiveId}
                                  style={{ border: "1px solid gray", borderRadius:"15px", background:"white",
-                                          textAlign: "center", padding: "13px", textAlign:"left" }}
+                                          textAlign: "center", padding: "13px", textAlign:"left",
+                                          boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                                  onClick={() => {
                                     setSelectedArchiveId(e.archiveId);
                                     setShowArchiveDetail(true);
                                  }}
                             >
                                 <div style={{ aspectRatio: "1/1", width: "100%", margin: "auto  0",
-                                              border: "1px solid gray", borderRadius:"13px", overflow: "hidden", }}>
+                                              border: "1px solid gray", borderRadius:"13px", overflow: "hidden",
+                                              boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}>
                                     <img src={`http://localhost:8080/uploads/${e.thumbnailImage}`}
                                          style={{ width:"100%", height:"100%", objectFit: "contain", }} />
                                 </div>

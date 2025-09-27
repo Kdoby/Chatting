@@ -37,7 +37,8 @@ export default function ChattingRoomList({ leftType, setLeftType, userInfo, setR
     return (
     <>
         <button style={{ width : "90%", margin:"10px auto", padding:"7px", background:"white",
-                         border: "1px solid gray", borderRadius:"10px", }}
+                         border: "1px solid gray", borderRadius:"10px",
+                         boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                 onClick={() => setShowAddChattingRoom(true)}
         >
             Create Chatting Room
