@@ -93,7 +93,9 @@ export default function ChatDrawer ({ roomId, onClose }) {
                                     </div>
                                     <div style={{ marginTop: "5px" }}>
                                         <div style={{ fontSize: "14px", display: "flex", alignItems: "center", position: "relative" }}>
-                                            <span style={{ fontSize: "13px", color:"gray", }}>{new Date(e.createdAt).toLocaleDateString()}</span>
+                                            <span style={{ fontSize: "13px", color:"gray", }}>
+                                                {new Date(e.createdAt).toLocaleDateString()}
+                                            </span>
 
                                             <div style={{ marginLeft: "auto", position: "relative" }}>
                                                 <span style={{ cursor: "pointer" }}>set</span>
@@ -101,7 +103,7 @@ export default function ChatDrawer ({ roomId, onClose }) {
                                                 <div className="ChatDrawerDropdownMenu_wrapper">
                                                     <ul>
                                                         <li onClick={() => setModalType(1)}>수정</li>
-                                                        <li onClick={() => setModalType(2)}>삭제</li>
+                                                        /*<li onClick={() => setModalType(2)}>삭제</li>*/
                                                     </ul>
                                                 </div>
                                             </div>
