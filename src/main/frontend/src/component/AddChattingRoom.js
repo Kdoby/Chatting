@@ -60,7 +60,7 @@ export default function AddChattingRoom({ onClose, userInfo }) {
             });
 
             console.log(res.data.message);
-            alert(res.data.message);
+            alert("[ " + roomName + " ] 채팅방을 생성하였습니다.");
 
             onClose(false);
         } catch (err) {
@@ -73,12 +73,12 @@ export default function AddChattingRoom({ onClose, userInfo }) {
         <div className="AddChattingRoom">
             <div style={{
                 position: "relative", border: "1px solid gray", padding: "10px",
-                borderRadius: "15px", backgroundColor: "white",
+                borderRadius: "15px", backgroundColor: "#F8FAFC",
                 width: "40%", height: "80%", textAlign: "center",
             }}>
                 {/* 닫기 버튼 */}
                 <img
-                    src="images/close.png"
+                    src="images/close2.png"
                     onClick={() => onClose(false)}
                     style={{
                         width: "20px", position: "absolute", top: "20px", right: "28px",
@@ -93,18 +93,19 @@ export default function AddChattingRoom({ onClose, userInfo }) {
                     padding: "45px 20px 20px",
                     display: "flex", flexDirection: "column",
                 }}>
-                    <div>채팅방 이름</div>
-                    <input onChange={(e) => setRoomName(e.target.value)}></input>
+                    <div style={{ display: "grid", gridTemplateColumns:"1fr 4fr", }}>
+                        <div>채팅방 이름</div>
+                        <input onChange={(e) => setRoomName(e.target.value)}
+                               style={{ border:"1px solid gray", borderRadius:"5px", padding:"5px 10px", boxShadow: "0 0 4px rgba(0,0,0,0.2)", }} />
+                    </div>
 
                     <br />
 
                     {/* 선택된 닉네임 표시 */}
                     <div style={{ marginBottom: "10px", fontWeight: "bold" }}>
-                        선택됨:
+                        선택됨 :
                         {chattingRoomMemberList.length > 0 && (
-                        <span>
-                            {chattingRoomMemberList.map((m) => m.nickname).join(", ")}
-                        </span>
+                        <span> {chattingRoomMemberList.map((m) => m.nickname).join(", ")}</span>
                         )}
                     </div>
 
@@ -117,19 +118,14 @@ export default function AddChattingRoom({ onClose, userInfo }) {
                                     className={"ChattingRoom_wrapper"}
                                     style={{ gridTemplateColumns: "auto auto 9fr" }}
                                 >
-                                    <input
-                                        type="checkbox"
-                                        onChange={(event) =>
-                                            handleCheckboxChange(
-                                                e.friendId,
-                                                e.friendNickname,
-                                                event.target.checked
-                                            )
-                                        }
+                                    <input type="checkbox"
+                                           onChange={(event) => handleCheckboxChange(e.friendId, e.friendNickname, event.target.checked)}
+                                           style={{margin:"0 10px 0 0"}}
                                     />
-                                    <div className={"ChattingRoom_img"} style={{ backgroundColor: "gray" }} />
+
+                                    <div className={"ChattingRoom_img"} style={{ backgroundColor: "#BCCCDC" }} />
                                     <div className={"ChattingRoom_info"}>
-                                        <div>{e.friendNickname}</div>
+                                        <div style={{margin:"auto 0"}}>{e.friendNickname}</div>
                                     </div>
                                 </div>
                             ))}
@@ -138,7 +134,8 @@ export default function AddChattingRoom({ onClose, userInfo }) {
                         <div>not exist</div>
                     )}
 
-                    <button style={{ margin: "auto 0 0" }}
+                    <button style={{ margin: "auto 0 0", padding:"8px", border:"1px solid black",
+                                     borderRadius: "8px", backgroundColor:"#D9EAFD", boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                             onClick={() => createRoom()}
                     >
                         create

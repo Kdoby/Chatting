@@ -39,12 +39,12 @@ export default function EditArchive ({ onClose, selectedArchive, setSelectedArch
              style={{backgroundColor: "rgba(0,0,0,0)"}}>
             <div style={{
                 position: "relative", border: "1px solid gray", padding: "10px",
-                borderRadius: "15px", backgroundColor: "white",
+                borderRadius: "15px", backgroundColor: "#F8FAFC",
                 width: "40%", height: "80%", textAlign: "center",
             }}>
                 {/* 닫기 버튼 */}
                 <img
-                    src="images/close.png"
+                    src="images/close2.png"
                     onClick={() => {
                         setSelectedArchive([]);
                         onClose(false);
@@ -63,19 +63,16 @@ export default function EditArchive ({ onClose, selectedArchive, setSelectedArch
                     display: "flex", flexDirection: "column",
                 }}>
                     <div style={{
-                        height: "100%",           // 부모 높이를 꽉 채움
-                        maxHeight: "100%",        // 최대 높이 제한
-                        width: "100%",
-                        textAlign: "left",
-                        boxSizing: "border-box",
-                        padding: "45px 20px 20px",
-                        display: "flex",
-                        flexDirection: "column",
+                        height: "100%", maxHeight: "100%", width: "100%", textAlign: "left",
+                        boxSizing: "border-box", padding: "45px 20px 20px",
+                        display: "flex", flexDirection: "column",
                     }}>
-                        <div style={{ width: "100%", height: "50%", border: "1px solid black", flexShrink: 0 }}>
-                            {selectedArchive?.images?.length > 0 && (
-                                <img src={`http://localhost:8080${selectedArchive.images[0]}`}
-                                     alt={selectedArchive.images[0]}
+                        <div style={{ width: "100%", height: "50%", border: "1px solid black",
+                                      borderRadius:"15px", overflow: "hidden", flexShrink: 0,
+                                      backgroundColor: "white", boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}>
+                            {selectedArchive.thumbnailImage && (
+                                <img src={`http://localhost:8080${selectedArchive.thumbnailImage}`}
+                                     alt={selectedArchive.thumbnailImage}
                                      style={{ width: "100%", height: "100%", objectFit: "contain" }}
                                 />
                             )}
@@ -83,28 +80,35 @@ export default function EditArchive ({ onClose, selectedArchive, setSelectedArch
 
 
                         <div style={{ margin: "20px 0 10px", flexShrink: 0, fontSize: "15px", color:"gray" }}>
-                            {selectedArchive.createdAt}
+                            createdAt. {new Date(selectedArchive.createdAt).toLocaleDateString()}
                         </div>
 
                         <div>
-                            <input
-                                style={{width: "97%", fontSize: "19px", fontWeight:"bold", margin:"0 0 10px 0"}}
-                                defaultValue={archiveTitle}
-                                onChange={(e) => setArchiveTitle(e.target.value)}
+                            <input style={{ width: "96%", fontSize: "19px", fontWeight:"bold", margin:"0 0 10px 0",
+                                            padding:"5px 10px", border:"1px solid gray", borderRadius:"5px",
+                                            boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
+                                   defaultValue={archiveTitle}
+                                   onChange={(e) => setArchiveTitle(e.target.value)}
                             />
                         </div>
 
                         <div style={{ overflowY: "auto", flexGrow: 1, fontSize: "15px" }}>
                             <textarea
-                                style={{ width:"97%", height: "90%", overflowY: "auto", flexGrow: 1, fontSize: "15px" }}
+                                style={{ width:"96%", height: "80%", overflowY: "auto", flexGrow: 1, fontSize: "15px",
+                                         padding:"5px 10px", border:"1px solid gray", borderRadius:"5px", resize: "none",
+                                         boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                                 defaultValue={archiveContent}
                                 onChange={(e) => setArchiveContent(e.target.value)}
                             />
 
                         </div>
 
-                        <button style={{width: "20%", margin:"auto"}}
-                                onClick={() => EditArchive()} >
+                        <br/>
+                        <button style={{ margin: "auto 0 0", padding:"8px", border:"1px solid black",
+                                         borderRadius: "8px", backgroundColor:"#D9EAFD",
+                                         boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
+                                onClick={() => EditArchive()}
+                        >
                             Edit
                         </button>
                     </div>

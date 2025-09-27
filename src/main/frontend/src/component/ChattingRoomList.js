@@ -36,15 +36,18 @@ export default function ChattingRoomList({ leftType, setLeftType, userInfo, setR
 
     return (
     <>
-        <button style={{width : "100%"}}
+        <button style={{ width : "90%", margin:"10px auto", padding:"7px", background:"white",
+                         border: "1px solid gray", borderRadius:"10px",
+                         boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                 onClick={() => setShowAddChattingRoom(true)}
         >
-            create chatting room
+            Create Chatting Room
         </button>
 
         {Array.isArray(chattingList) && chattingList.length > 0 ? (
         <div style={{ overflowY: "auto" }}>
             {chattingList.map((e) => (
+            <>
                 <div key={e.roomId}
                      className="ChattingRoom_wrapper"
                      onClick={() => {
@@ -67,6 +70,9 @@ export default function ChattingRoomList({ leftType, setLeftType, userInfo, setR
                         </div>
                     </div>
                 </div>
+
+                <hr style={{ margin:"2px auto", width:"95%", color:"black" }}/>
+            </>
             ))}
         </div>
         ) : (

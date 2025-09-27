@@ -11,12 +11,12 @@ export default function ChatSetting ({ roomId, roomName, participants, memberCou
         <div className="AddChattingRoom">
             <div style={{
                 position: "relative", border: "1px solid gray", padding: "10px",
-                borderRadius: "15px", backgroundColor: "white",
+                borderRadius: "15px", backgroundColor: "#F8FAFC",
                 width: "40%", height: "80%", textAlign: "center",
             }}>
                 {/* 닫기 버튼 */}
                 <img
-                    src="images/close.png"
+                    src="images/close2.png"
                     onClick={() => onClose(false)}
                     style={{
                         width: "20px", position: "absolute", top: "20px", right: "28px",
@@ -48,16 +48,18 @@ export default function ChatSetting ({ roomId, roomName, participants, memberCou
                         <br />
 
                         <div style={{ gridColumn: "1 / span 2",}}>
-                            <button style={{ width: "100%", borderRadius: "5px",
-                                             padding:"5px"}}
+                            <button style={{ width: "100%", borderRadius: "5px", padding:"8px",
+                                             backgroundColor:"#D9EAFD", border:"1px solid black",
+                                             boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                                      onClick={() => { console.log("클릭됨"); setShowAddChattingRoomMember(true);}}
                             >
                                 친구 초대하기
                             </button>
                         </div>
                         <div style={{ gridColumn: "1 / span 2",}}>
-                            <button style={{ width: "100%", backgroundColor:"red", color:"white", borderRadius: "5px",
-                                             padding:"5px"}}
+                            <button style={{ width: "100%", borderRadius: "5px", padding:"8px",
+                                             backgroundColor:"#9AA6B2", border:"1px solid black",
+                                             boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                                     onClick={() => deleteChattingRoom()}
                             >
                                 채팅방 나가기

@@ -18,13 +18,13 @@ export default function Signup() {
 
         console.log(id, pw, nickname);
         try {
-            await axios.post('/api/v1/auth', {  // '/auth/login' 으로 요청
+            await axios.post('/api/v1/auth', {
                 username: id,
                 password: pw,
                 nickname
             });
 
-            alert("회원가입 성공");
+            alert("회원가입 성공. 로그인 하세요.");
             navigate('/login');
 
         } catch (err) {
@@ -67,7 +67,8 @@ export default function Signup() {
                         <br />
 
                         <input onChange={(e) => setNickname(e.target.value)}
-                               style={{ height:"35px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
+                               style={{ height:"35px", width:"100%", paddingLeft:"10px",
+                                        border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
                         />
                     </div>
 
@@ -76,7 +77,8 @@ export default function Signup() {
                         <br />
 
                         <input onChange={(e) => setId(e.target.value)}
-                               style={{ height:"35px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
+                               style={{ height:"35px", width:"100%", paddingLeft:"10px",
+                                        border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
                         />
                     </div>
 
@@ -85,13 +87,20 @@ export default function Signup() {
                         <br />
 
                         <input onChange={(e) => setPw(e.target.value)}
-                               style={{ height:"35px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
+                               type="password"
+                               style={{ height:"35px", width:"100%", paddingLeft:"10px",
+                                        border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}
                         />
                     </div>
 
                     <div>
-                        <input type="submit" value="SIGN UP" />
-                        <div style={{ margin:"10px", textAlign:"center" }}>
+                        <input type="submit"
+                               style={{ backgroundColor:"#BCCCDC",
+                                        padding:"8px", fontSize:"18px",
+                                        border:"1px solid black" }}
+                               value="SIGN UP"
+                        />
+                        <div style={{ margin:"10px", textAlign:"center", fontSize:"15px" }}>
                             <Link to="/login">LOG-IN</Link>
                         </div>
                     </div>
@@ -100,38 +109,3 @@ export default function Signup() {
         </div>
     );
 }
-
-/*
-<div style={{ width:"100%", margin:"50px 0" }}>
-                        <label htmlFor="id">ID</label>
-                        <br />
-
-                        <input style={{ height:"40px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}></input>
-                        <button type="button" onClick={checkID}>Duplicate Check</button>
-                    </div>
-
-                    <div style={{ width:"100%", margin:"50px 0" }}>
-                        <label htmlFor="pw">PASSWORD</label>
-                        <br />
-
-                        <input style={{ height:"40px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}></input>
-                    </div>
-
-                    <div style={{ width:"100%", margin:"50px 0" }}>
-                        <label htmlFor="pwConfirm">PASSWORD CHECK</label>
-                        <br />
-
-                        <input style={{ height:"40px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}></input>
-                    </div>
-
-                    <div style={{ width:"100%", margin:"50px 0" }}>
-                        <label htmlFor="email">E-MAIL</label>
-                        <br />
-
-                        <input style={{ height:"40px", width:"100%", border:"2px solid black", borderRadius:"10px", margin:"20px 0"}}></input>
-                    </div>
-
-                    <div>
-                        <input type="submit" value="SIGN UP" />
-                    </div>
-*/

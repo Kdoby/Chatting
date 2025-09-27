@@ -38,6 +38,10 @@ export default function HomePage({ type }) {
 
     // 채팅방 삭제
     const deleteChattingRoom = async() => {
+        if( !window.confirm("채팅방을 나가시겠습니까?") ){
+            return;
+        }
+
         try {
             const res = await api.delete("/v1/chatroom/" + roomId);
 

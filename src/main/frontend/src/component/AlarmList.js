@@ -20,7 +20,7 @@ export default function FriendList(){
     const approveFriendRequest = async (e) => {
         try {
             const res = await api.post("/v1/friend/" + e);
-            alert("성공");
+            alert("친구 요청을 수락하였습니다.");
             fetchReceivedFriendRequests();
         } catch (err) {
             console.error("검색 에러:", err);
@@ -34,16 +34,27 @@ export default function FriendList(){
     return (
     <>
     {Array.isArray(alarmList) && alarmList.length > 0 ? (
-        <div>
+        <div style={{ overflowY: "auto" }}>
             {alarmList.map((e) => (
+            <>
                 <div key={e.friendshipId} className="ChattingRoom_wrapper">
-                    <div className="ChattingRoom_img"></div>
                     <div className="ChattingRoom_info">
-                        <div>'{e.nickname}'가 친구를 요청하였습니다.</div>
-                        <button onClick={() => approveFriendRequest(e.friendshipId)}>수락</button>
-                        <button>거절</button>
+                        <div style={{ fontSize: "15px" }}>
+                            '{e.nickname}'가 친구를 요청하였습니다.
+                            <br />
+                            <span>
+                                <button onClick={() => approveFriendRequest(e.friendshipId)}
+                                        style={{ padding:"3px 8px", border:"1px solid gray", borderRadius:"5px", backgroundColor: "white" }}
+                                >
+                                    수락
+                                </button>
+                            </span>
+                        </div>
                     </div>
                 </div>
+
+                <hr style={{ margin:"2px auto", width:"95%", color:"black" }}/>
+            </>
             ))}
         </div>
     ) : (
