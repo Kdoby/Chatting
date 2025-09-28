@@ -14,6 +14,13 @@ CREATE TABLE member
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+INSERT INTO member (username, password, nickname)
+VALUES (
+    'SYSTEM',
+    '$2a$10$Dow1L2UoZ4zZJslS1g5NzuOtG5oE/cE0hvCbh4pqCbr19vAzVxEyG', -- BCrypt 암호화된 "password123"
+    'System Admin'
+);
+
 DROP TABLE if EXISTS friendship CASCADE;
 CREATE TABLE friendship
 (
