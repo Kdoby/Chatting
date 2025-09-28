@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+// This file is adapted from https://github.com/prgrms-web-devcourse/Team-DarkNight-Kkini-BE.git
+// Licensed under MIT License
 
 @Component
 public class JwtTokenProvider {
