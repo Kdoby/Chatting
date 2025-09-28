@@ -4,7 +4,7 @@ import api from'../api';
 
 import React, {useEffect, useState} from "react";
 
-export default function ChattingRoomList({ leftType, setLeftType, userInfo, setRoomId }){
+export default function ChattingRoomList({ leftType, setLeftType, userInfo, setRoomId, roomId }){
     const [chattingList, setChattingList] = useState([]);
     const [showAddChattingRoom, setShowAddChattingRoom] = useState(false);
 
@@ -54,7 +54,7 @@ export default function ChattingRoomList({ leftType, setLeftType, userInfo, setR
                         setLeftType('chatting');
                         setRoomId(e.roomId);
                         }}
-                     style={{ cursor: "pointer" }}
+                     style={roomId===e.roomId ? { cursor: "pointer", backgroundColor:"#BCCCDC"} : { cursor: "pointer" } }
                 >
                     <div className="ChattingRoom_img"></div>
                     <div className="ChattingRoom_info"

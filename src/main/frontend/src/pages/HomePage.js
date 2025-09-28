@@ -60,7 +60,7 @@ export default function HomePage({ type }) {
 
     return(
         <div style={{ display: "flex", width: "100%", height: "100vh" }}>
-            <LeftHeader leftType={leftType} setLeftType={setLeftType} userInfo={userInfo} setRoomId={setRoomId} fetchMyArchive={fetchMyArchive} />
+            <LeftHeader leftType={leftType} setLeftType={setLeftType} userInfo={userInfo} setRoomId={setRoomId} fetchMyArchive={fetchMyArchive} roomId={roomId} />
 
             { leftType === "archive" ? <Archive className={"chatting_wrapper"} myArchiveList={myArchiveList} /> : <></>}
             { leftType === "chatting" ? <ChattingRoomView userInfo={userInfo} roomId={roomId} deleteChattingRoom={deleteChattingRoom} /> : <></>}
