@@ -25,20 +25,14 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 
 ### Tech
 
-<img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white">
-<img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=black">
-<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-<img src="https://img.shields.io/badge/css-663399?style=for-the-badge&logo=css&logoColor=white">
+<img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=black"> <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-663399?style=for-the-badge&logo=css&logoColor=white">
 
 ![대체 텍스트](https://camo.githubusercontent.com/ad933327ed241d88cd1c93f402e74d9a72cb26d2622316f048faa33633919b8f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f537072696e6720426f6f742d3644423333463f7374796c653d666f722d7468652d6261646765266c6f676f3d537072696e67426f6f74266c6f676f436f6c6f723d7768697465)
 ![대체 텍스트](https://camo.githubusercontent.com/1d5094482cf699e58b93efa1def19b9018bc9b2b30795f685d73bd8a7a28bc93/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f537072696e672044617461204a70612d3030373844343f7374796c653d666f722d7468652d6261646765266c6f676f3d266c6f676f436f6c6f723d7768697465)
 ![대체 텍스트](https://camo.githubusercontent.com/91b949fd3f5d3d60475d1ab8c382735f3df6b1cab5ab8ea105df0d2adbb96bb5/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f537072696e672053656375726974792d364442333346203f7374796c653d666f722d7468652d6261646765266c6f676f3d537072696e675365637572697479266c6f676f436f6c6f723d7768697465)
 ![대체 텍스트](https://camo.githubusercontent.com/b71403892b54c3adbfe60201be51fa894007f3971c6cf1062e8109727f0133f9/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4a57542d3644423333463f7374796c653d666f722d7468652d6261646765266c6f676f3d4a736f6e576562546f6b656e73266c6f676f436f6c6f723d7768697465)
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
-<img src="https://img.shields.io/badge/H2 Database-09476B?style=for-the-badge&logo=H2 Database&logoColor=black">
-
-
-
+<img src="https://img.shields.io/badge/H2 Database-09476B?style=for-the-badge&logo=H2&logoColor=black">
 
 ### Tool
 ![대체 텍스트](https://camo.githubusercontent.com/b657d8051445da43d0e8b7f855ba02bde92bb80c7522bf4f0de45a2a6b92e6de/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f496e74656c6c694a20494445412d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d696e74656c6c696a49646561266c6f676f436f6c6f723d7768697465)
@@ -190,7 +184,9 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 
 ## ERD
 
-![img_2.png](img_2.png)
+<img width="1287" height="723" alt="image" src="https://github.com/user-attachments/assets/e6159802-46cd-424a-9ed2-d62d33269962" />
+
+
 
 ## API 명세서
 
