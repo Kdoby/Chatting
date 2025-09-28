@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpHeaders.*;
+// This file is adapted from https://github.com/prgrms-web-devcourse/Team-DarkNight-Kkini-BE.git
+// Licensed under MIT License
 
 @RestController
 @RequiredArgsConstructor

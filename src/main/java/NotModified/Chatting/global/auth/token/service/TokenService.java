@@ -20,6 +20,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+// This file is adapted from https://github.com/prgrms-web-devcourse/Team-DarkNight-Kkini-BE.git
+// Licensed under MIT License
 
 @Service
 @Transactional
