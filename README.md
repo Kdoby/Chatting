@@ -23,7 +23,6 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 
 ## 개발 언어 및 활용 기술
 
----
 ### Tech
 
 <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white">
@@ -40,6 +39,7 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 
 
 
+
 ### Tool
 ![대체 텍스트](https://camo.githubusercontent.com/b657d8051445da43d0e8b7f855ba02bde92bb80c7522bf4f0de45a2a6b92e6de/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f496e74656c6c694a20494445412d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d696e74656c6c696a49646561266c6f676f436f6c6f723d7768697465)
 
@@ -48,8 +48,6 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=black">
 
 ## 주요기능
-
----
 
 - JWT 인증 기반 로그인
 - STOMP 기반 실시간 채팅
@@ -60,7 +58,6 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 - AI 요약 기능은 **영문 대화만 지원** 합니다.
 
 ## 프로젝트 구조
-├── └── │
 
 ### Frontend
     frontend/
@@ -140,8 +137,6 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 
 ## 개발환경
 
----
-
 ### Version
 
 - Spring boot: 3.x
@@ -169,37 +164,36 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 - IntelliJ에서 해당 파일의 build.gradle 을 Open or import (Open as Project)
 
 
-    git clone https://github.com/Kdoby/Chatting.git
 
-    -- frontend --
-    npm install http-proxy-middleware --save
-    npm install axios
-    npm install react-router-dom
-    -- run (#port:3000)  --
-    cd src/main/frontend
-    npm start
+      git clone https://github.com/Kdoby/Chatting.git
 
-    -- backend --
-    ## application.properties 파일에 아래 항목 추가 
-        jwt.secret={your_secret_key}
-        file.path=uploads/
-    -- run (#port:8080) --
-    1. h2.bat 파일 실행 -> 
-    2. jdbc:h2:~/Chatting 로 connect
-    3. init.sql 파일 ctrl+c, ctrl+v
-    4. IntelliJ에서 ChattingApplication 실행
+      -- frontend --
+      npm install http-proxy-middleware --save
+      npm install axios
+      npm install react-router-dom
+      -- run (#port:3000)  --
+      cd src/main/frontend
+      npm start
+    
+      -- backend --
+      application.properties 파일에 아래 항목 추가 
+          jwt.secret={your_secret_key}
+          file.path=uploads/
+      -- run (#port:8080) --
+      1. h2.bat 파일 실행 -> 
+      2. jdbc:h2:~/Chatting 로 connect
+      3. init.sql 파일 ctrl+c, ctrl+v
+      4. IntelliJ에서 ChattingApplication 실행
   
 
 ### 🔗 [FastAPI 서버 환경 설정](https://github.com/Kdoby/Summarization_AI.git)
 
 ## ERD
 
----
 ![img_2.png](img_2.png)
 
 ## API 명세서
 
----
 
 - [Member API](https://www.notion.so/Member-API-27a6a052f9e1807393aacceae4f18ebe?source=copy_link)
 
@@ -211,7 +205,6 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 
 ## 팀원 소개
 
----
 |                                  Frontend                                   |                                  Frontend                                   |                                    Backend                                    |
 |:---------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|
 | <img src="https://avatars.githubusercontent.com/u/123297062?v=4" width=100> | <img src="https://avatars.githubusercontent.com/u/165632710?v=4" width=100> | <img src="https://avatars.githubusercontent.com/u/155566596?v=4" width = 100> |
@@ -220,7 +213,12 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 
 ## Acknowledgements
 
----
+
+
+
+
+
+
 
 This Project refrences or uses code from the following open-source projects:
 
