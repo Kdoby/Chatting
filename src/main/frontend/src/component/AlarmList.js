@@ -32,7 +32,7 @@ export default function FriendList(){
     }, [])
 
     return (
-    <>
+    <div style={{margin:"10px 5px"}}>
     {Array.isArray(alarmList) && alarmList.length > 0 ? (
         <div style={{ overflowY: "auto" }}>
             {alarmList.map((e) => (
@@ -61,6 +61,6 @@ export default function FriendList(){
     ) : (
         <div>not exist</div>
     )}
-    </>
+    </div>
     );
 }

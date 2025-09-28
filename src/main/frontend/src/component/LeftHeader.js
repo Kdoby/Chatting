@@ -15,7 +15,7 @@ export default function LeftHeader({ leftType, setLeftType, userInfo, setRoomId,
             <HeaderProfile userInfo={userInfo}/>
 
 
-            <div style={{ width:"100%", textAlign:"center", margin:"5px 0 15px" }}>
+            <div style={{ width:"90%", textAlign:"center", margin:"5px auto 5px", border: "1px solid gray" , borderRadius : "5px", padding:"5px 0" }}>
                 <img src="images/archive.png"
                      style={{ height:"25px", margin:"auto",cursor:"pointer",  }}
                      onClick={() => {
@@ -25,7 +25,7 @@ export default function LeftHeader({ leftType, setLeftType, userInfo, setRoomId,
                 />
             </div>
 
-            <div style={{ width:"90%", margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr 1fr" }}>
+            <div style={{ width:"90%", margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr 1fr", padding:"5px 0", border: "1px solid gray" , borderRadius : "5px" }}>
                 <img src="images/friend.png"
                      style={{ height:"25px", margin:"auto", cursor:"pointer",  }}
                      onClick={() => setFriendChatAlarmToggle('friend')}/>
