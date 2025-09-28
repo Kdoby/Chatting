@@ -1,6 +1,7 @@
 import {useEffect, useRef} from "react";
 import MyChatBubble from "./MyChatBubble";
 import ChatBubble from "./ChatBubble";
+import SystemChatBubble from "./SystemChatBubble";
 
 // 오전 hh:mm 형태
 const formatTime = (t) => {
@@ -12,7 +13,7 @@ const formatTime = (t) => {
     return `${ampm} ${h12}:${m}`;
 }
 
-export default function ChatLogDetail ({ userInfo, messages, endTime, startTime, onPick}) {
+export default function ChatLogDetail ({ userInfo, messages, endTime, startTime, onPick, systemOn}) {
     const bottomRef = useRef(null);
     const msgRefs = useRef({}); // messageId(or sendTime) → DOM node
 
@@ -30,15 +31,16 @@ export default function ChatLogDetail ({ userInfo, messages, endTime, startTime,
         }
     }, [startTime]);
     return (
-        <div style={{overflowY: "auto"}}>
+        <div style={{ overflowY: "auto", backgroundColor: "#BCCCDC"}}>
             {messages?.map((m, idx) => {
                 if (!m) return null; // m이 undefined인 경우 방어
                 return (
                     <div key={m.chatId} ref={(el) => {
                         if (el) msgRefs.current[m.sendTime] = el;
-                    }} onClick={() => onPick(m.sendTime)}>
+                    }} onClick={() => onPick(m.sendTime)}
+                    >
                         {m?.senderNickname === "system" ? (
-                            <div>{m.message}</div>
+                            systemOn && <SystemChatBubble message={m}/>
                         ) : m?.senderNickname === userInfo?.nickname ? (
                             <MyChatBubble message={m} formatTime={formatTime}/>
                         ) : (

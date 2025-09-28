@@ -5,6 +5,31 @@ import ChatBubble from "./ChatBubble";
 import formatTime from "./ChatLog";
 import ChatLogDetail from "./ChatLogDetail";
 
+const fmtKR = (d, opts = {}) =>
+    new Intl.DateTimeFormat('ko-KR', { timeZone: 'Asia/Seoul', ...opts }).format(d);
+
+const dayName = (d) => ['일','월','화','수','목','금','토'][d.getDay()];
+
+const datePart = (d) => `${d.getMonth()+1}월 ${d.getDate()}일(${dayName(d)})`;
+const timePart = (d) => fmtKR(d, { hour: '2-digit', minute: '2-digit', hour12: false });
+
+const formatRangeS = (startISO) => {
+    const s = new Date(startISO);
+
+    return `${datePart(s)} ${timePart(s)} → `;
+};
+const formatRange = (startISO, endISO) => {
+    const s = new Date(startISO);
+    const e = new Date(endISO);
+
+    const sameDay = s.toDateString() === e.toDateString();
+
+    if (sameDay) {
+        return `${datePart(s)} ${timePart(s)}–${timePart(e)}`;
+    }
+    return `${datePart(s)} ${timePart(s)} → ${datePart(e)} ${timePart(e)}`;
+};
+
 export default function SetContent ({userInfo, onNext, messages, end, start}) {
     const [startTime, setStartTime] = useState(start.split(".")[0]);
     const [endTime, setEndTime] = useState(end.split(".")[0]);
@@ -36,10 +61,10 @@ export default function SetContent ({userInfo, onNext, messages, end, start}) {
         <div className={"AddForm_wrapper"}>
             <p>Please select the scope of content to summarize</p>
             <div>
-                <div>startting point: {startTime}</div>
-                <div>ending point: {endTime}</div>
+                <div style={{margin: "15px 0"}}
+                >{endTime === '' ? formatRangeS(startTime) : formatRange(startTime, endTime)}</div>
             </div>
-            <ChatLogDetail userInfo={userInfo} messages={messages} startTime={startTime} endTime={endTime} onPick={handlePick}/>
+            <ChatLogDetail userInfo={userInfo} messages={messages} startTime={startTime} endTime={endTime} onPick={handlePick} systemOn={false}/>
             <button onClick={() => onNext(startTime, endTime)}>Next</button>
         </div>
     );

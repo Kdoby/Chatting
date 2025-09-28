@@ -72,7 +72,7 @@ export default function AddArchive ({roomId, userInfo, onClose, messages}) {
             <div style={{
                 position: "relative", border: "1px solid gray", padding: "10px",
                 borderRadius: "15px", backgroundColor: "white",
-                width: "40%", height: "80%", textAlign: "center",
+                width: "50%", height: "80%", textAlign: "center",
             }}>
                 {/* 닫기 버튼 */}
                 <img

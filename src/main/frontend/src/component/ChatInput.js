@@ -132,10 +132,10 @@ export default function ChatInput ({roomId, stompClient, OpenAddArchive}) {
     }, [files]);
 
     return (
-        <div>
+        <div style={{width: "100%", minWidth: 0}}>
             <div className="previews">
                 {previews.map((p, i) => (
-                    <div key={p.url} className={"filepreview"}>
+                    <div key={p.url} className={"filePreview"}>
                         <img src={p.url} alt={p.name} style={{maxHeight: 120}} />
                         {p.name} ({Math.round(p.size/1024)} KB)
                         <img
@@ -167,19 +167,23 @@ export default function ChatInput ({roomId, stompClient, OpenAddArchive}) {
                        onChange={handleFileChange}
                        multiple
                 />
-                <div>
-                    <label htmlFor={"imageUpload"}>
+                <div style={{display: "flex", flexDirection: "row", alignItems: "center"}}>
+                    <label htmlFor={"imageUpload"} style={{width: "30%", height: "30%", cursor: "pointer"}}>
                         <img src={"images/uploadImg.png"} alt={"이미지 업로드"}
-                             style={{width: "30%", height: "30%"}}
+                             style={{width: "100%", height: "100%"}}
                         />
                     </label>
-                    <img src={"images/uploadArchive.png"}
-                         alt={"아카이브 생성"}
-                         style={{width: "30%", height: "30%"}}
-                         onClick={() => OpenAddArchive()}
-                    />
+                    <div style={{width: "30%", height: "30%", cursor: "pointer"}}>
+                        <img src={"images/uploadArchive.png"}
+                             alt={"아카이브 생성"}
+                             style={{width: "30%", height: "30%"}}
+                             onClick={() => OpenAddArchive()}
+                             style={{width: "100%", height: "100%"}}
+                        />
+                    </div>
                 </div>
-                <button type={"submit"} disabled={isSending || (!input.trim() && files.length === 0)}>전송</button>
+                <button type={"submit"} disabled={isSending || (!input.trim() && files.length === 0)}
+                        style={{cursor: "pointer"}}>전송</button>
             </form>
         </div>
 
