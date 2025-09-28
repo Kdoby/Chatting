@@ -1,4 +1,4 @@
-
+ㅁ
 ## 다마(DAMA)
 
 친구들과의 추억을 보다 특별하게 간직하세요! 
@@ -142,24 +142,7 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 - H2 Database: 2.3.232
 
 ### 환경 설정
-🔗[Spring boot starter](https://start.spring.io)
-
-- Project: Groovy Project
-- Language: Java
-- Spring boot: 3.x.x
-- Group: NotModified
-- Artifact: Chatting
-- Packaging: Jar
-- java: 21
-- Dependencies: Spring Web, Thymeleaf
-
-
-- 파일 다운로드 및 압축 해제
-- IntelliJ에서 해당 파일의 build.gradle 을 Open or import (Open as Project)
-
-
-
-      git clone https://github.com/Kdoby/Chatting.git
+- IntelliJ에서 git 링크 복사 및 프로젝트로 열기
 
       -- frontend --
       npm install http-proxy-middleware --save
