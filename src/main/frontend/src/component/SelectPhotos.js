@@ -1,27 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import api from "../api";
 
-export default function SelectPhotos ({roomId, onNext}) {
-    const [chattingRoomPhotoList, setChattingRoomPhotoList] = useState([]);
-    const [selectedPhotoList, setSelectedPhotoList] = useState([]);
-
-    // 채팅방의 사진 fetch
-    const fetchChattingRoomArchiveList = async() => {
-        try {
-            const res = await api.get("/v1/chat/images/" + roomId);
-
-            setChattingRoomPhotoList(res.data.data);
-            console.log(res.data.data);
-        } catch (err) {
-            console.error("에러", err);
-        }
-    }
-
-    useEffect(() => {
-        if(!roomId) return;
-
-        fetchChattingRoomArchiveList();
-    }, [roomId]);
+export default function SelectPhotos ({roomId, onNext, onClose, selectedPhotoList, chattingRoomPhotoList, setSelectedPhotoList}) {
 
     // 이미지 선택/해제
     const toggleSelect = (idx, path, sendTime) => {
@@ -35,6 +15,10 @@ export default function SelectPhotos ({roomId, onNext}) {
 
     // 이미지 날짜 범위 추출 (채팅 요약 범위에 사용)
     const handleNext = () => {
+        if (selectedPhotoList.length < 1) {
+            alert("업로드할 이미지를 한 개 이상 선택해주세요");
+            return;
+        }
         const sorted = [...selectedPhotoList].sort((a, b) => a.idx - b.idx);
         const startTime = sorted[0].sendTime;
         const endTime = sorted[sorted.length - 1].sendTime;
@@ -46,7 +30,7 @@ export default function SelectPhotos ({roomId, onNext}) {
         <div className={"AddForm_wrapper"}>
             <p>select photos</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "10px", margin: "10px", overflowY: "scroll"}}>
+                gap: "10px", margin: "10px", overflowY: "scroll", height: "83%"}}>
 
                 {chattingRoomPhotoList ? (
                     <>
@@ -85,7 +69,7 @@ export default function SelectPhotos ({roomId, onNext}) {
                     </>
                 ) : ( <div>not exist</div> )}
             </div>
-            <button onClick={handleNext}>Next</button>
+            <button style={{position: "absolute", bottom: "30px"}} onClick={handleNext}>Next</button>
         </div>
     );
 }

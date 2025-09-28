@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export default function SelectThumb ({thumbnail, onNext, photos}) {
+export default function SelectThumb ({thumbnail, onNext, photos, onPrev}) {
     const [thumb, setThumb] = useState(thumbnail); // idx
 
     const toggleSelect = (idx) => {
@@ -31,7 +31,7 @@ export default function SelectThumb ({thumbnail, onNext, photos}) {
                             <div key={e.idx}
                                  style={{ aspectRatio: "1/1", border: "1px solid black", display: "flex",
                                      justifyContent: "center", alignItems: "center", textAlign: "center",
-                                     cursor:"pointer", position: "relative"
+                                     cursor:"pointer", position: "relative", height: "83%"
                                  }}
                                  onClick={() => toggleSelect(e.idx)}>
                                 <img src={`http://localhost:8080${e.path}`}
@@ -64,7 +64,10 @@ export default function SelectThumb ({thumbnail, onNext, photos}) {
 
 
             </div>
-            <button onClick={() => handleNext()}>Next</button>
+            <div style={{position: "absolute", bottom: "30px"}}>
+                <button onClick={onPrev}>Prev</button>
+                <button onClick={() => handleNext()}>Next</button>
+            </div>
         </div>
     );
 }
