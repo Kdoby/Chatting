@@ -42,30 +42,34 @@ export default function FriendList({ userInfo }){
 
     return (
     <>
-        <div style={{ height: "30px", margin:"10px 0",
+        <div style={{ height: "30px", margin:"10px 0", padding:"5px 10px",
                       display: "grid", gridTemplateColumns: "4fr 1fr",
                       backgroundColor: "white" }}>
-            <div>
-                <input value={searchInput} placeholder="친구 요청"
-                       onChange={(e) => setSearchInput(e.target.value)}
-                       style={{ width: "80%", padding: "5px 10px", borderWidth: "0", outline: "none" }}
-                />
-            </div>
-            <button onClick={() => handleSearch()}>send</button>
+            <input value={searchInput} placeholder="친구 요청"
+                   onChange={(e) => setSearchInput(e.target.value)}
+                   style={{ width: "100%", borderWidth: "0", outline: "none", }}
+            />
+            <button onClick={() => handleSearch()}
+                    style={{ border:"1px solid gray", borderRadius:"7px", background:"white",
+                             boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
+            >send</button>
         </div>
 
         {friendsList ? (
-            <div>
+            <div style={{ overflowY: "auto" }}>
             {Array.isArray(friendsList) && friendsList.map((e) => (
+            <>
                 <div key={e.friendId}
                      className={"ChattingRoom_wrapper"}>
-                    <div className={"ChattingRoom_img"}>
+                    <div className={"ChattingRoom_img"} style={{ background: "#F8FAFC" }}></div>
 
-                    </div>
                     <div className={"ChattingRoom_info"}>
-                        <div>{e.friendNickname}</div>
+                        <div style={{margin:"auto 0"}}>{e.friendNickname}</div>
                     </div>
                 </div>
+
+                <hr style={{ margin:"2px auto", width:"95%", color:"black" }}/>
+            </>
             ))}
 
             </div>

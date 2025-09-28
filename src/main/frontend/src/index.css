@@ -2,6 +2,25 @@
 
 }
 
+/* 스크롤바 설정*/
+*::-webkit-scrollbar{
+  width: 10px;
+}
+
+/* 스크롤바 막대 설정*/
+*::-webkit-scrollbar-thumb{
+  background-color: rgba(255,255,255,1);
+  /* 스크롤바 둥글게 설정    */
+  border-radius: 3px;
+  border: 1px solid rgba(154, 166, 178, .5);
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
+/* 스크롤바 뒷 배경 설정*/
+*::-webkit-scrollbar-track{
+  background-color: transparent;
+}
+
 body {
     height: 100%;
   margin: 0;
@@ -10,6 +29,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    overflow: hidden;
+    height: 100%;
+    background-color: #F8FAFC;
 }
 
 code {

@@ -1,4 +1,12 @@
-import getGridStyle from "./ChatBubble";
+import {useState} from "react";
+
+const getGridStyle = (count) => {
+    if (count === 1)
+        return {display: "grid", gridTemplateColumns: "1fr"};
+    if (count === 2)
+        return {display: "grid", gridTemplateColumns: "1fr 1fr"};
+    return {display: "grid", gridTemplateColumns: "1fr 1fr 1fr"};
+};
 
 export default function MyChatBubble ({message, formatTime}) {
     if (!message) return null;

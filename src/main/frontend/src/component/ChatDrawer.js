@@ -49,12 +49,12 @@ export default function ChatDrawer ({ roomId, onClose }) {
         <div className="AddChattingRoom">
             <div style={{
                 position: "relative", border: "1px solid gray", padding: "10px",
-                borderRadius: "15px", backgroundColor: "white",
+                borderRadius: "15px", backgroundColor: "#F8FAFC",
                 width: "40%", height: "80%", textAlign: "center",
             }}>
                 {/* 닫기 버튼 */}
                 <img
-                    src="images/close.png"
+                    src="images/close2.png"
                     onClick={() => onClose(false)}
                     style={{
                         width: "20px", position: "absolute", top: "20px", right: "28px",
@@ -72,16 +72,18 @@ export default function ChatDrawer ({ roomId, onClose }) {
                     <div style={{ textAlign: "center", fontSize: "25px", fontWeight: "bold", marginBottom:"20px" }}>Archive</div>
 
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-                                  gap: "10px", margin: "10px", overflowY: "scroll", }}>
+                                  gap: "10px", margin: "10px", overflowY: "auto", }}>
                         {chattingRoomArchiveList ? (
                             <>
                             {Array.isArray(chattingRoomArchiveList) && chattingRoomArchiveList.map((e) => (
                                 <div key={e.archiveId}
-                                     style={{ border: "1px solid black", textAlign: "center", padding: "13px", textAlign:"left", }}
+                                     style={{ border: "1px solid gray", borderRadius:"15px", overflow: "hidden", backgroundColor: "white",
+                                              textAlign: "center", padding: "10px", textAlign:"left", boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                                      onClick={() => setSelectedArchive(e)}
                                 >
-                                    <div style={{ aspectRatio: "1/1", border: "1px solid black", display: "flex",
-                                                  justifyContent: "center", alignItems: "center", textAlign: "center",
+                                    <div style={{ aspectRatio: "1/1", border: "0.5px solid gray", borderRadius:"15px", overflow: "hidden",
+                                                  display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center",
+                                                  boxShadow: "0 0 4px rgba(0,0,0,0.2)",
                                          }}
                                          onClick={() => {
                                             setArchiveId(e.archiveId);
@@ -92,8 +94,8 @@ export default function ChatDrawer ({ roomId, onClose }) {
                                              style={{ width:"100%", height:"100%", objectFit: "contain", }} />
                                     </div>
                                     <div style={{ marginTop: "5px" }}>
-                                        <div style={{ fontSize: "15px", display: "flex", alignItems: "center", position: "relative" }}>
-                                            <span>{e.createdAt}</span>
+                                        <div style={{ fontSize: "14px", display: "flex", alignItems: "center", position: "relative" }}>
+                                            <span style={{ fontSize: "13px", color:"gray", }}>{new Date(e.createdAt).toLocaleDateString()}</span>
 
                                             <div style={{ marginLeft: "auto", position: "relative" }}>
                                                 <span style={{ cursor: "pointer" }}>set</span>
@@ -101,7 +103,6 @@ export default function ChatDrawer ({ roomId, onClose }) {
                                                 <div className="ChatDrawerDropdownMenu_wrapper">
                                                     <ul>
                                                         <li onClick={() => setModalType(1)}>수정</li>
-                                                        <li onClick={() => setModalType(2)}>삭제</li>
                                                     </ul>
                                                 </div>
                                             </div>

@@ -38,6 +38,10 @@ export default function HomePage({ type }) {
 
     // 채팅방 삭제
     const deleteChattingRoom = async() => {
+        if( !window.confirm("채팅방을 나가시겠습니까?") ){
+            return;
+        }
+
         try {
             const res = await api.delete("/v1/chatroom/" + roomId);
 
@@ -56,7 +60,7 @@ export default function HomePage({ type }) {
 
     return(
         <div style={{ display: "flex", width: "100%", height: "100vh" }}>
-            <LeftHeader leftType={leftType} setLeftType={setLeftType} userInfo={userInfo} setRoomId={setRoomId} fetchMyArchive={fetchMyArchive} />
+            <LeftHeader leftType={leftType} setLeftType={setLeftType} userInfo={userInfo} setRoomId={setRoomId} fetchMyArchive={fetchMyArchive} roomId={roomId} />
 
             { leftType === "archive" ? <Archive className={"chatting_wrapper"} myArchiveList={myArchiveList} /> : <></>}
             { leftType === "chatting" ? <ChattingRoomView userInfo={userInfo} roomId={roomId} deleteChattingRoom={deleteChattingRoom} /> : <></>}

@@ -1,8 +1,16 @@
 import React, {useState} from "react";
 
-export default function SummaryResult ({summary, onNext, selectedPhotos, thumbnail}) {
+export default function SummaryResult ({summary, onNext, selectedPhotos, thumbnail, onPrev}) {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState(summary);
+
+    const handleNext = () => {
+        if (!title) {
+            alert("아카이브 제목을 입력해주세요.");
+            return;
+        }
+        onNext(title, content);
+    }
     return (
         <div className={"AddForm_wrapper"}>
             <p>Archive has been created</p>
@@ -39,12 +47,13 @@ export default function SummaryResult ({summary, onNext, selectedPhotos, thumbna
                     ) : ( <div>not exist</div> )}
 
                 </div>
-                <div>
-                    <input type={"text"} value={content} className={"AddArchive_text"}
-                           onChange={(e) => setContent(e.target.value)}></input>
-                </div>
             </div>
-            <button onClick={() => onNext(title, content)}>Next</button>
+            <textarea value={content} className={"AddArchive_text"}
+                   onChange={(e) => setContent(e.target.value)}></textarea>
+            <div style={{position: "absolute", bottom: "30px"}}>
+                <button onClick={onPrev}>Prev</button>
+                <button onClick={() => handleNext()}>Next</button>
+            </div>
         </div>
     );
 }
