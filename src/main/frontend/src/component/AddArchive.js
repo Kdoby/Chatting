@@ -12,9 +12,11 @@ export default function AddArchive ({roomId, userInfo, onClose, messages}) {
     const [start, setStart] = useState('');
     const [end, setEnd] = useState('');
     const [summary, setSummary] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSummary = async (start, end) => {
         console.log("AI요약 범위 전달: ", start, end);
+        setLoading(true);
         try {
             const res = await api.post(`/v1/summary/${roomId}`,
                 { start, end });
@@ -23,6 +25,8 @@ export default function AddArchive ({roomId, userInfo, onClose, messages}) {
             setStep(3);
         } catch (err) {
             console.error("ai 요약 에러:", err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -94,7 +98,7 @@ export default function AddArchive ({roomId, userInfo, onClose, messages}) {
                     <div style={{fontSize: "xx-large", fontWeight: "500"}}>Create archive</div>
                     {step === 0 && <SelectPhotos roomId={roomId} onNext={handlePhotoNext} onClose={onClose}/> }
                     {step === 1 &&  <SelectThumb onNext={handleThumbNext} photos={selectedPhotos} thumbnail={thumbnail}/> }
-                    {step === 2 && <SetContent userInfo={userInfo} messages={messages} start={start} end={end} onNext={handleContentNext}/>}
+                    {step === 2 && <SetContent userInfo={userInfo} messages={messages} start={start} end={end} onNext={handleContentNext} loading={loading}/>}
                     {step === 3 && <SummaryResult summary={summary} selectedPhotos={selectedPhotos} thumbnail={thumbnail} onNext={handleResultNext}/>}
                 </div>
             </div>
