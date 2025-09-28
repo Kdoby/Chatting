@@ -261,3 +261,11 @@ div:hover > .ChatDrawerDropdownMenu_wrapper {
     padding: 6px 10px;
     border-radius: 8px;
 }
+
+/* 최신 메시지로 이동 버튼 */
+.scroll-btn {
+    position: absolute;
+    padding: 8px 12px;
+    border-radius: 8px;
+
+}
