@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+// This file is adapted from https://github.com/prgrms-web-devcourse/Team-DarkNight-Kkini-BE.git
+// Licensed under MIT License
 
 @Component
 @RequiredArgsConstructor
