@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export default function SummaryResult ({summary, onNext, selectedPhotos, thumbnail}) {
+export default function SummaryResult ({summary, onNext, selectedPhotos, thumbnail, onPrev}) {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState(summary);
 
@@ -50,7 +50,10 @@ export default function SummaryResult ({summary, onNext, selectedPhotos, thumbna
             </div>
             <textarea value={content} className={"AddArchive_text"}
                    onChange={(e) => setContent(e.target.value)}></textarea>
-            <button onClick={() => handleNext()}>Next</button>
+            <div style={{position: "absolute", bottom: "30px"}}>
+                <button onClick={onPrev}>Prev</button>
+                <button onClick={() => handleNext()}>Next</button>
+            </div>
         </div>
     );
 }

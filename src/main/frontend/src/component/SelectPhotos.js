@@ -1,33 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import api from "../api";
 
-export default function SelectPhotos ({roomId, onNext, onClose}) {
-    const [chattingRoomPhotoList, setChattingRoomPhotoList] = useState([]);
-    const [selectedPhotoList, setSelectedPhotoList] = useState([]);
-    const alertedRef = useRef(false); // alert 2번 뜨는 문제 방지
-
-    // 채팅방의 사진 fetch
-    const fetchChattingRoomArchiveList = async() => {
-        try {
-            const res = await api.get("/v1/chat/images/" + roomId);
-            setChattingRoomPhotoList(res.data.data);
-            if (!alertedRef.current && (res.data.data.length < 1)) {
-                alertedRef.current = true;
-                alert("아카이브를 등록하려면 먼저 채팅에서 이미지를 전송해주세요.");
-                onClose();
-                return;
-            }
-            console.log(res.data.data);
-        } catch (err) {
-            console.error("에러", err);
-        }
-    }
-
-    useEffect(() => {
-        if(!roomId) return;
-        alertedRef.current = false;
-        fetchChattingRoomArchiveList();
-    }, [roomId]);
+export default function SelectPhotos ({roomId, onNext, onClose, selectedPhotoList, chattingRoomPhotoList, setSelectedPhotoList}) {
 
     // 이미지 선택/해제
     const toggleSelect = (idx, path, sendTime) => {
@@ -56,7 +30,7 @@ export default function SelectPhotos ({roomId, onNext, onClose}) {
         <div className={"AddForm_wrapper"}>
             <p>select photos</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "10px", margin: "10px", overflowY: "scroll"}}>
+                gap: "10px", margin: "10px", overflowY: "scroll", height: "83%"}}>
 
                 {chattingRoomPhotoList ? (
                     <>
@@ -95,7 +69,7 @@ export default function SelectPhotos ({roomId, onNext, onClose}) {
                     </>
                 ) : ( <div>not exist</div> )}
             </div>
-            <button onClick={handleNext}>Next</button>
+            <button style={{position: "absolute", bottom: "30px"}} onClick={handleNext}>Next</button>
         </div>
     );
 }

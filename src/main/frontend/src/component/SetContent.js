@@ -30,7 +30,7 @@ const formatRange = (startISO, endISO) => {
     return `${datePart(s)} ${timePart(s)} → ${datePart(e)} ${timePart(e)}`;
 };
 
-export default function SetContent ({userInfo, onNext, messages, end, start, loading}) {
+export default function SetContent ({userInfo, onNext, messages, end, start, loading, onPrev}) {
     const [startTime, setStartTime] = useState(start.split(".")[0]);
     const [endTime, setEndTime] = useState(end.split(".")[0]);
 
@@ -65,7 +65,10 @@ export default function SetContent ({userInfo, onNext, messages, end, start, loa
                 >{endTime === '' ? formatRangeS(startTime) : formatRange(startTime, endTime)}</div>
             </div>
             <ChatLogDetail userInfo={userInfo} messages={messages} startTime={startTime} endTime={endTime} onPick={handlePick} systemOn={false}/>
-            <button onClick={() => onNext(startTime, endTime)} disabled={loading || !startTime || !endTime}>Next</button>
+            <div style={{position: "absolute", bottom: "30px"}}>
+                <button onClick={onPrev}>Prev</button>
+                <button onClick={() => onNext(startTime, endTime)} disabled={loading || !startTime || !endTime}>Next</button>
+            </div>
             {loading && (
                 <div className="loaderOverlay" aria-live="polite" role="status">
                     <div className="loaderText">요약 생성 중...</div>

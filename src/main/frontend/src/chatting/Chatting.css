@@ -209,7 +209,7 @@ div:hover > .ChatDrawerDropdownMenu_wrapper {
 .AddForm_wrapper {
     display: flex;
     flex-direction: column;
-    height: 93%;
+    height: 86%;
     padding: 0 30px;
 }
 
