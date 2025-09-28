@@ -142,6 +142,7 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 
 ### 환경 설정
 - IntelliJ에서 https://github.com/Kdoby/Chatting.git 레포지토리 복제 및 프로젝트로 열기
+- IntelliJ > File > Settings > Build, Execution, Deployment > Build Tools > Gradle > Build and run using, Run tests using IntelliJ IDEA로 변경 후, build.gradle reload
 
 
       -- db --
@@ -154,6 +155,7 @@ Spring boot / React / FastAPI 를 기반으로 개발된
       npm install http-proxy-middleware --save
       npm install axios
       npm install react-router-dom
+      npm i react-virtuoso
       -- run (#port:3000)  --
       npm start
     
