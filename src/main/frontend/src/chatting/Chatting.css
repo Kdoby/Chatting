@@ -210,6 +210,7 @@ div:hover > .ChatDrawerDropdownMenu_wrapper {
     display: flex;
     flex-direction: column;
     height: 93%;
+    padding: 0 30px;
 }
 
 .AddArchive_title {
@@ -224,7 +225,7 @@ div:hover > .ChatDrawerDropdownMenu_wrapper {
     border: none;
     height: 100%;
     width: 80%;
-    margin: 20px;
+    margin: auto;
     overflow-y: auto;
 }
 .SystemChatBubble_wrapper {
