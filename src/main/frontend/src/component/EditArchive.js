@@ -106,7 +106,7 @@ export default function EditArchive ({ onClose, selectedArchive, setSelectedArch
                         <br/>
                         <button style={{ margin: "auto 0 0", padding:"8px", border:"1px solid black",
                                          borderRadius: "8px", backgroundColor:"#D9EAFD",
-                                         boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
+                                         boxShadow: "0 0 4px rgba(0,0,0,0.2)", cursor:"pointer", }}
                                 onClick={() => EditArchive()}
                         >
                             Edit

@@ -22,7 +22,7 @@ export default function Archive({ myArchiveList }) {
                             <div key={e.archiveId}
                                  style={{ border: "1px solid gray", borderRadius:"15px", background:"white",
                                           textAlign: "center", padding: "13px", textAlign:"left",
-                                          boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
+                                          boxShadow: "0 0 4px rgba(0,0,0,0.2)", cursor:"pointer", }}
                                  onClick={() => {
                                     setSelectedArchiveId(e.archiveId);
                                     setShowArchiveDetail(true);

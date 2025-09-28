@@ -51,7 +51,7 @@ export default function FriendList({ userInfo }){
             />
             <button onClick={() => handleSearch()}
                     style={{ border:"1px solid gray", borderRadius:"7px", background:"white",
-                             boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
+                             boxShadow: "0 0 4px rgba(0,0,0,0.2)", cursor:"pointer",  }}
             >send</button>
         </div>
 

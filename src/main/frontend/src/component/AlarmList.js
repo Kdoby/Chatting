@@ -44,7 +44,8 @@ export default function FriendList(){
                             <br />
                             <span>
                                 <button onClick={() => approveFriendRequest(e.friendshipId)}
-                                        style={{ padding:"3px 8px", border:"1px solid gray", borderRadius:"5px", backgroundColor: "white" }}
+                                        style={{ padding:"3px 8px", border:"1px solid gray", borderRadius:"5px",
+                                                 backgroundColor: "white", cursor:"pointer", }}
                                 >
                                     수락
                                 </button>
