@@ -142,25 +142,29 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 - H2 Database: 2.3.232
 
 ### 환경 설정
-- IntelliJ에서 git 링크 복사 및 프로젝트로 열기
+- IntelliJ에서 https://github.com/Kdoby/Chatting.git 레포지토리 복제 및 프로젝트로 열기
 
+
+      -- db --
+      1. h2.bat 파일 실행 -> 
+      2. jdbc:h2:~/Chatting 로 connect
+      3. sql/init.sql 파일 ctrl+c, ctrl+v
+  
       -- frontend --
+      cd src/main/frontend
       npm install http-proxy-middleware --save
       npm install axios
       npm install react-router-dom
       -- run (#port:3000)  --
-      cd src/main/frontend
       npm start
     
       -- backend --
-      application.properties 파일에 아래 항목 추가 
-          jwt.secret={your_secret_key}
+      src/main/resources/application.properties 파일에 아래 항목 추가 
+          jwt.secret=[your_secret_key]
           file.path=uploads/
       -- run (#port:8080) --
-      1. h2.bat 파일 실행 -> 
-      2. jdbc:h2:~/Chatting 로 connect
-      3. init.sql 파일 ctrl+c, ctrl+v
-      4. IntelliJ에서 ChattingApplication 실행
+      IntelliJ에서 src/main/java/ChattingApplication 실행
+      localhost:3000 새로고침
   
 
 ### 🔗 [FastAPI 서버 환경 설정](https://github.com/Kdoby/Summarization_AI.git)
