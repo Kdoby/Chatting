@@ -159,9 +159,11 @@ Spring boot / React / FastAPI 를 기반으로 개발된
       npm start
     
       -- backend --
-      src/main/resources/application.properties 파일에 아래 항목 추가 
+      1. src/main/resources/application.properties 파일에 아래 항목 추가 
           jwt.secret=[your_secret_key]
           file.path=uploads/
+      2. http://localhost:3000/login -> SIGN-UP -> username=SYSTEM, PASSWORD=[your_password], nickname=system
+         -> 임의의 시스템 유저 생성
       -- run (#port:8080) --
       IntelliJ에서 src/main/java/ChattingApplication 실행
       localhost:3000 새로고침
