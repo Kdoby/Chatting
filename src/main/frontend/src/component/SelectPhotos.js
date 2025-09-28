@@ -30,15 +30,16 @@ export default function SelectPhotos ({roomId, onNext, onClose, selectedPhotoLis
         <div className={"AddForm_wrapper"}>
             <p>select photos</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "10px", margin: "10px", overflowY: "scroll", height: "83%"}}>
+                gap: "10px", margin: "10px", overflowY: "auto",}}>
 
                 {chattingRoomPhotoList ? (
                     <>
                         {Array.isArray(chattingRoomPhotoList) && chattingRoomPhotoList.map((e) => (
                             <div key={e.imageId}
-                                 style={{ aspectRatio: "1/1", border: "1px solid black", display: "flex",
+                                 style={{ aspectRatio: "1/1", border: "1px solid gray", display: "flex",
                                      justifyContent: "center", alignItems: "center", textAlign: "center",
-                                     cursor:"pointer", position: "relative", minWidth: 0, // grid 아이템이 줄어들 수 있도록
+                                     cursor:"pointer", position: "relative", minWidth: 0,
+                                     borderRadius:"15px",
                                  }}
                                  onClick={() => toggleSelect(e.imageId, e.imagePath, e.sendTime)}>
                                 <img src={`http://localhost:8080${e.imagePath}`}
@@ -69,7 +70,9 @@ export default function SelectPhotos ({roomId, onNext, onClose, selectedPhotoLis
                     </>
                 ) : ( <div>not exist</div> )}
             </div>
-            <button style={{position: "absolute", bottom: "30px"}} onClick={handleNext}>Next</button>
+            <button style={{  width:"100%", margin:"auto", padding:"8px",
+                              background:"white", border:"1px solid gray", borderRadius: "10px"}}
+                    onClick={handleNext}>Next</button>
         </div>
     );
 }

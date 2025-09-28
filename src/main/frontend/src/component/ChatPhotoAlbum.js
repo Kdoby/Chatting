@@ -58,7 +58,7 @@ export default function ChatPhotoAlbum ({ roomId, onClose }) {
                             <>
                             {Array.isArray(chattingRoomPhotoList) && chattingRoomPhotoList.map((e) => (
                                 <div key={e.imageId}
-                                     style={{ aspectRatio: "1/1", border: "1px solid gray", borderRadius:"15px", overflow: "hidden",
+                                     style={{ aspectRatio: "1/1", border: "1px solid gray", borderRadius:"15px",
                                               display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center",
                                               backgroundColor:"white", boxShadow: "0 0 4px rgba(0,0,0,0.2)", cursor:"pointer",
                                      }}

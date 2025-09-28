@@ -82,7 +82,7 @@ export default function ChatDrawer ({ roomId, onClose }) {
                                               cursor:"pointer", }}
                                      onClick={() => setSelectedArchive(e)}
                                 >
-                                    <div style={{ aspectRatio: "1/1", border: "0.5px solid gray", borderRadius:"15px", overflow: "hidden",
+                                    <div style={{ aspectRatio: "1/1", border: "0.5px solid gray", borderRadius:"15px",
                                                   display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center",
                                                   boxShadow: "0 0 4px rgba(0,0,0,0.2)",
                                          }}

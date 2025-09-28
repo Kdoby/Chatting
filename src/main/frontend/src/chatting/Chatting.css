@@ -208,8 +208,8 @@ div:hover > .ChatDrawerDropdownMenu_wrapper {
 .AddForm_wrapper {
     display: flex;
     flex-direction: column;
-    height: 86%;
-    padding: 0 30px;
+    height: 93%;
+    padding: 0 10px;
 }
 
 .AddArchive_title {

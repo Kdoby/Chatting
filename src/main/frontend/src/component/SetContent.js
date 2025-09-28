@@ -59,15 +59,20 @@ export default function SetContent ({userInfo, onNext, messages, end, start, loa
     }
     return (
         <div className={"AddForm_wrapper"}>
-            <p>Please select the scope of content to summarize</p>
+            <p style={{ margin: "10px 0 0", }}>Please select the scope of content to summarize</p>
             <div>
-                <div style={{margin: "15px 0"}}
+                <div style={{ margin: "10px 0", fontWeight:"bold", }}
                 >{endTime === '' ? formatRangeS(startTime) : formatRange(startTime, endTime)}</div>
             </div>
             <ChatLogDetail userInfo={userInfo} messages={messages} startTime={startTime} endTime={endTime} onPick={handlePick} systemOn={false}/>
-            <div style={{position: "absolute", bottom: "30px"}}>
-                <button onClick={onPrev}>Prev</button>
-                <button onClick={() => onNext(startTime, endTime)} disabled={loading || !startTime || !endTime}>Next</button>
+
+            <div style={{display: "grid", gridTemplateColumns:"1fr 1fr", gap:"10px"}}>
+                <button style={{  width:"100%", margin:"auto", padding:"8px",
+                                  background:"white", border:"1px solid gray", borderRadius: "10px"}}
+                        onClick={onPrev}>Prev</button>
+                <button style={{  width:"100%", margin:"auto", padding:"8px",
+                                  background:"white", border:"1px solid gray", borderRadius: "10px"}}
+                        onClick={() => onNext(startTime, endTime)} disabled={loading || !startTime || !endTime}>Next</button>
             </div>
             {loading && (
                 <div className="loaderOverlay" aria-live="polite" role="status">
