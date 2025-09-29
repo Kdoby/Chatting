@@ -59,7 +59,8 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 ### 채팅방 생성 / 채팅
 ![Image](https://github.com/user-attachments/assets/de3c8294-0d3b-4a4f-a17b-c464fc5ca3be)
 ### 아카이브 생성
-![Image](https://github.com/user-attachments/assets/41e5807a-26bd-47c1-b768-058666516289)
+![Image](https://github.com/user-attachments/assets/a9fd3fb1-0a00-48a9-a079-b231ac9df154)
+
 
 <br>
 
