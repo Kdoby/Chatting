@@ -1,4 +1,5 @@
-import {useEffect, useRef} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
+import { Virtuoso } from "react-virtuoso";
 import MyChatBubble from "./MyChatBubble";
 import ChatBubble from "./ChatBubble";
 import SystemChatBubble from "./SystemChatBubble";
@@ -14,43 +15,77 @@ const formatTime = (t) => {
 }
 
 export default function ChatLogDetail ({ userInfo, messages, endTime, startTime, onPick, systemOn}) {
-    const bottomRef = useRef(null);
-    const msgRefs = useRef({}); // messageId(or sendTime) → DOM node
+    const virtuosoRef = useRef(null);
+    const [atBottom, setAtBottom] = useState(true);
 
-    useEffect(() => { // 새로운 메시지 추가되면 맨 아래로
-        bottomRef.current?.scrollIntoView({behavior: 'smooth', block: 'end'});
-    }, [messages.length]);
+    // systemOn이 false면 시스템 메세지 걸러내기
+    const visibleMessages = useMemo(() => {
+        if(systemOn) return messages || [];
+        return (messages || []).filter(m => m?.senderNickname !== "System Admin");
+    }, [messages, systemOn]);
 
+    // sendTime으로 idx 매핑 => 특정 메세지 위치로 이동
+    const idxBySendTime = useMemo(() => {
+        const map = new Map();
+        visibleMessages.forEach((m, i) => m?.sendTime && map.set(m.sendTime, i));
+        return map;
+    }, [visibleMessages]);
+
+
+    // startTime에 대한 위치로 스크롤
     useEffect(() => {
-        console.log("startTime: ", startTime);
-        if (startTime && msgRefs.current[startTime]) {
-            msgRefs.current[startTime].scrollIntoView({
-                behavior: "smooth",
-                block: "center", // 중앙에 오도록
+        if (!startTime || !virtuosoRef.current) return;
+        const idx = idxBySendTime.get(startTime);
+        if (idx != null) {
+            virtuosoRef.current.scrollToIndex({
+                index: idx,
+                align: "center",
+                behavior:"smooth",
             });
         }
-    }, [startTime]);
-    return (
-        <div style={{ overflowY: "auto", backgroundColor: "#BCCCDC"}}>
-            {messages?.map((m, idx) => {
-                if (!m) return null; // m이 undefined인 경우 방어
-                return (
-                    <div key={m.chatId} ref={(el) => {
-                        if (el) msgRefs.current[m.sendTime] = el;
-                    }} onClick={() => onPick(m.sendTime)}
-                    >
-                        {m?.senderNickname === "system" ? (
-                            systemOn && <SystemChatBubble message={m}/>
-                        ) : m?.senderNickname === userInfo?.nickname ? (
-                            <MyChatBubble message={m} formatTime={formatTime}/>
-                        ) : (
-                            <ChatBubble message={m} formatTime={formatTime}/>
-                        )}
+    }, [startTime, idxBySendTime]);
 
-                    </div>
-                );
-            })}
-            <div ref={bottomRef}/>
+    return (
+        <div style={{
+            position: "relative",
+            height: "100%",
+            overflowY: "hidden", // Virtuoso 자체 스크롤 사용
+            backgroundColor: "#BCCCDC"
+        }}>
+            <Virtuoso
+                ref={virtuosoRef}
+                data={visibleMessages}
+                style={{height: "100%"}}
+                followOutput="auto" // 스크롤 바닥으로 유지
+                computeItemKey={(index, m) => m?.chatId ?? `${m?.sendTime ?? "unknown"}-${index}`}
+                itemContent={(index, m) => {
+                    if (!m) return null; // m이 undefined인 경우 방어
+
+                    const isSystem = (m?.senderNickname === "system" || m?.senderNickname === "System Admin");
+                    const isMe = m?.senderNickname === userInfo?.nickname;
+
+                    if (isSystem) {
+                        return <div onClick={() => onPick(m.sendTime)}>
+                                    <SystemChatBubble message={m}/>
+                                </div>
+                    }
+                    return isMe ? (
+                        <div onClick={() => onPick(m.sendTime)}>
+                            <MyChatBubble message={m} formatTime={formatTime}/>
+                        </div>
+                    ) : (
+                        <div onClick={() => onPick(m.sendTime)}>
+                            <ChatBubble message={m} formatTime={formatTime}/>
+                        </div>
+                    );
+                }}
+                atBottomStateChange={setAtBottom}
+            />
+            {!atBottom && (
+                <button className="scroll-btn" onClick={() => virtuosoRef.current.scrollToIndex({ index: messages.length - 1 })}>
+                    최신 메시지 보기
+                </button>
+            )}
         </div>
     );
 }

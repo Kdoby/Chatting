@@ -30,16 +30,15 @@ export default function SelectPhotos ({roomId, onNext, onClose, selectedPhotoLis
         <div className={"AddForm_wrapper"}>
             <p>select photos</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "10px", margin: "10px", overflowY: "auto",}}>
+                gap: "10px", margin: "10px", overflowY: "scroll", height: "83%"}}>
 
                 {chattingRoomPhotoList ? (
                     <>
                         {Array.isArray(chattingRoomPhotoList) && chattingRoomPhotoList.map((e) => (
                             <div key={e.imageId}
-                                 style={{ aspectRatio: "1/1", border: "1px solid gray", display: "flex",
+                                 style={{ aspectRatio: "1/1", border: "1px solid black", display: "flex",
                                      justifyContent: "center", alignItems: "center", textAlign: "center",
-                                     cursor:"pointer", position: "relative", minWidth: 0,
-                                     borderRadius:"15px",
+                                     cursor:"pointer", position: "relative", minWidth: 0, // grid 아이템이 줄어들 수 있도록
                                  }}
                                  onClick={() => toggleSelect(e.imageId, e.imagePath, e.sendTime)}>
                                 <img src={`http://localhost:8080${e.imagePath}`}

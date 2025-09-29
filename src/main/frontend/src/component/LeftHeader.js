@@ -16,8 +16,8 @@ export default function LeftHeader({ leftType, setLeftType, userInfo, setRoomId,
 
 
             <div style={{ width:"90%", textAlign:"center", margin:"5px auto 5px", border: "1px solid gray" , borderRadius : "5px", padding:"5px 0" }}>
-                <img src="images/archive.png"
-                     style={{ height:"25px", margin:"auto",cursor:"pointer",  }}
+                <img src={leftType === 'archive' ? "images/archiveT.png" : "images/archiveF.png"}
+                     style={{ height:"25px", margin:"auto", cursor: 'pointer'}}
                      onClick={() => {
                          setLeftType('archive');
                          fetchMyArchive();
@@ -25,15 +25,15 @@ export default function LeftHeader({ leftType, setLeftType, userInfo, setRoomId,
                 />
             </div>
 
-            <div style={{ width:"90%", margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr 1fr", padding:"5px 0", border: "1px solid gray" , borderRadius : "5px" }}>
-                <img src="images/friend.png"
-                     style={{ height:"25px", margin:"auto", cursor:"pointer",  }}
+            <div style={{ width:"90%", margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr 1fr" }}>
+                <img src={friendChatAlarmToggle === 'friend' ? "images/friendT.png" : "images/friendF.png"}
+                     style={{ height:"25px", margin:"auto", cursor: 'pointer'}}
                      onClick={() => setFriendChatAlarmToggle('friend')}/>
-                <img src="images/chat.png"
-                     style={{ height:"25px", margin:"auto", cursor:"pointer",  }}
+                <img src={friendChatAlarmToggle === 'chat' ? "images/chatT.png" : "images/chatF.png"}
+                     style={{ height:"25px", margin:"auto", cursor: 'pointer'}}
                      onClick={() => setFriendChatAlarmToggle('chat')}/>
-                <img src="images/alarm.png"
-                     style={{ height:"25px", margin:"auto", cursor:"pointer",  }}
+                <img src={friendChatAlarmToggle === 'alarm' ? "images/alarmT.png" : "images/alarmF.png"}
+                     style={{ height:"25px", margin:"auto", cursor: 'pointer'}}
                      onClick={() => setFriendChatAlarmToggle('alarm')}/>
             </div>
             <div style={{height:"80vh", display:"flex", flexDirection:"column", }}>
