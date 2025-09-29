@@ -15,7 +15,7 @@ export default function LeftHeader({ leftType, setLeftType, userInfo, setRoomId,
             <HeaderProfile userInfo={userInfo}/>
 
 
-            <div style={{ width:"90%", textAlign:"center", margin:"5px auto 5px", border: "1px solid gray" , borderRadius : "5px", padding:"5px 0" }}>
+            <div style={{ width:"90%", textAlign:"center", margin:"5px auto 5px", borderRadius : "5px", padding:"5px 0" }}>
                 <img src={leftType === 'archive' ? "images/archiveT.png" : "images/archiveF.png"}
                      style={{ height:"25px", margin:"auto", cursor: 'pointer'}}
                      onClick={() => {
