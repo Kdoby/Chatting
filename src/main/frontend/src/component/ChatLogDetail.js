@@ -21,7 +21,7 @@ export default function ChatLogDetail ({ userInfo, messages, endTime, startTime,
     // systemOn이 false면 시스템 메세지 걸러내기
     const visibleMessages = useMemo(() => {
         if(systemOn) return messages || [];
-        return (messages || []).filter(m => m?.senderNickname !== "system");
+        return (messages || []).filter(m => m?.senderNickname !== "System Admin");
     }, [messages, systemOn]);
 
     // sendTime으로 idx 매핑 => 특정 메세지 위치로 이동
@@ -30,6 +30,7 @@ export default function ChatLogDetail ({ userInfo, messages, endTime, startTime,
         visibleMessages.forEach((m, i) => m?.sendTime && map.set(m.sendTime, i));
         return map;
     }, [visibleMessages]);
+
 
     // startTime에 대한 위치로 스크롤
     useEffect(() => {
@@ -49,7 +50,7 @@ export default function ChatLogDetail ({ userInfo, messages, endTime, startTime,
             position: "relative",
             height: "100%",
             overflowY: "hidden", // Virtuoso 자체 스크롤 사용
-            backgroundColor: "#BCCCDC",
+            backgroundColor: "#BCCCDC"
         }}>
             <Virtuoso
                 ref={virtuosoRef}
@@ -60,7 +61,7 @@ export default function ChatLogDetail ({ userInfo, messages, endTime, startTime,
                 itemContent={(index, m) => {
                     if (!m) return null; // m이 undefined인 경우 방어
 
-                    const isSystem = m?.senderNickname === "system";
+                    const isSystem = (m?.senderNickname === "system" || m?.senderNickname === "System Admin");
                     const isMe = m?.senderNickname === userInfo?.nickname;
 
                     if (isSystem) {

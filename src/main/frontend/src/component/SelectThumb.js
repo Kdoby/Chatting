@@ -65,8 +65,8 @@ export default function SelectThumb ({thumbnail, onNext, photos, onPrev}) {
 
             </div>
             <div style={{position: "absolute", bottom: "30px"}}>
-                <button onClick={onPrev}>Prev</button>
-                <button onClick={() => handleNext()}>Next</button>
+                <button className={"button_css"} onClick={onPrev}>Prev</button>
+                <button className={"button_css"} onClick={() => handleNext()}>Next</button>
             </div>
         </div>
     );

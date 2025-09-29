@@ -16,8 +16,8 @@ export default function LeftHeader({ leftType, setLeftType, userInfo, setRoomId,
 
 
             <div style={{ width:"100%", textAlign:"center", margin:"5px 0 15px" }}>
-                <img src="images/archive.png"
-                     style={{ height:"25px", margin:"auto", }}
+                <img src={leftType === 'archive' ? "images/archiveT.png" : "images/archiveF.png"}
+                     style={{ height:"35px", margin:"auto", cursor: 'pointer'}}
                      onClick={() => {
                          setLeftType('archive');
                          fetchMyArchive();
@@ -26,14 +26,14 @@ export default function LeftHeader({ leftType, setLeftType, userInfo, setRoomId,
             </div>
 
             <div style={{ width:"90%", margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr 1fr" }}>
-                <img src="images/friend.png"
-                     style={{ height:"25px", margin:"auto", }}
+                <img src={friendChatAlarmToggle === 'friend' ? "images/friendT.png" : "images/friendF.png"}
+                     style={{ height:"35px", margin:"auto", cursor: 'pointer'}}
                      onClick={() => setFriendChatAlarmToggle('friend')}/>
-                <img src="images/chat.png"
-                     style={{ height:"25px", margin:"auto" }}
+                <img src={friendChatAlarmToggle === 'chat' ? "images/chatT.png" : "images/chatF.png"}
+                     style={{ height:"35px", margin:"auto", cursor: 'pointer'}}
                      onClick={() => setFriendChatAlarmToggle('chat')}/>
-                <img src="images/alarm.png"
-                     style={{ height:"25px", margin:"auto" }}
+                <img src={friendChatAlarmToggle === 'alarm' ? "images/alarmT.png" : "images/alarmF.png"}
+                     style={{ height:"35px", margin:"auto", cursor: 'pointer'}}
                      onClick={() => setFriendChatAlarmToggle('alarm')}/>
             </div>
             <div style={{height:"80vh", display:"flex", flexDirection:"column", }}>

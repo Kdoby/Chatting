@@ -70,8 +70,8 @@ export default function SetContent ({userInfo, onNext, messages, end, start, loa
                                onPick={handlePick} systemOn={false}/>
             </div>
             <div style={{position: "absolute", bottom: "30px"}}>
-                <button onClick={onPrev}>Prev</button>
-                <button onClick={() => onNext(startTime, endTime)} disabled={loading || !startTime || !endTime}>Next</button>
+                <button className={"button_css"} onClick={onPrev}>Prev</button>
+                <button className={"button_css"} onClick={() => onNext(startTime, endTime)} disabled={loading || !startTime || !endTime}>Next</button>
             </div>
             {loading && (
                 <div className="loaderOverlay" aria-live="polite" role="status">

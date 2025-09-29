@@ -69,7 +69,7 @@ export default function SelectPhotos ({roomId, onNext, onClose, selectedPhotoLis
                     </>
                 ) : ( <div>not exist</div> )}
             </div>
-            <button style={{position: "absolute", bottom: "30px"}} onClick={handleNext}>Next</button>
+            <button className={"button_css"} style={{position: "absolute", bottom: "30px"}} onClick={handleNext}>Next</button>
         </div>
     );
 }
