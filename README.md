@@ -52,6 +52,7 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 <br>
 
 ## 데모
+
 ### 회원가입/로그인
 ![Image](https://github.com/user-attachments/assets/e00b5077-c622-4b6c-bf7a-43a7bcfcb03e)
 ### 친구추가
@@ -71,8 +72,8 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 - Huggingface AI 모델 기반 채팅 요약
 - 아카이브에 공유 일기 작성
 
-### <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Warning.png" alt="Warning" width="25" height="25" /> 주의 사항
-- AI 요약 기능은 **영문 대화만 지원** 합니다.
+> ### <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Warning.png" alt="Warning" width="25" height="25" /> 주의 사항
+> - AI 요약 기능은 **영문 대화만 지원** 합니다.
 
 <br>
 
@@ -214,18 +215,6 @@ Spring boot / React / FastAPI 를 기반으로 개발된
 ## ERD
 <img width="1287" height="723" alt="image" src="https://github.com/user-attachments/assets/e6159802-46cd-424a-9ed2-d62d33269962" />
 
-
-<br>
-
-## API 명세서
-
-- [Member API](https://www.notion.so/Member-API-27a6a052f9e1807393aacceae4f18ebe?source=copy_link)
-
-- [Friendship API](https://www.notion.so/Friendship-API-27a6a052f9e18063ada8c94c75640599?source=copy_link)
-
-- [Chat API](https://www.notion.so/Chat-API-27a6a052f9e1805fa4d5dbf6d564c3df?source=copy_link)
-
-- [Archive API](https://www.notion.so/Archive-API-27a6a052f9e1802d9382cc0aaa04df46?source=copy_link)
 
 <br>
 
