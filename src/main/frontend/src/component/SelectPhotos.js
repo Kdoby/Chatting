@@ -36,7 +36,7 @@ export default function SelectPhotos ({roomId, onNext, onClose, selectedPhotoLis
                     <>
                         {Array.isArray(chattingRoomPhotoList) && chattingRoomPhotoList.map((e) => (
                             <div key={e.imageId}
-                                 style={{ aspectRatio: "1/1", border: "1px solid black", display: "flex",
+                                 style={{ aspectRatio: "1/1", border: "1px solid gray", borderRadius:"10px", display: "flex",
                                      justifyContent: "center", alignItems: "center", textAlign: "center",
                                      cursor:"pointer", position: "relative", minWidth: 0, // grid 아이템이 줄어들 수 있도록
                                  }}
