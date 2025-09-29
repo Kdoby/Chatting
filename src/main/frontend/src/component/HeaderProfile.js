@@ -1,9 +1,7 @@
 import Logout from "../login/Logout";
 import "./LeftHeader.css";
 
-import api from '../api';
-
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 export default function HeaderProfile({ userInfo} ) {
     return (

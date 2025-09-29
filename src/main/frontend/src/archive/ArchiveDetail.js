@@ -10,7 +10,7 @@ export default function ArchiveDetail({ onClose, setArchiveId, archiveId }) {
     const [imageList, setImageList] = useState([]);
 
     useEffect(() => {
-        if(!archiveId || archiveId == '') return;
+        if(!archiveId || archiveId === '') return;
 
         console.log(archiveId);
         fetchArchiveDetail();

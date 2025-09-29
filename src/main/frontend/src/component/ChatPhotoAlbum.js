@@ -4,7 +4,6 @@ import api from '../api';
 import React, { useEffect, useState } from "react";
 
 export default function ChatPhotoAlbum ({ roomId, onClose }) {
-    const [imgList, setImgList] = useState([]);
     const [showChatPhotoAlbumDetail, setShowChatPhotoAlbumDetail] = useState(false);
     const [chattingRoomPhotoList, setChattingRoomPhotoList] = useState([]);
     const [selectedImagePath, setSelectedImagePath] = useState('');

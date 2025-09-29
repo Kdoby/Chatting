@@ -1,8 +1,5 @@
 import React, {useState} from "react";
 import {type} from "@testing-library/user-event/dist/type";
-import MyChatBubble from "./MyChatBubble";
-import ChatBubble from "./ChatBubble";
-import formatTime from "./ChatLog";
 import ChatLogDetail from "./ChatLogDetail";
 
 const fmtKR = (d, opts = {}) =>

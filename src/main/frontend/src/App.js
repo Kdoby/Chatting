@@ -1,15 +1,10 @@
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
-import ChattingPage from "./chatting/ChattingPage";
 
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function AppContent() {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const hideMenu = (location.pathname === "/login" || location.pathname === "/Login" || location.pathname === "/signup");
 
     return (
         <div className="App"

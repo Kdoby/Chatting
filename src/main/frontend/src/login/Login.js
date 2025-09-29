@@ -1,6 +1,4 @@
-import { TokenStore as TokenStore } from '../TokenStore';
-
-import styles from './Login.module.css';
+import './Login.module.css';
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -23,7 +21,6 @@ export default function Login() {
                 password: pw
             });
             console.log(res.data);
-            TokenStore.setToken(res.data.accessToken);
 
             console.log("로그인 성공");
             navigate('/');

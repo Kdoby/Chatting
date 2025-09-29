@@ -1,7 +1,5 @@
 import AddChattingRoomMember from "./AddChattingRoomMember";
 
-import api from '../api';
-
 import React, { useState } from "react";
 
 export default function ChatSetting ({ roomId, roomName, participants, memberCount, onClose, deleteChattingRoom, userInfo }) {

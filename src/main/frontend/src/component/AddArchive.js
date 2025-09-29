@@ -60,7 +60,7 @@ export default function AddArchive ({roomId, userInfo, onClose, messages}) {
         try {
             const images = selectedPhotos.map(p => p.idx);
             console.log("roomId: ", roomId, "/ title: ", title, "/ content: ", content, "/ images: ", images, "/ thumbnailImageId: ", thumbnail);
-            const res = await api.post(`/v1/archive`,
+            await api.post(`/v1/archive`,
                 {
                     roomId,
                     title,

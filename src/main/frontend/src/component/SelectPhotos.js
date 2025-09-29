@@ -1,5 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
-import api from "../api";
+import React from "react";
 
 export default function SelectPhotos ({roomId, onNext, onClose, selectedPhotoList, chattingRoomPhotoList, setSelectedPhotoList}) {
 

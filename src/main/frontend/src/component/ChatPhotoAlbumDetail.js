@@ -1,11 +1,9 @@
 import './AddChattingRoom.css';
 import '../chatting/Chatting.css';
 
-import React, { useState } from "react";
+import React from "react";
 
 export default function ChatPhotoAlbumDetail ({ onClose, selectedImagePath }) {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [modalType, setModalType] = useState(null); // 0=닫힘, 1=수정
     console.log(selectedImagePath);
 
     return (

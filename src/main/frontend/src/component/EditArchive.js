@@ -5,8 +5,6 @@ import api from '../api';
 import React, { useState, useEffect } from "react";
 
 export default function EditArchive ({ onClose, selectedArchive, setSelectedArchive, fetchChattingRoomArchiveList }) {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [modalType, setModalType] = useState(null); // 0=닫힘, 1=수정
     const [archiveTitle, setArchiveTitle] = useState('');
     const [archiveContent, setArchiveContent] = useState('');
 
