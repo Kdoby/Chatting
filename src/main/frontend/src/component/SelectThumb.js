@@ -23,19 +23,22 @@ export default function SelectThumb ({thumbnail, onNext, photos, onPrev}) {
         <div className={"AddForm_wrapper"}>
             <p>select thumbnail</p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "10px", margin: "10px", overflowY: "scroll", }}>
+                gap: "10px", margin: "10px", overflowY: "auto", }}>
 
                 {photos ? (
                     <>
                         {Array.isArray(photos) && photos.map((e) => (
                             <div key={e.idx}
-                                 style={{ aspectRatio: "1/1", border: "1px solid black", display: "flex",
+                                 style={{ aspectRatio: "1/1", border: "1px solid gray", display: "flex",
                                      justifyContent: "center", alignItems: "center", textAlign: "center",
-                                     cursor:"pointer", position: "relative", height: "83%"
+                                     cursor:"pointer", position: "relative", borderRadius: "15px"
                                  }}
-                                 onClick={() => toggleSelect(e.idx)}>
+                                 onClick={() => toggleSelect(e.idx)}
+                            >
+
                                 <img src={`http://localhost:8080${e.path}`}
                                      style={{ width:"100%", height:"100%", objectFit: "contain", }} />
+
                                 {thumb === e.idx && (
                                     <div
                                         style={{
@@ -64,9 +67,13 @@ export default function SelectThumb ({thumbnail, onNext, photos, onPrev}) {
 
 
             </div>
-            <div style={{position: "absolute", bottom: "30px"}}>
-                <button className={"button_css"} onClick={onPrev}>Prev</button>
-                <button className={"button_css"} onClick={() => handleNext()}>Next</button>
+            <div style={{display: "grid", gridTemplateColumns:"1fr 1fr", gap:"10px"}}>
+                <button style={{  width:"100%", margin:"auto", padding:"8px",
+                                  background:"white", border:"1px solid gray", borderRadius: "10px"}}
+                        onClick={onPrev}>Prev</button>
+                <button style={{  width:"100%", margin:"auto", padding:"8px",
+                                  background:"white", border:"1px solid gray", borderRadius: "10px"}}
+                        onClick={() => handleNext()}>Next</button>
             </div>
         </div>
     );

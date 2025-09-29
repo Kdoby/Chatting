@@ -1,6 +1,4 @@
-import { TokenStore as TokenStore } from '../TokenStore';
-
-import styles from './Login.module.css';
+import './Login.module.css';
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -23,7 +21,6 @@ export default function Login() {
                 password: pw
             });
             console.log(res.data);
-            TokenStore.setToken(res.data.accessToken);
 
             console.log("로그인 성공");
             navigate('/');
@@ -76,7 +73,7 @@ export default function Login() {
                         <input type="submit"
                                style={{ backgroundColor:"#BCCCDC",
                                         padding:"8px", fontSize:"18px",
-                                        border:"1px solid black" }}
+                                        border:"1px solid black", boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
                                value="LOG-IN"
                         />
                         <div style={{ margin:"10px", textAlign:"center", fontSize:"15px" }}>

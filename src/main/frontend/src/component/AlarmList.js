@@ -1,6 +1,6 @@
 import api from '../api';
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function FriendList(){
     const [alarmList, setAlarmList] = useState([]);
@@ -19,8 +19,10 @@ export default function FriendList(){
     // 친구 요청 수락
     const approveFriendRequest = async (e) => {
         try {
-            const res = await api.post("/v1/friend/" + e);
+            await api.post("/v1/friend/" + e);
+
             alert("친구 요청을 수락하였습니다.");
+
             fetchReceivedFriendRequests();
         } catch (err) {
             console.error("검색 에러:", err);
@@ -32,7 +34,7 @@ export default function FriendList(){
     }, [])
 
     return (
-    <>
+    <div style={{margin:"10px 5px"}}>
     {Array.isArray(alarmList) && alarmList.length > 0 ? (
         <div style={{ overflowY: "auto" }}>
             {alarmList.map((e) => (
@@ -44,7 +46,8 @@ export default function FriendList(){
                             <br />
                             <span>
                                 <button onClick={() => approveFriendRequest(e.friendshipId)}
-                                        style={{ padding:"3px 8px", border:"1px solid gray", borderRadius:"5px", backgroundColor: "white" }}
+                                        style={{ padding:"3px 8px", border:"1px solid gray", borderRadius:"5px",
+                                                 backgroundColor: "white", cursor:"pointer", }}
                                 >
                                     수락
                                 </button>
@@ -60,6 +63,6 @@ export default function FriendList(){
     ) : (
         <div>not exist</div>
     )}
-    </>
+    </div>
     );
 }

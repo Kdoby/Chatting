@@ -7,7 +7,6 @@ import React, { useEffect, useState } from "react";
 export default function AddChattingRoomMember({ onClose, userInfo, participants, roomId }) {
     const [friendsList, setFriendsList] = useState([]);
     const [chattingRoomMemberList, setChattingRoomMemberList] = useState([]);
-    const [roomName, setRoomName] = useState('');
 
     // 친구 리스트 조회
     const fetchFriendList = async () => {
@@ -47,8 +46,6 @@ export default function AddChattingRoomMember({ onClose, userInfo, participants,
         }
 
         const friendIdList = chattingRoomMemberList.map(m => m.friendId);
-
-        console.log(roomName, friendIdList);
         try {
             const res = await api.post("/v1/chatroom/" + roomId, { participantsId: friendIdList });
 

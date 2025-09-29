@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
+
 import api from "../api";
 import {TokenStore} from "../TokenStore";
-import AddArchive from "./AddArchive";
 
 export default function ChatInput ({roomId, stompClient, OpenAddArchive}) {
     const [input, setInput] = useState('');

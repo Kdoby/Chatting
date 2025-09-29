@@ -1,11 +1,8 @@
 import ArchiveDetail from "./ArchiveDetail";
 
-import api from '../api'
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export default function Archive({ myArchiveList }) {
-    const [friendChatToggle, setFriendChatToggle] = useState(true);
     const [showArchiveDetail, setShowArchiveDetail] = useState(false);
     const [SelectedArchiveId, setSelectedArchiveId] = useState('');
 
@@ -21,8 +18,7 @@ export default function Archive({ myArchiveList }) {
                         {myArchiveList.map((e) => (
                             <div key={e.archiveId}
                                  style={{ border: "1px solid gray", borderRadius:"15px", background:"white",
-                                          textAlign: "center", padding: "13px", textAlign:"left",
-                                          boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
+                                          padding: "13px", textAlign:"left", boxShadow: "0 0 4px rgba(0,0,0,0.2)", cursor:"pointer", }}
                                  onClick={() => {
                                     setSelectedArchiveId(e.archiveId);
                                     setShowArchiveDetail(true);

@@ -1,5 +1,3 @@
-import ChatBubble from "./ChatBubble";
-import MyChatBubble from "./MyChatBubble";
 import DropdownMenu from "./DropdownMenu";
 import ChatDrawer from "./ChatDrawer";
 import ChatPhotoAlbum from "./ChatPhotoAlbum";

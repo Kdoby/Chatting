@@ -6,7 +6,6 @@ import React, { useState, useEffect } from "react";
 
 export default function FriendList({ userInfo }){
     const [searchInput, setSearchInput] = useState('');
-    const [results, setResults] = useState([]);
     const [friendsList, setFriendsList] = useState([]);
 
     // 친구 추가 요청 보내기
@@ -15,7 +14,6 @@ export default function FriendList({ userInfo }){
             const res = await api.post("/v1/friend", { addresseeNickname: searchInput });
 
             alert(res.data.data);
-            setResults(res.data);
         } catch (err) {
             alert(err.response.data.message);
             console.error("검색 에러:", err);
@@ -37,6 +35,7 @@ export default function FriendList({ userInfo }){
 
     useEffect(() => {
         if( !userInfo ) { return; }
+
         fetchFriendList();
     }, [userInfo]);
 
@@ -51,7 +50,7 @@ export default function FriendList({ userInfo }){
             />
             <button onClick={() => handleSearch()}
                     style={{ border:"1px solid gray", borderRadius:"7px", background:"white",
-                             boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
+                             boxShadow: "0 0 4px rgba(0,0,0,0.2)", cursor:"pointer",  }}
             >send</button>
         </div>
 

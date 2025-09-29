@@ -9,23 +9,22 @@ import api from '../api';
 import React, { useState, useEffect } from "react";
 
 export default function ChatDrawer ({ roomId, onClose }) {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [modalType, setModalType] = useState(null); // 0=닫힘, 1=수정
     const [chattingRoomArchiveList, setChattingRoomArchiveList] = useState([]);
     const [showArchiveDetail, setShowArchiveDetail] = useState(false);
     const [archiveId, setArchiveId] = useState('');
     const [selectedArchive, setSelectedArchive] = useState([]);
 
-    // 아카이브 삭제 -> 아직 연결 안 함
-    const deleteArchive = async () => {
-        try {
-            const res = await api.get("/v1/friend/list/");
-
-            console.log(res.data.data);
-        } catch (err) {
-            console.error("검색 에러:", err);
-        }
-    };
+// 아카이브 삭제 -> 아직 연결 안 함
+//    const deleteArchive = async () => {
+//        try {
+//            const res = await api.get("/v1/friend/list/");
+//
+//            console.log(res.data.data);
+//        } catch (err) {
+//            console.error("검색 에러:", err);
+//        }
+//    };
 
     // 채팅방의 아카이브 fetch
     const fetchChattingRoomArchiveList = async() => {
@@ -78,10 +77,11 @@ export default function ChatDrawer ({ roomId, onClose }) {
                             {Array.isArray(chattingRoomArchiveList) && chattingRoomArchiveList.map((e) => (
                                 <div key={e.archiveId}
                                      style={{ border: "1px solid gray", borderRadius:"15px", overflow: "hidden", backgroundColor: "white",
-                                              textAlign: "center", padding: "10px", textAlign:"left", boxShadow: "0 0 4px rgba(0,0,0,0.2)", }}
+                                              padding: "10px", textAlign:"left", boxShadow: "0 0 4px rgba(0,0,0,0.2)",
+                                              cursor:"pointer", }}
                                      onClick={() => setSelectedArchive(e)}
                                 >
-                                    <div style={{ aspectRatio: "1/1", border: "0.5px solid gray", borderRadius:"15px", overflow: "hidden",
+                                    <div style={{ aspectRatio: "1/1", border: "0.5px solid gray", borderRadius:"15px",
                                                   display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center",
                                                   boxShadow: "0 0 4px rgba(0,0,0,0.2)",
                                          }}

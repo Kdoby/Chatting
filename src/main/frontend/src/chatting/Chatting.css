@@ -196,7 +196,6 @@ div:hover > .ChatDrawerDropdownMenu_wrapper {
 .previews {
     display: flex;
     flex-direction: row;
-    gap: 8px;
     overflow-x: auto;      /* 가로 스크롤 허용 */
     overflow-y: hidden;
     width: 100%;           /* 부모 기준으로 폭 제한 */
@@ -204,14 +203,14 @@ div:hover > .ChatDrawerDropdownMenu_wrapper {
 }
 
 .filePreview {
-    margin: 5px;
+    margin: 5px 10px;
 }
 
 .AddForm_wrapper {
     display: flex;
     flex-direction: column;
-    height: 86%;
-    padding: 0 30px;
+    height: 93%;
+    padding: 0 10px;
 }
 
 .AddArchive_title {

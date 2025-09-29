@@ -1,8 +1,4 @@
-import ChatBubble from "./ChatBubble";
-import MyChatBubble from "./MyChatBubble";
 import ChatHeader from "./ChatHeader";
-import api from "../api";
-import {useEffect, useRef, useState} from "react";
 import ChatLogDetail from "./ChatLogDetail";
 
 export default function ChatLog ({ userInfo, roomId, roomName, participants, memberCount, messages, deleteChattingRoom }) {
