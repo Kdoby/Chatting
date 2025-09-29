@@ -64,10 +64,14 @@ export default function SetContent ({userInfo, onNext, messages, end, start, loa
                 <div style={{margin: "15px 0"}}
                 >{endTime === '' ? formatRangeS(startTime) : formatRange(startTime, endTime)}</div>
             </div>
-            <ChatLogDetail userInfo={userInfo} messages={messages} startTime={startTime} endTime={endTime} onPick={handlePick} systemOn={false}/>
+            <div style={{flex: 1, minHeight: 0}}>
+                <ChatLogDetail userInfo={userInfo} messages={messages}
+                               startTime={startTime} endTime={endTime}
+                               onPick={handlePick} systemOn={false}/>
+            </div>
             <div style={{position: "absolute", bottom: "30px"}}>
-                <button onClick={onPrev}>Prev</button>
-                <button onClick={() => onNext(startTime, endTime)} disabled={loading || !startTime || !endTime}>Next</button>
+                <button className={"button_css"} onClick={onPrev}>Prev</button>
+                <button className={"button_css"} onClick={() => onNext(startTime, endTime)} disabled={loading || !startTime || !endTime}>Next</button>
             </div>
             {loading && (
                 <div className="loaderOverlay" aria-live="polite" role="status">

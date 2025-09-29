@@ -51,8 +51,8 @@ export default function SummaryResult ({summary, onNext, selectedPhotos, thumbna
             <textarea value={content} className={"AddArchive_text"}
                    onChange={(e) => setContent(e.target.value)}></textarea>
             <div style={{position: "absolute", bottom: "30px"}}>
-                <button onClick={onPrev}>Prev</button>
-                <button onClick={() => handleNext()}>Next</button>
+                <button className={"button_css"} onClick={onPrev}>Prev</button>
+                <button className={"button_css"} onClick={() => handleNext()}>Next</button>
             </div>
         </div>
     );

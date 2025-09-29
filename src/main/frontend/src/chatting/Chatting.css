@@ -148,6 +148,7 @@
     text-align: center;
     position: absolute;
     background-color: white;
+    z-index: 100;
 }
 
 .DropdownMenu_wrapper > ul > li {
@@ -260,4 +261,21 @@ div:hover > .ChatDrawerDropdownMenu_wrapper {
     background: rgba(255,255,255,0.9);
     padding: 6px 10px;
     border-radius: 8px;
+}
+
+/* 최신 메시지로 이동 버튼 */
+.scroll-btn {
+    position: absolute;
+    padding: 8px 12px;
+    border-radius: 8px;
+
+}
+
+.button_css {
+    padding: 7px;
+    background: white;
+    font-size: 13px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 4px;
 }
