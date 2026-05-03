@@ -210,7 +210,7 @@ Spring boot / React / FastAPI 를 기반으로 개발된
   
 
 ### 🔗 [FastAPI 서버(AI 서버) 환경 설정](https://github.com/Kdoby/Summarization_AI.git)
-![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Kdoby&repo=Summarization_AI)
+![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Kdoby&repo=Summarization_AI&v=2)
 
 <br>
 
